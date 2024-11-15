@@ -1,0 +1,124 @@
+/* Styles related to color palettes and their containers including :
+- The grid structure of the palettes
+- The style of individual color boxes
+- Empty states with checkered pattern
+- Hover effects
+- Copy button
+- Color labels */
+
+/* Palettes Section */
+.all-palettes {
+  display: grid;
+  gap: var(--spacing-xxl);
+  margin-top: var(--spacing-xxl);
+}
+
+/* Individual Palette Section */
+.palette-section {
+  background: var(--color-surface-alt);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.palette-section h2 {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+/* Palette Grid */
+.palette {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-xl);
+  margin: var(--spacing-md);
+}
+
+/* Individual Color Box */
+.color-box {
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-md);
+  position: relative;
+  transition: transform var(--transition-base);
+  cursor: pointer;
+  height: 60px;
+}
+
+.color-box.base-color {
+  border: 3px solid var(--color-primary);
+  box-shadow: var(--shadow-base-color);
+}
+
+/* Color Box Label */
+.color-box p {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+/* Hover Effects */
+.color-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.color-box:hover p {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* Empty State */
+.color-box.empty-box {
+  background-color: var(--color-surface-alt);
+  border: 2px dashed var(--color-empty-border);;
+  position: relative;
+}
+
+/* Checkered pattern for empty boxes */
+.color-box.empty-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;  
+  background-image: linear-gradient(45deg, var(--color-checkerboard) 25%, transparent 25%),
+                    linear-gradient(-45deg, var(--color-checkerboard) 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, var(--color-checkerboard) 75%),
+                    linear-gradient(-45deg, transparent 75%, var(--color-checkerboard) 75%);
+  background-size: 10px 10px;
+  background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+  opacity: 0.5;
+}
+
+/* Text in empty box */
+.color-box.empty-box p {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Copy Button */
+.copy-button {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+  margin-top: var(--spacing-xxl);
+}
+
+.copy-button:hover {
+  background: var(--color-primary-hover);
+}

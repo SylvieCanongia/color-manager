@@ -1,0 +1,164 @@
+/* Styles related to input fields and their containers */
+
+input {
+  outline: none;
+}
+
+/* Custom Focus Style */
+input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring);
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+/* Form Section */
+.color-form {
+  display: grid;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+}
+
+/* Groups of colors */
+.color-group {
+  background: var(--color-surface-alt);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.color-group h2 {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+}
+
+/* Input organization */
+.color-group .form-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.form-group label {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.form-group input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+}
+
+/* Input sections */
+.input-section {
+  background-color: var(--color-surface-input);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--color-border); /* Ajout d'une bordure */
+}
+
+.input-section h3 {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+/* Quick input section */
+.quick-input {
+  border-left: 3px solid var(--color-primary);
+}
+
+/* Detailed input section */
+.detailed-input {
+  border-left: 3px solid var(--color-success);
+}
+
+/* Focus states */
+.input-section:focus-within {
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Input with tooltip */
+.input-with-tooltip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* HSL input specific styles */
+.hsl-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.hsl-input-wrapper label {
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.hsl-input {
+  flex: 1;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family-mono);
+}
+
+.hsl-input:focus {
+  border-color: var(--color-primary);
+}
+
+input[type="number"]:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring);
+}
+
+/* Error states */
+.error-message {
+  display: none;
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.error-message.visible {
+  display: block;
+}
+
+.hsl-input.invalid {
+  border-color: var(--color-error);
+  background-color: var(--color-surface-error);
+}
+
+.hsl-input.invalid + .error-message {
+  display: block;
+}
+
+/* Submit button */
+.submit-button {
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+  font-size: var(--font-size-base);
+  margin-top: var(--spacing-md);
+}
+
+.submit-button:hover {
+  background: var(--color-primary-hover);
+}
