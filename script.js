@@ -153,13 +153,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const hslValue = input.value.trim();
     const preview = document.getElementById(`${colorType}ColorPreview`);
     const value = document.getElementById(`${colorType}ColorValue`);
+    const errorSpan = document.getElementById(`${colorType}HslError`);
 
     if (isValidHSL(hslValue)) {
       const { hue, saturation, lightness } = parseHSL(hslValue);
 
+      // Réinitialiser l'état d'erreur
+      input.classList.remove('invalid');
+      errorSpan.textContent = '';
+      errorSpan.classList.remove('visible');
+
       // Mise à jour visuelle de la prévisualisation
       preview.classList.remove("empty-preview");
-      input.classList.remove("invalid");
 
       // Feedback pour les lecteurs d'écran
       announceToScreenReader(`Couleur mise à jour : ${hslValue}`);
@@ -168,6 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
       updateNumberInputsWithoutGeneration(colorType, hue, saturation, lightness);
     } else {
       input.classList.add("invalid");
+      errorSpan.textContent = 'Format HSL invalide. Exemple : hsl(320, 80%, 58%)';
+      errorSpan.classList.add('visible');
       announceToScreenReader("Format HSL invalide. Exemple correct : hsl(320, 80%, 58%)");
     }
   }
