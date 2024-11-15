@@ -1,10 +1,15 @@
 # Color Manager
 
-[EN] | [FR]
+[English](#overview) | [Français](#aperçu)
 
-## [EN] Overview
+## Overview
 
 A web tool for generating HSL color palettes with light and dark variants, designed for developers. Features real-time preview, accessibility support, and CSS variables export.
+
+### Links
+
+- 🔗 [Live Demo](https://sylviecanongia.github.io/color-manager/)
+- 💻 [GitHub Repository](https://github.com/SylvieCanongia/color-manager)
 
 ### Features
 
@@ -34,9 +39,14 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 
 ---
 
-## [FR] Aperçu
+## Aperçu
 
 Un outil web pour générer des palettes de couleurs HSL avec variantes claires et foncées, conçu pour les développeurs. Propose une prévisualisation en temps réel, un support d'accessibilité et l'export de variables CSS.
+
+### Liens
+
+- 🔗 [Démo en ligne](https://sylviecanongia.github.io/color-manager/)
+- 💻 [Dépôt GitHub](https://github.com/SylvieCanongia/color-manager)
 
 ### Fonctionnalités
 
