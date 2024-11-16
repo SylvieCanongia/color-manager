@@ -156,6 +156,13 @@ export const resetPalettes = (type) => {
 // Initialize palette generation
 export const initPalettes = () => {
   const form = document.getElementById('paletteForm');
+
+  // Ensure immediate initialization of empty palettes
+  requestAnimationFrame(() => {
+    Object.values(TYPES).forEach(type => {
+        resetPalettes(type);
+    });
+});
   
   const generatePalettes = (type) => {
       if (!hasColorValues(type)) {

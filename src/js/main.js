@@ -14,8 +14,8 @@ import { initTabs } from './components/tabs.js';
 import { initColorInputs } from './components/colorInput.js';
 import { initPalettes } from './components/palette.js';
 
-// Initialize all application components
-const initApp = () => {
+// Wait for all resources to load
+window.addEventListener('load', () => {
     try {
         // Initialize UI components in specific order
         initTabs();
@@ -25,10 +25,9 @@ const initApp = () => {
         // Log successful initialization
         console.info('Application initialized successfully');
     } catch (error) {
-        // Log any initialization errors
         console.error('Failed to initialize application:', error);
         
-        // Display user-friendly error message
+        // Display user-friendly error message if needed
         const container = document.querySelector('.container');
         if (container) {
             const errorMessage = document.createElement('div');
@@ -38,11 +37,4 @@ const initApp = () => {
             container.prepend(errorMessage);
         }
     }
-};
-
-// Initialize app when DOM is fully loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp();
-}
+});
