@@ -1,0 +1,61 @@
+/* src/css/components/layout.css */
+
+/* Layout principal */
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+/* Système d'onglets */
+.color-tabs {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.tab-button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.tab-button[aria-selected="true"] {
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border-color: var(--color-primary);
+}
+
+/* Panneaux de couleur */
+.color-panel[hidden] {
+  display: none;
+}
+
+/* Colonne de prévisualisation */
+.preview-column {
+  position: sticky;
+  top: var(--spacing-xl);
+  height: fit-content;
+}
+
+.previews-container {
+  background: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Adaptations pour le responsive */
+@media (max-width: 1024px) {
+  .app-layout {
+      grid-template-columns: 1fr;
+  }
+
+  .preview-column {
+      position: static;
+  }
+}

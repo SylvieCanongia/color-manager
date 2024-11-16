@@ -2,6 +2,7 @@
    Imports
    ========================================================================== */
 @import "variables.css";
+@import "components/layout.css";
 @import "components/inputs.css";
 @import "components/palette.css";
 @import "components/preview.css";

@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xl);
-  margin-top: var(--spacing-md);
+  /* margin-top: var(--spacing-md); */
 }
 
 /* ==========================================================================

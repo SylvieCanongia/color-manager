@@ -18,211 +18,124 @@
   <body>
     <div class="container">
       <h1>Générateur de Palettes HSL</h1>
-
-      <form id="paletteForm" class="color-form">
-        <!-- Primary Color -->
-        <div class="color-group">
-          <h2>Primary</h2>
-
-          <!-- Quick Entry Section -->
-          <div class="input-section quick-input">
-            <h3>Saisie rapide</h3>
-            <div class="hsl-input-wrapper">
-              <label for="primaryHslInput">Format HSL :</label>
-              <div class="input-with-tooltip">
-                <input type="text" id="primaryHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%)" aria-describedby="primaryHslTooltip" />
-                <span class="info-icon" role="tooltip" id="primaryHslTooltip">
-                  ℹ️
-                  <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
-                </span>
+      
+      <div class="app-layout">
+          <!-- Colonne de gauche : Entrées -->
+          <div class="inputs-column">
+              <!-- Système d'onglets -->
+              <div class="color-tabs" role="tablist" aria-label="Sélection de couleur">
+                  <button class="tab-button active" role="tab" aria-selected="true" aria-controls="primaryPanel" id="primaryTab">
+                      Primary
+                  </button>
+                  <button class="tab-button" role="tab" aria-selected="false" aria-controls="secondaryPanel" id="secondaryTab">
+                      Secondary
+                  </button>
+                  <button class="tab-button" role="tab" aria-selected="false" aria-controls="accentPanel" id="accentTab">
+                      Accent
+                  </button>
               </div>
-            </div>
-            <span id="primaryHslError" class="error-message" role="alert"></span>
+  
+              <form id="paletteForm" class="color-form">
+                  <!-- Primary Panel -->
+                  <div id="primaryPanel" class="color-panel" role="tabpanel" aria-labelledby="primaryTab">
+                      <div class="color-group">
+                          <!-- Quick Entry Section -->
+                          <div class="input-section quick-input">
+                              <h3>Saisie rapide</h3>
+                              <div class="hsl-input-wrapper">
+                                  <label for="primaryHslInput">Format HSL :</label>
+                                  <div class="input-with-tooltip">
+                                      <input type="text" 
+                                             id="primaryHslInput" 
+                                             class="hsl-input" 
+                                             placeholder="hsl(320, 80%, 58%)" 
+                                             aria-describedby="primaryHslTooltip" />
+                                      <span class="info-icon" role="tooltip" id="primaryHslTooltip">
+                                          ℹ️
+                                          <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
+                                      </span>
+                                  </div>
+                              </div>
+                              <span id="primaryHslError" class="error-message" role="alert"></span>
+                          </div>
+  
+                          <!-- Detailed Entry Section -->
+                          <div class="input-section detailed-input">
+                              <h3>Saisie détaillée</h3>
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <label for="primary-hue">Teinte (0-360) :</label>
+                                      <input type="number" 
+                                             id="primary-hue" 
+                                             name="primary-hue" 
+                                             min="0" 
+                                             max="360" 
+                                             aria-label="Teinte de 0 à 360 degrés" />
+                                  </div>
+                                  <div class="input-group">
+                                      <label for="primary-saturation">Saturation (0-100%) :</label>
+                                      <input type="number" 
+                                             id="primary-saturation" 
+                                             name="primary-saturation" 
+                                             min="0" 
+                                             max="100" 
+                                             aria-label="Saturation de 0 à 100 pourcents" />
+                                  </div>
+                                  <div class="input-group">
+                                      <label for="primary-lightness">Luminosité (0-100%) :</label>
+                                      <input type="number" 
+                                             id="primary-lightness" 
+                                             name="primary-lightness" 
+                                             min="0" 
+                                             max="100" 
+                                             aria-label="Luminosité de 0 à 100 pourcents" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <!-- Secondary Panel (initialement caché) -->
+                  <div id="secondaryPanel" class="color-panel" role="tabpanel" aria-labelledby="secondaryTab" hidden>
+                      <!-- Même structure que Primary avec IDs et labels appropriés -->
+                  </div>
+  
+                  <!-- Accent Panel (initialement caché) -->
+                  <div id="accentPanel" class="color-panel" role="tabpanel" aria-labelledby="accentTab" hidden>
+                      <!-- Même structure que Primary avec IDs et labels appropriés -->
+                  </div>
+  
+                  <button type="submit" class="submit-button">Générer les Palettes</button>
+              </form>
           </div>
-
-          <!-- Detailed Entry Section -->
-          <div class="input-section detailed-input">
-            <h3>Saisie détaillée</h3>
-            <div class="form-group">
-              <div class="input-group">
-                <label for="primary-hue">Teinte (0-360) :</label>
-                <input type="number" id="primary-hue" name="primary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
+  
+          <!-- Colonne de droite : Prévisualisations et Palettes -->
+          <div class="preview-column">
+              <!-- Zone de prévisualisation -->
+              <div class="previews-container">
+                  <div class="color-preview-wrapper">
+                      <div class="color-preview">
+                          <div id="primaryColorPreview" class="base-color-preview"></div>
+                          <p id="primaryColorValue"></p>
+                      </div>
+                      <div class="color-preview">
+                          <div id="secondaryColorPreview" class="base-color-preview"></div>
+                          <p id="secondaryColorValue"></p>
+                      </div>
+                      <div class="color-preview">
+                          <div id="accentColorPreview" class="base-color-preview"></div>
+                          <p id="accentColorValue"></p>
+                      </div>
+                  </div>
               </div>
-              <div class="input-group">
-                <label for="primary-saturation">Saturation (0-100%) :</label>
-                <input type="number" id="primary-saturation" name="primary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+  
+              <!-- Zone des palettes -->
+              <div class="all-palettes">
+                  <!-- Structure existante des palettes -->
               </div>
-              <div class="input-group">
-                <label for="primary-lightness">Luminosité (0-100%) :</label>
-                <input type="number" id="primary-lightness" name="primary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
-              </div>
-            </div>
           </div>
-
-          <!-- Preview Section -->
-          <div class="color-preview-wrapper">
-            <div class="color-preview">
-              <div id="primaryColorPreview" class="base-color-preview"></div>
-              <p id="primaryColorValue"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Secondary Color -->
-        <div class="color-group">
-          <h2>Secondary</h2>
-
-          <!-- Quick Entry Section -->
-          <div class="input-section quick-input">
-            <h3>Saisie rapide</h3>
-            <div class="hsl-input-wrapper">
-              <label for="secondaryHslInput">Format HSL :</label>
-              <div class="input-with-tooltip">
-                <input type="text" id="secondaryHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%)" aria-describedby="secondaryHslTooltip" />
-                <span class="info-icon" role="tooltip" id="secondaryHslTooltip">
-                  ℹ️
-                  <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
-                </span>
-              </div>
-            </div>
-            <span id="secondaryHslError" class="error-message" role="alert"></span>
-          </div>
-
-          <!-- Detailed Entry Section -->
-          <div class="input-section detailed-input">
-            <h3>Saisie détaillée</h3>
-            <div class="form-group">
-              <div class="input-group">
-                <label for="secondary-hue">Teinte (0-360) :</label>
-                <input type="number" id="secondary-hue" name="secondary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
-              </div>
-              <div class="input-group">
-                <label for="secondary-saturation">Saturation (0-100%) :</label>
-                <input type="number" id="secondary-saturation" name="secondary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
-              </div>
-              <div class="input-group">
-                <label for="secondary-lightness">Luminosité (0-100%) :</label>
-                <input type="number" id="secondary-lightness" name="secondary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Preview Section -->
-          <div class="color-preview-wrapper">
-            <div class="color-preview">
-              <div id="secondaryColorPreview" class="base-color-preview"></div>
-              <p id="secondaryColorValue"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Accent Color -->
-        <div class="color-group">
-          <h2>Accent</h2>
-
-          <!-- Quick Entry Section -->
-          <div class="input-section quick-input">
-            <h3>Saisie rapide</h3>
-            <div class="hsl-input-wrapper">
-              <label for="accentHslInput">Format HSL :</label>
-              <div class="input-with-tooltip">
-                <input type="text" id="accentHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%)" aria-describedby="accentHslTooltip" />
-                <span class="info-icon" role="tooltip" id="accentHslTooltip">
-                  ℹ️
-                  <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
-                </span>
-              </div>
-            </div>
-            <span id="accentHslError" class="error-message" role="alert"></span>
-          </div>
-
-          <!-- Detailed Entry Section -->
-          <div class="input-section detailed-input">
-            <h3>Saisie détaillée</h3>
-            <div class="form-group">
-              <div class="input-group">
-                <label for="accent-hue">Teinte (0-360) :</label>
-                <input type="number" id="accent-hue" name="accent-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
-              </div>
-              <div class="input-group">
-                <label for="accent-saturation">Saturation (0-100%) :</label>
-                <input type="number" id="accent-saturation" name="accent-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
-              </div>
-              <div class="input-group">
-                <label for="accent-lightness">Luminosité (0-100%) :</label>
-                <input type="number" id="accent-lightness" name="accent-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Preview Section -->
-          <div class="color-preview-wrapper">
-            <div class="color-preview">
-              <div id="accentColorPreview" class="base-color-preview"></div>
-              <p id="accentColorValue"></p>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="submit-button">Générer les Palettes</button>
-      </form>
-
-      <!-- Palettes Container -->
-      <!-- Palettes Section -->
-      <div class="all-palettes">
-        <!-- Primary Palettes -->
-        <div class="palette-section">
-          <h2>Primary Color Palettes</h2>
-          <div class="palettes">
-            <section class="palette-container">
-              <h3>Normal</h3>
-              <div id="primaryNormalPalette" class="palette"></div>
-              <button id="copyPrimaryNormal" class="copy-button">Copier la palette</button>
-            </section>
-            <section class="palette-container">
-              <h3>Vivid</h3>
-              <div id="primaryVividPalette" class="palette"></div>
-              <button id="copyPrimaryVivid" class="copy-button">Copier la palette</button>
-            </section>
-          </div>
-        </div>
-
-        <!-- Secondary Palettes -->
-        <div class="palette-section">
-          <h2>Secondary Color Palettes</h2>
-          <div class="palettes">
-            <section class="palette-container">
-              <h3>Normal</h3>
-              <div id="secondaryNormalPalette" class="palette"></div>
-              <button id="copySecondaryNormal" class="copy-button">Copier la palette</button>
-            </section>
-            <section class="palette-container">
-              <h3>Vivid</h3>
-              <div id="secondaryVividPalette" class="palette"></div>
-              <button id="copySecondaryVivid" class="copy-button">Copier la palette</button>
-            </section>
-          </div>
-        </div>
-
-        <!-- Accent Palettes -->
-        <div class="palette-section">
-          <h2>Accent Color Palettes</h2>
-          <div class="palettes">
-            <section class="palette-container">
-              <h3>Normal</h3>
-              <div id="accentNormalPalette" class="palette"></div>
-              <button id="copyAccentNormal" class="copy-button">Copier la palette</button>
-            </section>
-            <section class="palette-container">
-              <h3>Vivid</h3>
-              <div id="accentVividPalette" class="palette"></div>
-              <button id="copyAccentVivid" class="copy-button">Copier la palette</button>
-            </section>
-          </div>
-        </div>
       </div>
-    </div>
+  </div>
     <script type="module" src="src/js/main.js"></script>
-    <!-- <script src="script.js"></script> -->
   </body>
 </html>

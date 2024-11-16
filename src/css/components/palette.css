@@ -12,7 +12,8 @@
 .all-palettes {
   display: grid;
   gap: var(--spacing-xxl);
-  margin-top: var(--spacing-xxl);
+  /* margin-top: var(--spacing-xxl); */
+  margin-top: 0;
 }
 
 /* ==========================================================================
