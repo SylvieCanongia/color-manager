@@ -32,10 +32,11 @@ const generatePalette = (baseHsl, step) => {
   const maxSteps = 5; // 5 steps in each direction + base color = 11 total colors
   let currentLightness = baseHsl.lightness;
 
-  // Generate darker variations (5 steps down)
-  for (let i = 0; i < maxSteps && currentLightness > 0; i++) {
-      currentLightness -= step;
-      if (currentLightness < 0) break;
+  // Generate lighter variations (5 steps up)
+  currentLightness = baseHsl.lightness;
+  for (let i = 0; i < maxSteps && currentLightness < 100; i++) {
+      currentLightness += step;
+      if (currentLightness > 100) break;
       
       variations.unshift({
           hue: baseHsl.hue,
@@ -47,10 +48,11 @@ const generatePalette = (baseHsl, step) => {
   // Add base color
   variations.push({ ...baseHsl });
 
-  // Generate lighter variations (5 steps up)
-  for (let i = 0; i < maxSteps && currentLightness < 100; i++) {
-      currentLightness += step;
-      if (currentLightness > 100) break;
+  // Generate darker variations (5 steps down)
+  currentLightness = baseHsl.lightness;
+  for (let i = 0; i < maxSteps && currentLightness > 0; i++) {
+      currentLightness -= step;
+      if (currentLightness < 0) break;
       
       variations.push({
           hue: baseHsl.hue,
