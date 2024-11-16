@@ -27,8 +27,11 @@
   height: 50px;
   border-radius: var(--border-radius-md);
   border: 1px solid var(--color-border);
-  transition: all var(--transition-base);
   position: relative;
+}
+
+.base-color-preview:hover {
+  box-shadow: var(--shadow-sm);
 }
 
 /* Empty State */
@@ -77,11 +80,6 @@
 
 .preview-update {
   animation: updateFade var(--transition-smooth) ease-out;
-}
-
-/* Hover Effects */
-.base-color-preview:hover {
-  box-shadow: var(--shadow-sm);
 }
 
 /* Focus States for Accessibility */

@@ -8,7 +8,6 @@ input {
 input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring);
-  transition: box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
 /* Form Section */
@@ -154,7 +153,6 @@ input[type="number"]:focus {
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: background-color var(--transition-base);
   font-size: var(--font-size-base);
   margin-top: var(--spacing-md);
 }
