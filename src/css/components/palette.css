@@ -6,14 +6,18 @@
 - Copy button
 - Color labels */
 
-/* Palettes Section */
+/* ==========================================================================
+   Palette Layout
+   ========================================================================== */
 .all-palettes {
   display: grid;
   gap: var(--spacing-xxl);
   margin-top: var(--spacing-xxl);
 }
 
-/* Individual Palette Section */
+/* ==========================================================================
+   Palette Sections
+   ========================================================================== */
 .palette-section {
   background: var(--color-surface-alt);
   padding: var(--spacing-lg);
@@ -34,7 +38,9 @@
   margin: var(--spacing-md);
 }
 
-/* Individual Color Box */
+/* ==========================================================================
+   Color Boxes
+   ========================================================================== */
 .color-box {
   aspect-ratio: 1;
   border-radius: var(--border-radius-md);
@@ -75,10 +81,12 @@
   box-shadow: var(--shadow-base-color);
 }
 
-/* Empty State */
+/* ==========================================================================
+   Empty States
+   ========================================================================== */
 .color-box.empty-box {
   background-color: var(--color-surface-alt);
-  border: 2px dashed var(--color-empty-border);;
+  border: 2px dashed var(--color-empty-border);
   position: relative;
 }
 
@@ -105,7 +113,9 @@
   font-style: italic;
 }
 
-/* Copy Button */
+/* ==========================================================================
+   Action Buttons
+   ========================================================================== */
 .copy-button {
   width: 100%;
   padding: var(--spacing-md);

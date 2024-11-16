@@ -1,12 +1,13 @@
-/* System colors */
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
 :root {
   /* Main Interface Colors */
   --color-primary: hsl(210, 80%, 42%);
-  --color-border-focus: hsl(215, 85%, 45%);
   --color-primary-hover: hsl(210, 80%, 36%);
   --color-success: hsl(96, 54%, 38%);
-  --color-error: hsl(354, 65%, 54%); 
-  
+  --color-error: hsl(354, 65%, 54%);
+
   /* Background colors */
   --color-surface: hsl(220, 25%, 85%);
   --color-surface-alt: hsl(210, 10%, 96%);
@@ -17,66 +18,57 @@
   --color-text-primary: hsl(220, 25%, 20%);
   --color-text-secondary: hsl(220, 15%, 35%);
   --color-text-muted: hsl(220, 10%, 50%);
-  
+
   /* Border colors */
-  --color-border: hsl(210, 10%, 80%);
   --color-border: hsl(220, 15%, 75%);
-  --color-border-focus: hsl(210, 100%, 42%);
-  --color-border-focus: hsl(210, 80%, 42%);
   --color-border-focus: hsl(215, 85%, 45%);
-  
+
   /* Tooltip */
-  --color-tooltip: hsl(202, 28%, 45%);
   --color-tooltip: hsl(210, 28%, 45%);
-  
 
   /* Patterns and States */
-  --color-checkerboard: hsl(210, 5%, 93%);
   --color-checkerboard: hsl(220, 15%, 90%);
-  --color-empty-border: hsl(210, 5%, 87%);
   --color-empty-border: hsl(220, 15%, 80%);
 
   /* Focus states */
-  --focus-ring: hsla(215, 85%, 45%, 0.3);
+  --focus-ring-color: hsla(215, 85%, 45%, 0.3);
   --focus-ring-width: 1px;
-}
 
-/* 2. Spacing */
-:root {
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-xxl: 3rem;     /* 48px */
-}
+  /* Shadow colors */
+  --shadow-color: hsla(220, 25%, 20%, 0.1);
+  --shadow-color-focus: hsla(207, 100%, 42%, 0.1);
+  --shadow-color-overlay: hsla(0, 0%, 0%, 0.2);
 
-/* 3. Typography */
-:root {
-  --font-family-base: system-ui, -apple-system, sans-serif;
-  --font-family-mono: monospace;
-  
-  --font-size-sm: 0.875rem;  /* 14px */
-  --font-size-base: 1.1rem;  /* 17.6px actual */
-  --font-size-lg: 1.25rem;   /* 20px */
-  
-  --line-height-base: 1.5;
-}
+  /* Shadows */
+  --shadow-sm: 0 2px 4px var(--shadow-color);
+  --shadow-md: 0 3px 8px var(--shadow-color-overlay);
+  --shadow-focus: 0 0 0 2px var(--shadow-color-focus);
+  --shadow-base-color: 0 0 0 1px hsla(0, 0%, 100%, 0.5);
 
-/* 4. Effects */
-:root {
-  /* Ombres */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.2);
-  --shadow-focus: 0 0 0 2px rgba(0, 120, 215, 0.1);
-  --shadow-base-color: 0 0 0 1px rgba(255, 255, 255, 0.5);
-  
   /* Borders */
   --border-radius-sm: 4px;
   --border-radius-md: 6px;
   --border-radius-lg: 8px;
-  
+
   /* Transitions */
   --transition-base: 0.2s ease;
   --transition-smooth: 0.3s ease;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-xxl: 3rem; /* 48px */
+
+  /* Typography */
+  --font-family-base: system-ui, -apple-system, sans-serif;
+  --font-family-mono: monospace;
+
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1.1rem; /* 17.6px */
+  --font-size-lg: 1.25rem; /* 20px */
+
+  --line-height-base: 1.5;
 }
