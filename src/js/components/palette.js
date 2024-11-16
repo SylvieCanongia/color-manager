@@ -1,133 +1,190 @@
+/*
+ * Color Manager - A web tool for generating HSL color palettes
+ * Copyright (C) 2024 Sylvie Canongia
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
+
 // src/js/components/palette.js
 
-import { generatePalette } from '../utils/colorUtils.js';
-import { announceToScreenReader, copyToClipboard } from '../utils/domUtils.js';
+// Constants for palette generation
+const STEPS = {
+  NORMAL: 5,
+  VIVID: 10
+};
 
-/**
- * Displays a color palette in the specified container
- * @param {Array} palette - Array of color objects
- * @param {string} containerId - ID of the container element
- */
-function displayPalette(palette, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
-    // Handle empty or invalid palette
-    if (!palette?.length || palette.some(color => color.color.includes('NaN'))) {
-        container.innerHTML = '';
-        // Create empty boxes (5 per row)
-        for (let i = 0; i < 11; i++) {
-            const colorBox = document.createElement('div');
-            colorBox.classList.add('color-box', 'empty-box');
-            const colorText = document.createElement('p');
-            colorText.textContent = 'En attente';
-            colorBox.appendChild(colorText);
-            container.appendChild(colorBox);
-        }
-        return;
-    }
+const TYPES = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  ACCENT: 'accent'
+};
 
-    // Display normal palette
-    container.innerHTML = '';
-    palette.forEach(colorObj => {
-        const colorBox = document.createElement('div');
-        colorBox.classList.add('color-box');
-        colorBox.style.backgroundColor = colorObj.color;
-        
-        if (colorObj.isBase) {
-            colorBox.classList.add('base-color');
-        }
+// Create HSL string from component values
+const createHSLString = ({ hue, saturation, lightness }) => 
+  `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 
-        const colorText = document.createElement('p');
-        colorText.textContent = colorObj.color;
-        colorBox.appendChild(colorText);
-        container.appendChild(colorBox);
-    });
-}
+// Generate palette variations with fixed number of steps
+const generatePalette = (baseHsl, step) => {
+  const variations = [];
+  const maxSteps = 5; // 5 steps in each direction + base color = 11 total colors
+  let currentLightness = baseHsl.lightness;
 
-/**
- * Generates and displays color palettes for a specific color type
- * @param {string} colorType - Type of color (primary, secondary, accent)
- */
-function generateColorPalettes(colorType) {
-    const hueInput = document.getElementById(`${colorType}-hue`);
-    const saturationInput = document.getElementById(`${colorType}-saturation`);
-    const lightnessInput = document.getElementById(`${colorType}-lightness`);
+  // Generate darker variations (5 steps down)
+  for (let i = 0; i < maxSteps && currentLightness > 0; i++) {
+      currentLightness -= step;
+      if (currentLightness < 0) break;
+      
+      variations.unshift({
+          hue: baseHsl.hue,
+          saturation: baseHsl.saturation,
+          lightness: Math.round(currentLightness)
+      });
+  }
 
-    if (!hueInput || !saturationInput || !lightnessInput) {
-        console.error(`Inputs manquants pour ${colorType}`);
-        return;
-    }
+  // Add base color
+  variations.push({ ...baseHsl });
 
-    // Get HSL values
-    const hue = parseInt(hueInput.value);
-    const saturation = parseInt(saturationInput.value);
-    const lightness = parseInt(lightnessInput.value);
+  // Generate lighter variations (5 steps up)
+  for (let i = 0; i < maxSteps && currentLightness < 100; i++) {
+      currentLightness += step;
+      if (currentLightness > 100) break;
+      
+      variations.push({
+          hue: baseHsl.hue,
+          saturation: baseHsl.saturation,
+          lightness: Math.round(currentLightness)
+      });
+  }
 
-    // Handle empty or invalid inputs
-    if (isNaN(hue) || isNaN(saturation) || isNaN(lightness)) {
-        displayPalette([], `${colorType}NormalPalette`);
-        displayPalette([], `${colorType}VividPalette`);
-        return;
-    }
+  return variations;
+};
 
-    // Generate and display palettes
-    const normalPalette = generatePalette(hue, saturation, lightness, "normal");
-    const vividPalette = generatePalette(hue, saturation, lightness, "vivid");
+// Create empty palette boxes
+const createEmptyPalette = () => {
+  const boxes = [];
+  for (let i = 0; i < 11; i++) { // 11 boxes (5 darker + base + 5 lighter)
+      const box = document.createElement('div');
+      box.className = 'color-box empty-box';
+      boxes.push(box);
+  }
+  return boxes;
+};
 
-    displayPalette(normalPalette, `${colorType}NormalPalette`);
-    displayPalette(vividPalette, `${colorType}VividPalette`);
+// Create color box element
+const createColorBox = (hsl, isBase = false) => {
+  const box = document.createElement('div');
+  box.className = `color-box${isBase ? ' base-color' : ''}`;
+  box.style.backgroundColor = createHSLString(hsl);
+  
+  const text = document.createElement('p');
+  text.textContent = `${hsl.lightness}%`;
+  box.appendChild(text);
+  
+  return box;
+};
 
-    // Announce palette generation to screen reader
-    announceToScreenReader(`Palettes de couleurs générées pour la couleur ${colorType}`);
-}
+// Update palette display
+const updatePalette = (type, variations, paletteType) => {
+  const paletteId = `${type}${paletteType}Palette`;
+  const copyButtonId = `copy${type}${paletteType}`;
+  
+  const paletteElement = document.getElementById(paletteId);
+  if (!paletteElement) return;
 
-/**
- * Initializes palette functionality
- */
-export function initializePalettes() {
-    // Initialize copy buttons
-    const copyButtons = {
-        copyPrimaryNormal: "primaryNormalPalette",
-        copyPrimaryVivid: "primaryVividPalette",
-        copySecondaryNormal: "secondaryNormalPalette",
-        copySecondaryVivid: "secondaryVividPalette",
-        copyAccentNormal: "accentNormalPalette",
-        copyAccentVivid: "accentVividPalette"
-    };
+  // Clear existing palette
+  paletteElement.innerHTML = '';
 
-    // Set up copy buttons
-    Object.entries(copyButtons).forEach(([buttonId, paletteId]) => {
-        const button = document.getElementById(buttonId);
-        if (button) {
-            button.addEventListener("click", () => {
-                const colors = Array.from(
-                    document.querySelectorAll(`#${paletteId} .color-box p`)
-                ).map(p => p.textContent).filter(Boolean);
-                
-                if (colors.length) {
-                    copyToClipboard(colors);
-                    announceToScreenReader("Palette copiée dans le presse-papier");
-                } else {
-                    announceToScreenReader("Aucune couleur à copier");
-                }
-            });
-        }
-    });
+  if (!variations) {
+      // Add empty state with checkerboard pattern
+      const emptyBoxes = createEmptyPalette();
+      emptyBoxes.forEach(box => paletteElement.appendChild(box));
+      
+      // Disable copy button
+      const copyButton = document.getElementById(copyButtonId);
+      if (copyButton) {
+          copyButton.disabled = true;
+      }
+      return;
+  }
 
-    // Initialize form submission
-    const form = document.getElementById("paletteForm");
-    if (form) {
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            generateColorPalettes("primary");
-            generateColorPalettes("secondary");
-            generateColorPalettes("accent");
-        });
-    }
+  // Add new color boxes
+  variations.forEach((hsl, index) => {
+      // Base color is in the middle of the array
+      const isBase = index === Math.floor(variations.length / 2);
+      const colorBox = createColorBox(hsl, isBase);
+      paletteElement.appendChild(colorBox);
+  });
 
-    // Generate initial empty palettes
-    ["primary", "secondary", "accent"].forEach(colorType => {
-        generateColorPalettes(colorType);
-    });
-}
+  // Enable and setup copy button
+  const copyButton = document.getElementById(copyButtonId);
+  if (copyButton) {
+      copyButton.disabled = false;
+      const cssVariables = variations
+          .map((hsl, index) => 
+              `--color-${type.toLowerCase()}-${index * 100}: ${createHSLString(hsl)};`)
+          .join('\n');
+
+      copyButton.onclick = () => {
+          navigator.clipboard.writeText(cssVariables);
+          const originalText = copyButton.textContent;
+          copyButton.textContent = 'Copié !';
+          setTimeout(() => {
+              copyButton.textContent = originalText;
+          }, 2000);
+      };
+  }
+};
+
+// Check if color has been set
+const hasColorValues = (type) => {
+  const hue = document.getElementById(`${type}-hue`).value;
+  const saturation = document.getElementById(`${type}-saturation`).value;
+  const lightness = document.getElementById(`${type}-lightness`).value;
+  
+  return hue !== '' && saturation !== '' && lightness !== '';
+};
+
+// Export function to reset palettes
+export const resetPalettes = (type) => {
+  updatePalette(type, null, 'Normal');
+  updatePalette(type, null, 'Vivid');
+};
+
+// Initialize palette generation
+export const initPalettes = () => {
+  const form = document.getElementById('paletteForm');
+  
+  const generatePalettes = (type) => {
+      if (!hasColorValues(type)) {
+          resetPalettes(type);
+          return;
+      }
+
+      const hue = parseInt(document.getElementById(`${type}-hue`).value);
+      const saturation = parseInt(document.getElementById(`${type}-saturation`).value);
+      const lightness = parseInt(document.getElementById(`${type}-lightness`).value);
+      
+      const baseHsl = { hue, saturation, lightness };
+      
+      // Generate normal variations
+      const normalVariations = generatePalette(baseHsl, STEPS.NORMAL);
+      updatePalette(type, normalVariations, 'Normal');
+      
+      // Generate vivid variations
+      const vividVariations = generatePalette(baseHsl, STEPS.VIVID);
+      updatePalette(type, vividVariations, 'Vivid');
+  };
+
+  // Initialize empty palettes
+  Object.values(TYPES).forEach(type => {
+      resetPalettes(type);
+  });
+
+  form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      Object.values(TYPES).forEach(generatePalettes);
+  });
+};

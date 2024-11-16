@@ -1,3 +1,13 @@
+/*
+ * Color Manager - A web tool for generating HSL color palettes
+ * Copyright (C) 2024 Sylvie Canongia
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
+
 /* ==========================================================================
    Input Components
    Styles for form inputs, sections, and related elements
@@ -85,6 +95,36 @@ input:focus {
 /* Detailed input section */
 .detailed-input {
   border-left: 3px solid var(--color-success);
+}
+
+/* Number input styles */
+input[type="number"] {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+/* Spinner buttons for Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 1em;
+  margin: 0 var(--spacing-xs);
+  cursor: pointer;
+}
+
+/* Style for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Firefox: Show spinner on hover and focus */
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
 }
 
 /* Focus states */

@@ -1,66 +1,38 @@
+/*
+ * Color Manager - A web tool for generating HSL color palettes
+ * Copyright (C) 2024 Sylvie Canongia
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
+
 // src/js/components/preview.js
 
-import { formatHSL } from '../utils/colorUtils.js';
-import { announceToScreenReader } from '../utils/domUtils.js';
+// Create HSL string from component values
+const createHSLString = ({ hue, saturation, lightness }) => 
+    `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 
-/**
- * Updates preview from input values
- * @param {string} colorType - Type of color (primary, secondary, accent)
- * @param {number} hue - HSL hue value
- * @param {number} saturation - HSL saturation value
- * @param {number} lightness - HSL lightness value
- */
-function updatePreviewFromInputs(colorType, hue, saturation, lightness) {
-    const preview = document.getElementById(`${colorType}ColorPreview`);
-    const value = document.getElementById(`${colorType}ColorValue`);
-    const hslValue = formatHSL(hue, saturation, lightness);
+// Update color preview and display value
+export const updatePreview = (type, hsl) => {
+    const preview = document.getElementById(`${type}ColorPreview`);
+    const value = document.getElementById(`${type}ColorValue`);
 
-    preview.classList.remove("empty-preview");
-    preview.style.backgroundColor = hslValue;
-    value.textContent = hslValue;
+    // Check if all values are empty or zero
+    const isEmpty = !hsl || (hsl.hue === 0 && hsl.saturation === 0 && hsl.lightness === 0);
 
-    // Add update animation
-    preview.classList.remove("preview-update");
-    void preview.offsetWidth; // Force browser to recalculate style
-    preview.classList.add("preview-update");
+    if (isEmpty) {
+        // Reset to empty state
+        preview.style.backgroundColor = '';
+        preview.classList.add('empty-preview');
+        value.textContent = '';
+        return;
+    }
 
-    preview.addEventListener(
-        "animationend",
-        function () {
-            preview.classList.remove("preview-update");
-        },
-        { once: true }
-    );
-}
-
-/**
- * Initializes color previews
- */
-export function initializePreviews() {
-    ["primary", "secondary", "accent"].forEach(colorType => {
-        const preview = document.getElementById(`${colorType}ColorPreview`);
-        const value = document.getElementById(`${colorType}ColorValue`);
-        
-        if (preview && value) {
-            // Set initial empty state
-            preview.classList.add("empty-preview");
-            value.textContent = "Aucune couleur";
-            
-            // Add click to copy functionality
-            preview.addEventListener("click", () => {
-                const currentColor = value.textContent;
-                if (currentColor && currentColor !== "Aucune couleur") {
-                    navigator.clipboard.writeText(currentColor)
-                        .then(() => {
-                            announceToScreenReader("Couleur copiée dans le presse-papier");
-                        })
-                        .catch(() => {
-                            announceToScreenReader("Erreur lors de la copie de la couleur");
-                        });
-                }
-            });
-        }
-    });
-}
-
-export { updatePreviewFromInputs };
+    // Update with color values
+    const hslString = createHSLString(hsl);
+    preview.style.backgroundColor = hslString;
+    preview.classList.remove('empty-preview');
+    value.textContent = hslString;
+};

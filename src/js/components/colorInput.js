@@ -1,145 +1,106 @@
+/*
+ * Color Manager - A web tool for generating HSL color palettes
+ * Copyright (C) 2024 Sylvie Canongia
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
+
 // src/js/components/colorInput.js
 
-import { isValidHSL, parseHSL } from "../utils/validation.js";
-import { formatHSL } from "../utils/colorUtils.js";
-import { debounce, announceToScreenReader } from "../utils/domUtils.js";
+import { isValidHSL } from '../utils/validation.js';
+import { updatePreview } from './preview.js';
+import { resetPalettes } from './palette.js'; // Ajout de l'import
 
-/**
- * Handles HSL input changes with debouncing
- * @param {HTMLInputElement} input - The HSL input element
- * @param {string} colorType - Type of color (primary, secondary, accent)
- */
-const debouncedHandleHSLInput = debounce((input, colorType) => {
-  handleHSLInput(input, colorType);
-}, 150);
+// Color types constants
+const TYPES = {
+    PRIMARY: 'primary',
+    SECONDARY: 'secondary',
+    ACCENT: 'accent'
+};
 
-/**
- * Updates all inputs and preview for a color type
- * @param {string} colorType - Type of color
- * @param {number} hue - HSL hue value
- * @param {number} saturation - HSL saturation value
- * @param {number} lightness - HSL lightness value
- */
-function updateAllInputs(colorType, hue, saturation, lightness) {
-  // Update number inputs
-  document.getElementById(`${colorType}-hue`).value = hue;
-  document.getElementById(`${colorType}-saturation`).value = saturation;
-  document.getElementById(`${colorType}-lightness`).value = lightness;
-  
-  // Update HSL input
-  const hslInput = document.getElementById(`${colorType}HslInput`);
-  if (hslInput) {
-      hslInput.value = formatHSL(hue, saturation, lightness);
-  }
+export const initColorInputs = () => {
+    // Initialize input handling for a specific color type
+    const setupHSLInput = (type) => {
+        const hslInput = document.getElementById(`${type}HslInput`);
+        const errorElement = document.getElementById(`${type}HslError`);
+        const hueInput = document.getElementById(`${type}-hue`);
+        const saturationInput = document.getElementById(`${type}-saturation`);
+        const lightnessInput = document.getElementById(`${type}-lightness`);
 
-  // Update preview
-  updatePreviewFromInputs(colorType, hue, saturation, lightness);
-}
+        // Update detailed inputs with HSL values
+        const updateDetailedInputs = (hsl) => {
+            hueInput.value = hsl.hue;
+            saturationInput.value = hsl.saturation;
+            lightnessInput.value = hsl.lightness;
+        };
 
-function handleHSLInput(input, colorType) {
-  const hslValue = input.value.trim();
-  const preview = document.getElementById(`${colorType}ColorPreview`);
-  const errorSpan = document.getElementById(`${colorType}HslError`);
+        // Clear all inputs and reset palettes
+        const clearInputs = () => {
+            hslInput.value = '';
+            hueInput.value = '';
+            saturationInput.value = '';
+            lightnessInput.value = '';
+            errorElement.textContent = '';
+            updatePreview(type, null);
+            resetPalettes(type); // Reset palettes when inputs are cleared
+        };
 
-  if (isValidHSL(hslValue)) {
-    const { hue, saturation, lightness } = parseHSL(hslValue);
+        // Handle HSL input changes
+        const handleHSLInput = () => {
+            const value = hslInput.value.trim();
+            
+            // Clear all if empty
+            if (!value) {
+                clearInputs();
+                return;
+            }
 
-    // Reset error state
-    input.classList.remove("invalid");
-    errorSpan.textContent = "";
-    errorSpan.classList.remove("visible");
+            const validationResult = isValidHSL(value);
 
-    // Update preview state
-    preview.classList.remove("empty-preview");
+            if (!validationResult.isValid) {
+                errorElement.textContent = validationResult.error;
+                hslInput.setAttribute('aria-invalid', 'true');
+                return;
+            }
 
-    // Update all inputs and preview
-    updateAllInputs(colorType, hue, saturation, lightness);
-    announceToScreenReader(`Couleur mise à jour : ${hslValue}`);
-  } else {
-    // Show error state
-    input.classList.add("invalid");
-    errorSpan.textContent = "Format HSL invalide. Exemple : hsl(320, 80%, 58%)";
-    errorSpan.classList.add("visible");
-    announceToScreenReader("Format HSL invalide. Exemple correct : hsl(320, 80%, 58%)");
-  }
-}
+            errorElement.textContent = '';
+            hslInput.setAttribute('aria-invalid', 'false');
+            updateDetailedInputs(validationResult.values);
+            updatePreview(type, validationResult.values);
+        };
 
-/**
- * Updates preview from input values
- * @param {string} colorType - Type of color (primary, secondary, accent)
- * @param {number} hue - HSL hue value
- * @param {number} saturation - HSL saturation value
- * @param {number} lightness - HSL lightness value
- */
-function updatePreviewFromInputs(colorType, hue, saturation, lightness) {
-    const preview = document.getElementById(`${colorType}ColorPreview`);
-    const value = document.getElementById(`${colorType}ColorValue`);
-    const hslValue = formatHSL(hue, saturation, lightness);
+        // Handle detailed inputs changes
+        const handleDetailedInput = () => {
+            const hue = parseInt(hueInput.value);
+            const saturation = parseInt(saturationInput.value);
+            const lightness = parseInt(lightnessInput.value);
 
-    preview.classList.remove("empty-preview");
-    preview.style.backgroundColor = hslValue;
-    value.textContent = hslValue;
+            // Clear HSL input and preview if all detailed inputs are empty
+            if (isNaN(hue) && isNaN(saturation) && isNaN(lightness)) {
+                clearInputs();
+                return;
+            }
 
-    // Add update animation
-    preview.classList.remove("preview-update");
-    void preview.offsetWidth;
-    preview.classList.add("preview-update");
+            const hsl = {
+                hue: hue || 0,
+                saturation: saturation || 0,
+                lightness: lightness || 0
+            };
+            
+            updatePreview(type, hsl);
+            hslInput.value = `hsl(${hsl.hue}, ${hsl.saturation}%, ${hsl.lightness}%)`;
+        };
 
-    preview.addEventListener(
-        "animationend",
-        function () {
-            preview.classList.remove("preview-update");
-        },
-        { once: true }
-    );
-}
-
-/**
- * Initializes all color inputs and their event listeners
- */
-export function initializeColorInputs() {
-  ["primary", "secondary", "accent"].forEach((colorType) => {
-    // Initialize HSL inputs
-    const hslInput = document.getElementById(`${colorType}HslInput`);
-    if (hslInput) {
-      ["input", "paste"].forEach((eventType) => {
-        hslInput.addEventListener(eventType, (e) => {
-          if (eventType === "paste") {
-            setTimeout(() => handleHSLInput(e.target, colorType), 0);
-          } else {
-            debouncedHandleHSLInput(e.target, colorType);
-          }
+        // Event listeners
+        hslInput.addEventListener('input', handleHSLInput);
+        [hueInput, saturationInput, lightnessInput].forEach(input => {
+            input.addEventListener('input', handleDetailedInput);
         });
-      });
-    }
+    };
 
-    // Initialize number inputs
-    const inputs = [
-      document.getElementById(`${colorType}-hue`),
-      document.getElementById(`${colorType}-saturation`),
-      document.getElementById(`${colorType}-lightness`)
-    ];
-
-    inputs.forEach((input) => {
-      // Add screen reader instructions
-      input.addEventListener("focus", function () {
-        const inputType = this.id.includes("hue") ? "teinte" : this.id.includes("saturation") ? "saturation" : "luminosité";
-        announceToScreenReader(`Saisie de la ${inputType}. Utilisez les flèches ou entrez une valeur.`);
-      });
-
-      // Handle input changes
-      input.addEventListener("input", () => {
-        const [hue, saturation, lightness] = inputs.map((i) => parseInt(i.value));
-        if (!isNaN(hue) && !isNaN(saturation) && !isNaN(lightness)) {
-          updateAllInputs(colorType, hue, saturation, lightness);
-        }
-      });
-    });
-
-    // Initialize empty state
-    const preview = document.getElementById(`${colorType}ColorPreview`);
-    const value = document.getElementById(`${colorType}ColorValue`);
-    preview.classList.add("empty-preview");
-    value.textContent = "Aucune couleur";
-  });
-}
+    // Initialize all color inputs
+    Object.values(TYPES).forEach(setupHSLInput);
+};

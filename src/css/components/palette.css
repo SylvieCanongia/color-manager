@@ -1,3 +1,13 @@
+/*
+ * Color Manager - A web tool for generating HSL color palettes
+ * Copyright (C) 2024 Sylvie Canongia
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
+
 /* Styles related to color palettes and their containers including :
 - The grid structure of the palettes
 - The style of individual color boxes
@@ -50,6 +60,7 @@
   height: 60px;
   transition: transform var(--transition-base);
   box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
 }
 
 .color-box:hover {
@@ -78,9 +89,11 @@
 }
 
 .color-box.base-color {
-  border: 3px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
   box-shadow: var(--shadow-base-color);
 }
+
+
 
 /* ==========================================================================
    Empty States
