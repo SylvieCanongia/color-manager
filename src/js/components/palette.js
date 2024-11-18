@@ -10,66 +10,23 @@
 
 // src/js/components/palette.js
 
-// Constants for palette generation
-const STEPS = {
-  NORMAL: 5,
-  VIVID: 10,
-};
+import { createHSLString, generatePaletteVariations } from "../utils/colorUtils.js";
 
+// Constants for palette generation
 const TYPES = {
   PRIMARY: "primary",
   SECONDARY: "secondary",
   ACCENT: "accent",
 };
 
-// Create HSL string from component values
-const createHSLString = ({ hue, saturation, lightness }) => `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-
-// Generate palette variations with fixed number of steps
-const generatePalette = (baseHsl, step) => {
-  const variations = [];
-  const maxSteps = 5; // 5 steps in each direction + base color = 11 total colors
-  let currentLightness = baseHsl.lightness;
-
-  // Generate lighter variations (5 steps up)
-  currentLightness = baseHsl.lightness;
-  for (let i = 0; i < maxSteps && currentLightness < 100; i++) {
-    currentLightness += step;
-    if (currentLightness > 100) break;
-
-    variations.unshift({
-      hue: baseHsl.hue,
-      saturation: baseHsl.saturation,
-      lightness: Math.round(currentLightness),
-    });
-  }
-
-  // Add base color
-  variations.push({ ...baseHsl });
-
-  // Generate darker variations (5 steps down)
-  currentLightness = baseHsl.lightness;
-  for (let i = 0; i < maxSteps && currentLightness > 0; i++) {
-    currentLightness -= step;
-    if (currentLightness < 0) break;
-
-    variations.push({
-      hue: baseHsl.hue,
-      saturation: baseHsl.saturation,
-      lightness: Math.round(currentLightness),
-    });
-  }
-
-  return variations;
-};
-
 // Create empty palette boxes
 const createEmptyPalette = () => {
   const boxes = [];
   for (let i = 0; i < 11; i++) {
-    // 11 boxes (5 lighter + base + 5 darker)
     const box = document.createElement("div");
     box.className = "color-box empty-box";
+    box.setAttribute("role", "listitem");
+    box.setAttribute("aria-label", "Empty color slot");
     boxes.push(box);
   }
   return boxes;
@@ -80,6 +37,10 @@ const createColorBox = (hsl, isBase = false) => {
   const box = document.createElement("div");
   box.className = `color-box${isBase ? " base-color" : ""}`;
   box.style.backgroundColor = createHSLString(hsl);
+
+  // Add ARIA labels for accessibility
+  box.setAttribute("role", "listitem");
+  box.setAttribute("aria-label", `Color: HSL(${hsl.hue}, ${hsl.saturation}%, ${hsl.lightness}%)`);
 
   const text = document.createElement("p");
   text.textContent = `${hsl.lightness}%`;
@@ -98,8 +59,6 @@ const updatePalette = (type, variations, paletteType) => {
 
   // Construct ID with first letter cap
   const buttonId = `copy${type.charAt(0).toUpperCase() + type.slice(1)}${paletteType}`;
-
-  // Handle copy button
   const copyButton = document.getElementById(buttonId);
 
   if (!variations) {
@@ -107,15 +66,13 @@ const updatePalette = (type, variations, paletteType) => {
     const emptyBoxes = createEmptyPalette();
     emptyBoxes.forEach((box) => paletteElement.appendChild(box));
 
-    // Disable copy button if it exists
     if (copyButton) {
       copyButton.disabled = true;
-      copyButton.onclick = null; // Remove old event listener
+      copyButton.onclick = null;
     }
     return;
   }
 
-  // Setup copy functionality only when we have variations
   // Add new color boxes
   variations.forEach((hsl, index) => {
     const isBase = index === Math.floor(variations.length / 2);
@@ -126,7 +83,6 @@ const updatePalette = (type, variations, paletteType) => {
   // Setup copy functionality
   if (copyButton) {
     copyButton.disabled = false;
-
     copyButton.onclick = () => {
       const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${index * 100}: ${createHSLString(hsl)};`).join("\n");
 
@@ -145,7 +101,6 @@ const hasColorValues = (type) => {
   const hue = document.getElementById(`${type}-hue`).value;
   const saturation = document.getElementById(`${type}-saturation`).value;
   const lightness = document.getElementById(`${type}-lightness`).value;
-
   return hue !== "" && saturation !== "" && lightness !== "";
 };
 
@@ -158,32 +113,42 @@ export const resetPalettes = (type) => {
 // Initialize palette generation
 export const initPalettes = () => {
   const form = document.getElementById("paletteForm");
-  if (!form) return;
+  if (!form) {
+    console.warn("Palette form not found in the DOM");
+    return;
+  }
 
   // Initialize empty palettes immediately
-  Object.values(TYPES).forEach((type) => {
-    resetPalettes(type);
-  });
+  Object.values(TYPES).forEach(resetPalettes);
 
   const generatePalettes = (type) => {
-    if (!hasColorValues(type)) {
+    try {
+      if (!hasColorValues(type)) {
+        resetPalettes(type);
+        return;
+      }
+
+      const hue = parseInt(document.getElementById(`${type}-hue`).value);
+      const saturation = parseInt(document.getElementById(`${type}-saturation`).value);
+      const lightness = parseInt(document.getElementById(`${type}-lightness`).value);
+
+      if (isNaN(hue) || isNaN(saturation) || isNaN(lightness)) {
+        throw new Error("Invalid color values");
+      }
+
+      const baseHsl = { hue, saturation, lightness };
+
+      // Generate normal variations
+      const normalVariations = generatePaletteVariations(baseHsl, "NORMAL");
+      updatePalette(type, normalVariations, "Normal");
+
+      // Generate vivid variations
+      const vividVariations = generatePaletteVariations(baseHsl, "VIVID");
+      updatePalette(type, vividVariations, "Vivid");
+    } catch (error) {
+      console.error(`Error generating palettes for ${type}:`, error);
       resetPalettes(type);
-      return;
     }
-
-    const hue = parseInt(document.getElementById(`${type}-hue`).value);
-    const saturation = parseInt(document.getElementById(`${type}-saturation`).value);
-    const lightness = parseInt(document.getElementById(`${type}-lightness`).value);
-
-    const baseHsl = { hue, saturation, lightness };
-
-    // Generate normal variations
-    const normalVariations = generatePalette(baseHsl, STEPS.NORMAL);
-    updatePalette(type, normalVariations, "Normal");
-
-    // Generate vivid variations
-    const vividVariations = generatePalette(baseHsl, STEPS.VIVID);
-    updatePalette(type, vividVariations, "Vivid");
   };
 
   form.addEventListener("submit", (event) => {
