@@ -17,7 +17,7 @@
    Form groups
    ========================================================================== */
 
-   /* Custom Focus Style */
+/* Custom Focus Style */
 input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
@@ -28,7 +28,6 @@ input:focus {
 .color-form {
   display: grid;
   gap: var(--spacing-xl);
-  margin: var(--spacing-xl) 0;
 }
 
 /* Form Group Container */
@@ -53,18 +52,18 @@ input:focus {
 
 .form-group label {
   font-size: var(--font-size-sm);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-xxs);
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
 }
 
 .form-group input {
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-xs);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
 }
@@ -100,7 +99,7 @@ input:focus {
 /* Number input styles */
 input[type="number"] {
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-xs);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
   background: var(--color-surface);
@@ -112,7 +111,7 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   opacity: 1;
   height: 1em;
-  margin: 0 var(--spacing-xs);
+  margin: 0 var(--spacing-xxs);
   cursor: pointer;
 }
 
@@ -147,7 +146,7 @@ input[type="number"]:focus {
 .hsl-input-wrapper {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-xxs);
 }
 
 .hsl-input-wrapper label {
@@ -157,7 +156,7 @@ input[type="number"]:focus {
 
 .hsl-input {
   flex: 1;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-xs);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
   font-family: var(--font-family-mono);
@@ -174,7 +173,7 @@ input[type="number"]:focus {
   display: none;
   color: var(--color-error);
   font-size: var(--font-size-sm);
-  margin-top: var(--spacing-xs);
+  margin-top: var(--spacing-xxs);
 }
 
 .error-message.visible {

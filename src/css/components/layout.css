@@ -16,13 +16,18 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
   margin-top: var(--spacing-xl);
+  margin-inline: auto;
+  width: 100%;
 }
 
 /* Système d'onglets */
 .color-tabs {
   display: flex;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  margin: 0 0 var(--spacing-md);
+  justify-content: center;
+  height: 70px;
+  padding: var(--spacing-xxs);
 }
 
 .tab-button {
@@ -55,16 +60,18 @@
 .previews-container {
   background: var(--color-surface);
   border-radius: var(--border-radius-lg);
-  margin-bottom: var(--spacing-xl);
+  margin: 0 0 10px;
+  overflow: hidden;
+  padding: var(--spacing-xxs);
 }
 
 /* Adaptations pour le responsive */
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
   .app-layout {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 
   .preview-column {
-      position: static;
+    position: static;
   }
 }

@@ -11,7 +11,7 @@
 /* ==========================================================================
    Imports
    ========================================================================== */
-@import 'custom-reset.css';
+@import "custom-reset.css";
 @import "variables.css";
 @import "components/layout.css";
 @import "components/inputs.css";
@@ -28,9 +28,10 @@
 }
 
 body {
+  display: flex;
   font-family: var(--font-family-base);
   background-color: var(--color-surface);
-  padding: var(--spacing-xxl);
+  padding-inline: 5px;
   line-height: var(--line-height-base);
   font-size: var(--font-size-base);
 }
@@ -43,7 +44,11 @@ button {
    Layout
    ========================================================================== */
 .container {
-  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -53,7 +58,7 @@ button {
 .info-icon {
   display: inline-flex;
   align-items: center;
-  margin-left: var(--spacing-xs);
+  margin-left: var(--spacing-xxs);
   cursor: help;
   position: relative;
 }
@@ -64,8 +69,8 @@ button {
   left: 50%;
   transform: translateX(-50%);
   bottom: 100%;
-  margin-bottom: var(--spacing-xs);
-  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-xxs);
+  padding: var(--spacing-xs);
   background-color: var(--color-tooltip);
   color: var(--color-surface);
   font-size: var(--font-size-sm);
@@ -125,32 +130,19 @@ button {
 /* ==========================================================================
    Responsive Design
    ========================================================================== */
-@media (max-width: 768px) {
-  body {
-      padding: var(--spacing-lg);
-  }
-
+@media (max-width: 576px) {
   .color-group .form-group {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 
-  .palette {
-      grid-template-columns: repeat(3, 1fr);
+  .color-preview-wrapper {
+    flex-direction: column;
+    gap: var(--spacing-md);
   }
 }
 
 @media (max-width: 480px) {
   body {
-      padding: var(--spacing-md);
-      font-size: var(--font-size-sm);
-  }
-
-  .palette {
-      grid-template-columns: repeat(2, 1fr);
-  }
-
-  .color-preview-wrapper {
-      flex-direction: column;
-      gap: var(--spacing-md);
+    font-size: var(--font-size-sm);
   }
 }
