@@ -10,17 +10,16 @@
 
 /* src/css/components/layout.css */
 
-/* Layout principal */
+/* Main layout */
 .app-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
   margin-top: var(--spacing-xl);
   margin-inline: auto;
-  width: 100%;
 }
 
-/* Système d'onglets */
+/* Tabs system */
 .color-tabs {
   display: flex;
   gap: var(--spacing-md);
@@ -45,12 +44,12 @@
   border-color: var(--color-primary);
 }
 
-/* Panneaux de couleur */
+/* Color Panels */
 .color-panel[hidden] {
   display: none;
 }
 
-/* Colonne de prévisualisation */
+/* Preview Column */
 .preview-column {
   position: sticky;
   top: var(--spacing-xl);
@@ -65,7 +64,7 @@
   padding: var(--spacing-xxs);
 }
 
-/* Adaptations pour le responsive */
+/* Responsive */
 @media (max-width: 992px) {
   .app-layout {
     grid-template-columns: 1fr;

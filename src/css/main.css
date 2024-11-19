@@ -36,6 +36,14 @@ body {
   font-size: var(--font-size-base);
 }
 
+h2 {
+  font-size: 1.3rem; /* Browser default 1.5em */
+}
+
+h3 {
+  font-size: 1.08rem; /* Browser default 1.17em */
+}
+
 button {
   font-size: inherit;
 }
@@ -48,8 +56,8 @@ button {
   flex-direction: column;
   align-items: center;
   max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+  margin-inline: auto;
+  margin-block: var(--spacing-lg);
 }
 
 /* ==========================================================================

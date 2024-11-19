@@ -27,11 +27,14 @@ input:focus {
 /* Form Layout */
 .color-form {
   display: grid;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg);
 }
 
 /* Form Group Container */
 .color-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
   background: var(--color-surface-alt);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-lg);
@@ -75,8 +78,7 @@ input:focus {
   background-color: var(--color-surface-input);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-md);
-  margin-bottom: var(--spacing-lg);
-  border: 1px solid var(--color-border); /* Ajout d'une bordure */
+  border: 1px solid var(--color-border);
 }
 
 .input-section h3 {
@@ -118,12 +120,14 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Style for Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Firefox: Show spinner on hover and focus */
 input[type="number"]:hover,
 input[type="number"]:focus {
   -moz-appearance: number-input;
+  appearance: textfield;
 }
 
 /* Focus states */
@@ -202,7 +206,6 @@ input[type="number"]:focus {
   border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-size: var(--font-size-base);
-  margin-top: var(--spacing-md);
 }
 
 .submit-button:hover {

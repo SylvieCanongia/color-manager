@@ -21,7 +21,7 @@
    ========================================================================== */
 .all-palettes {
   display: grid;
-  gap: var(--spacing-xxl);
+  gap: var(--spacing-xxs);
   margin-top: 0;
 }
 
@@ -36,8 +36,9 @@
 }
 
 .palette-section h2 {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text-primary);
+  line-height: 1;
 }
 
 .palette-container {
@@ -49,7 +50,7 @@
 /* Palette Grid */
 .palette {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
   width: 100%;
   overflow: visible;
   gap: 1px;
@@ -69,6 +70,7 @@
   box-shadow: var(--shadow-sm);
   box-sizing: border-box;
   width: 100%;
+  border: 2px solid transparent;
 }
 
 .color-box:hover {
@@ -83,7 +85,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   background-color: var(--color-surface);
   padding: var(--spacing-xxs) var(--spacing-xs);
@@ -97,7 +99,7 @@
 }
 
 .color-box.base-color {
-  border: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
   box-shadow: var(--shadow-base-color);
 }
 

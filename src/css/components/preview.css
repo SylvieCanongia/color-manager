@@ -30,7 +30,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 69px;
 }
+
+/* For each child */
+/* .color-preview > * {
+  flex: 0 0 auto; /* do not grow or shrink
+} */
 
 .colorValueWrapper {
   display: flex;
