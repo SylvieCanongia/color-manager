@@ -40,7 +40,10 @@
                     <div class="input-with-tooltip">
                       <input type="text" id="primaryHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%)" aria-describedby="primaryHslTooltip" />
                       <span class="info-icon" role="tooltip" id="primaryHslTooltip">
-                        ℹ️
+                        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+                          <rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor" />
+                          <path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="white" />
+                        </svg>
                         <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
                       </span>
                     </div>
@@ -80,7 +83,10 @@
                     <div class="input-with-tooltip">
                       <input type="text" id="secondaryHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%)" aria-describedby="secondaryHslTooltip" />
                       <span class="info-icon" role="tooltip" id="secondaryHslTooltip">
-                        ℹ️
+                        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+                          <rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor" />
+                          <path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="white" />
+                        </svg>
                         <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
                       </span>
                     </div>
@@ -120,7 +126,10 @@
                     <div class="input-with-tooltip">
                       <input type="text" id="accentHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%)" aria-describedby="accentHslTooltip" />
                       <span class="info-icon" role="tooltip" id="accentHslTooltip">
-                        ℹ️
+                        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+                          <rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor" />
+                          <path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="white" />
+                        </svg>
                         <span class="tooltip-text">Collez ou saisissez une valeur HSL complète</span>
                       </span>
                     </div>
@@ -185,12 +194,26 @@
                 <section class="palette-container">
                   <h3>Normal</h3>
                   <div id="primaryNormalPalette" class="palette"></div>
-                  <button id="copyPrimaryNormal" class="copy-button">Copier la palette</button>
+                  <button id="copyPrimaryNormal" class="copy-button" aria-label="Copier la palette">
+                    <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </button>
                 </section>
                 <section class="palette-container">
                   <h3>Vivid</h3>
                   <div id="primaryVividPalette" class="palette"></div>
-                  <button id="copyPrimaryVivid" class="copy-button">Copier la palette</button>
+                  <button id="copyPrimaryVivid" class="copy-button" aria-label="Copier la palette">
+                    <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </button>
                 </section>
               </div>
             </div>
@@ -202,12 +225,26 @@
                 <section class="palette-container">
                   <h3>Normal</h3>
                   <div id="secondaryNormalPalette" class="palette"></div>
-                  <button id="copySecondaryNormal" class="copy-button">Copier la palette</button>
+                  <button id="copySecondaryNormal" class="copy-button" aria-label="Copier la palette">
+                    <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </button>
                 </section>
                 <section class="palette-container">
                   <h3>Vivid</h3>
                   <div id="secondaryVividPalette" class="palette"></div>
-                  <button id="copySecondaryVivid" class="copy-button">Copier la palette</button>
+                  <button id="copySecondaryVivid" class="copy-button" aria-label="Copier la palette">
+                    <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </button>
                 </section>
               </div>
             </div>
@@ -219,12 +256,26 @@
                 <section class="palette-container">
                   <h3>Normal</h3>
                   <div id="accentNormalPalette" class="palette"></div>
-                  <button id="copyAccentNormal" class="copy-button">Copier la palette</button>
+                  <button id="copyAccentNormal" class="copy-button" aria-label="Copier la palette">
+                    <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </button>
                 </section>
                 <section class="palette-container">
                   <h3>Vivid</h3>
                   <div id="accentVividPalette" class="palette"></div>
-                  <button id="copyAccentVivid" class="copy-button">Copier la palette</button>
+                  <button id="copyAccentVivid" class="copy-button" aria-label="Copier la palette">
+                    <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </button>
                 </section>
               </div>
             </div>

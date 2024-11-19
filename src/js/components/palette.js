@@ -87,11 +87,10 @@ const updatePalette = (type, variations, paletteType) => {
       const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${index * 100}: ${createHSLString(hsl)};`).join("\n");
 
       navigator.clipboard.writeText(cssVariables);
-      const originalText = copyButton.textContent;
-      copyButton.textContent = "Copié !";
+      copyButton.classList.add("copied");
       setTimeout(() => {
-        copyButton.textContent = originalText;
-      }, 2000);
+        copyButton.classList.remove("copied");
+      }, 2200);
     };
   }
 };

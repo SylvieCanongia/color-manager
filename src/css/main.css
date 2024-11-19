@@ -63,6 +63,15 @@ button {
   position: relative;
 }
 
+.info-icon svg {
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--color-tooltip);
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
 .tooltip-text {
   visibility: hidden;
   position: absolute;
