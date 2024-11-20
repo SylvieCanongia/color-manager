@@ -2,6 +2,12 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.2] - 2024-11-20
+
+- Ajout de l'export multi-format (HSL, RGB, HEX)
+- Sélecteur de format pour chaque palette
+- Amélioration du nommage des variables CSS pour éviter les conflits
+
 ## [1.0.1] - 2024-11-17
 
 - Reset CSS personnalisé pour une meilleure cohérence entre navigateurs

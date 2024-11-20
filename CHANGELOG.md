@@ -3,6 +3,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2024-11-20
+
+- Add multi-format color export (HSL, RGB, HEX)
+- Add format selector for each palette
+- Improve CSS variable naming to prevent conflicts
+
 ## [1.0.1] - 2024-11-17
 
 - Custom CSS reset for better cross-browser consistency
