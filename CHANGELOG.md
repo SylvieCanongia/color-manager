@@ -3,6 +3,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2024-11-21
+
+- Add Light/Dark theme support
+- Automatic system preferences detection
+- Theme choice persistence
+- Smooth theme transitions
+
 ## [1.0.2] - 2024-11-20
 
 - Add multi-format color export (HSL, RGB, HEX)

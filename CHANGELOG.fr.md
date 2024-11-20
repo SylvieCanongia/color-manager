@@ -2,6 +2,13 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.3] - 2024-11-21
+
+- Ajout du support des thèmes clair/sombre
+- Détection automatique des préférences système
+- Persistance du choix de thème
+- Transitions fluides entre les thèmes
+
 ## [1.0.2] - 2024-11-20
 
 - Ajout de l'export multi-format (HSL, RGB, HEX)

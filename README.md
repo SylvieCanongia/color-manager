@@ -21,6 +21,7 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 - Empty state management
 - Modern, responsive interface
 - Multi-format color export (HSL, RGB, HEX)
+- Light/Dark theme support with system preference detection
 
 ### Usage
 
@@ -32,7 +33,6 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 
 ### Coming Soon
 
-- Light/Dark theme support
 - Customizable variable naming
 - Direct CSS file download
 - Social sharing
@@ -58,6 +58,7 @@ Un outil web pour générer des palettes de couleurs HSL avec variantes claires 
 - Gestion des états vides
 - Interface moderne et responsive
 - Export multi-format des couleurs (HSL, RGB, HEX)
+- Support des thèmes clair/sombre avec détection des préférences système
 
 ### Utilisation
 
@@ -69,7 +70,6 @@ Un outil web pour générer des palettes de couleurs HSL avec variantes claires 
 
 ### À venir
 
-- Support des thèmes clair/sombre
 - Nommage personnalisable des variables
 - Téléchargement direct de fichiers CSS
 - Partage social
