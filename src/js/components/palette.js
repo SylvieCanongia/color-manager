@@ -10,7 +10,7 @@
 
 // src/js/components/palette.js
 
-import { createHSLString, generatePaletteVariations } from "../utils/colorUtils.js";
+import { createHSLString, createColorString, generatePaletteVariations } from "../utils/colorUtils.js";
 
 // Constants for palette generation
 const TYPES = {
@@ -84,7 +84,12 @@ const updatePalette = (type, variations, paletteType) => {
   if (copyButton) {
     copyButton.disabled = false;
     copyButton.onclick = () => {
-      const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${index * 100}: ${createHSLString(hsl)};`).join("\n");
+      const formatSelect = copyButton.parentElement.querySelector(".format-select");
+      console.log("format-select", formatSelect);
+      const format = formatSelect ? formatSelect.value : "hsl";
+      console.log("format", format);
+      const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${index * 100}: ${createColorString(hsl, format)};`).join("\n");
+      console.log("variables", cssVariables);
 
       navigator.clipboard.writeText(cssVariables);
       copyButton.classList.add("copied");

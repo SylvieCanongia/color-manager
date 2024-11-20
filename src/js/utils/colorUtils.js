@@ -99,3 +99,42 @@ export const generatePaletteVariations = (baseHsl, paletteType) => {
 
   return variations;
 };
+
+export const hslToRgb = ({ hue, saturation, lightness }) => {
+  const s = saturation / 100;
+  const l = lightness / 100;
+  const k = (n) => (n + hue / 30) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+
+  return {
+    r: Math.round(255 * f(0)),
+    g: Math.round(255 * f(8)),
+    b: Math.round(255 * f(4)),
+  };
+};
+
+export const rgbToHex = ({ r, g, b }) => {
+  const toHex = (x) => {
+    const hex = x.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+  };
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+};
+
+export const createColorString = (hsl, format) => {
+  switch (format) {
+    case "hsl":
+      return createHSLString(hsl);
+    case "rgb": {
+      const rgb = hslToRgb(hsl);
+      return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+    }
+    case "hex": {
+      const rgb = hslToRgb(hsl);
+      return rgbToHex(rgb);
+    }
+    default:
+      return createHSLString(hsl);
+  }
+};
