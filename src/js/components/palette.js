@@ -85,11 +85,8 @@ const updatePalette = (type, variations, paletteType) => {
     copyButton.disabled = false;
     copyButton.onclick = () => {
       const formatSelect = copyButton.parentElement.querySelector(".format-select");
-      console.log("format-select", formatSelect);
       const format = formatSelect ? formatSelect.value : "hsl";
-      console.log("format", format);
-      const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${index * 100}: ${createColorString(hsl, format)};`).join("\n");
-      console.log("variables", cssVariables);
+      const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${paletteType.toLowerCase()}-${index * 100}: ${createColorString(hsl, format)};`).join("\n");
 
       navigator.clipboard.writeText(cssVariables);
       copyButton.classList.add("copied");
