@@ -19,7 +19,22 @@
   margin-inline: auto;
 }
 
-/* Tabs system */
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+Tabs system
+========================================================================== */
+
 .color-tabs {
   display: flex;
   gap: var(--spacing-md);
