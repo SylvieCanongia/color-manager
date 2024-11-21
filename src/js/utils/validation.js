@@ -65,3 +65,28 @@ export const isValidHSL = (hslString) => {
         values: { hue, saturation, lightness }
     };
 };
+
+// Validate detailed inputs format and values
+export const validateDetailedInput = (value, min, max) => {
+    const numValue = parseInt(value);
+    
+    if (isNaN(numValue)) {
+      return {
+        isValid: false,
+        error: "Nombre invalide"
+      };
+    }
+    
+    if (numValue < min || numValue > max) {
+      return {
+        isValid: false,
+        error: `Entre ${min} et ${max}`
+      };
+    }
+    
+    return {
+      isValid: true,
+      error: ""
+    };
+  };
+  

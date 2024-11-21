@@ -10,9 +10,9 @@
 
 // src/js/components/colorInput.js
 
-import { isValidHSL } from "../utils/validation.js";
+import { isValidHSL, validateDetailedInput } from "../utils/validation.js";
 import { updatePreview } from "./preview.js";
-import { resetPalettes } from "./palette.js"; // Ajout de l'import
+import { resetPalettes } from "./palette.js";
 
 // Color types constants
 const TYPES = {
@@ -51,7 +51,7 @@ export const initColorInputs = () => {
     // Handle HSL input changes
     const handleHSLInput = () => {
       const value = hslInput.value.trim();
-
+      console.log("value", value);
       // Clear all if empty
       if (!value) {
         clearInputs();
@@ -59,21 +59,37 @@ export const initColorInputs = () => {
       }
 
       const validationResult = isValidHSL(value);
-
+      console.log("validationResult", validationResult);
       if (!validationResult.isValid) {
         errorElement.textContent = validationResult.error;
+        errorElement.classList.add("visible");
+        console.log("validationResult.error", validationResult.error);
         hslInput.setAttribute("aria-invalid", "true");
         return;
       }
 
       errorElement.textContent = "";
+      errorElement.classList.remove("visible");
       hslInput.setAttribute("aria-invalid", "false");
       updateDetailedInputs(validationResult.values);
       updatePreview(type, validationResult.values);
     };
 
     // Handle detailed inputs changes
-    const handleDetailedInput = () => {
+    const handleDetailedInput = (event) => {
+      const input = event.target;
+      const min = parseInt(input.min);
+      const max = parseInt(input.max);
+
+      const validationResult = validateDetailedInput(input.value, min, max);
+      const errorSpan = input.parentNode.querySelector(".error-message");
+
+      errorSpan.textContent = validationResult.error;
+      errorSpan.classList.toggle("visible", !validationResult.isValid);
+      input.setAttribute("aria-invalid", !validationResult.isValid);
+
+      if (!validationResult.isValid) return;
+
       const hue = parseInt(hueInput.value);
       const saturation = parseInt(saturationInput.value);
       const lightness = parseInt(lightnessInput.value);

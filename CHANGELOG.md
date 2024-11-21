@@ -3,6 +3,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2024-11-22
+
+- Detailed input validation with error messages
+- Add recommendations for optimal palettes
+
 ## [1.0.3] - 2024-11-21
 
 - Add Light/Dark theme support

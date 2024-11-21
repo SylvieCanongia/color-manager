@@ -59,6 +59,7 @@ input:focus {
 }
 
 .input-group {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -76,6 +77,7 @@ input:focus {
    Input Sections
    ========================================================================== */
 .input-section {
+  position: relative;
   background-color: var(--color-surface-input);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-md);
@@ -176,23 +178,33 @@ input[type="number"]:focus {
    Error States
    ========================================================================== */
 .error-message {
-  display: none;
+  position: absolute;
+  opacity: 0;
   color: var(--color-error);
   font-size: var(--font-size-sm);
-  margin-top: var(--spacing-xxs);
+  transition: opacity var(--transition-base);
+  margin: 0;
 }
 
+.quick-input .error-message {
+  bottom: 0;
+  left: var(--spacing-lg);
+}
+
+.input-group .error-message {
+  bottom: calc(var(--spacing-lg) * -1);
+}
+
+/* Show error message */
 .error-message.visible {
-  display: block;
+  opacity: 1;
 }
 
-.hsl-input.invalid {
+.hsl-input[aria-invalid="true"],
+input[type="number"][aria-invalid="true"] {
   border-color: var(--color-error);
   background-color: var(--color-surface-error);
-}
-
-.hsl-input.invalid + .error-message {
-  display: block;
+  color: var(--color-text-primary);
 }
 
 /* ==========================================================================

@@ -31,8 +31,17 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 2. Get instant preview of your color
 3. Generate and copy color palettes
 
+### Recommendations for optimal palettes
+
+For best color palette results:
+
+- Saturation: prefer values > 0% to avoid pure grays
+- Lightness: use values between 40% and 60% for base color
+- Avoid combinations of 0% saturation with very low lightness
+
 ### Coming Soon
 
+- Integrated user guide
 - Customizable variable naming
 - Direct CSS file download
 - Social sharing
@@ -68,8 +77,17 @@ Un outil web pour générer des palettes de couleurs HSL avec variantes claires 
 2. Obtenez une prévisualisation instantanée
 3. Générez et copiez les palettes de couleurs
 
+### Recommandations pour les palettes optimales
+
+Pour obtenir les meilleures palettes de couleurs :
+
+- Saturation : préférez une valeur > 0% pour éviter les gris purs
+- Luminosité : utilisez des valeurs entre 40% et 60% pour la couleur de base
+- Évitez les combinaisons de saturation 0% avec une luminosité très faible
+
 ### À venir
 
+- Guide utilisateur intégré
 - Nommage personnalisable des variables
 - Téléchargement direct de fichiers CSS
 - Partage social

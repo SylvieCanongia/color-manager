@@ -2,6 +2,11 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.4] - 2024-11-22
+
+- Validation des champs de saisie détaillée avec messages d'erreur
+- Ajout des recommandations pour les palettes optimales
+
 ## [1.0.3] - 2024-11-21
 
 - Ajout du support des thèmes clair/sombre

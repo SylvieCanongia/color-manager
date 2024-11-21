@@ -38,7 +38,7 @@
             <button class="tab-button" role="tab" aria-selected="false" aria-controls="accentPanel" id="accentTab">Accent</button>
           </div>
 
-          <form id="paletteForm" class="color-form">
+          <form id="paletteForm" class="color-form" novalidate>
             <!-- Primary Panel -->
             <div id="primaryPanel" class="color-panel" role="tabpanel" aria-labelledby="primaryTab">
               <div class="color-group">
@@ -68,14 +68,17 @@
                     <div class="input-group">
                       <label for="primary-hue">Teinte (0-360) :</label>
                       <input type="number" id="primary-hue" name="primary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
                       <label for="primary-saturation">Saturation (0-100%) :</label>
                       <input type="number" id="primary-saturation" name="primary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
                       <label for="primary-lightness">Luminosité (0-100%) :</label>
                       <input type="number" id="primary-lightness" name="primary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                   </div>
                 </div>
@@ -111,14 +114,17 @@
                     <div class="input-group">
                       <label for="secondary-hue">Teinte (0-360) :</label>
                       <input type="number" id="secondary-hue" name="secondary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
                       <label for="secondary-saturation">Saturation (0-100%) :</label>
                       <input type="number" id="secondary-saturation" name="secondary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
                       <label for="secondary-lightness">Luminosité (0-100%) :</label>
                       <input type="number" id="secondary-lightness" name="secondary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                   </div>
                 </div>
@@ -154,14 +160,17 @@
                     <div class="input-group">
                       <label for="accent-hue">Teinte (0-360) :</label>
                       <input type="number" id="accent-hue" name="accent-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
                       <label for="accent-saturation">Saturation (0-100%) :</label>
                       <input type="number" id="accent-saturation" name="accent-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
                       <label for="accent-lightness">Luminosité (0-100%) :</label>
                       <input type="number" id="accent-lightness" name="accent-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
+                      <span class="error-message" role="alert"></span>
                     </div>
                   </div>
                 </div>
