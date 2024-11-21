@@ -24,10 +24,10 @@
    ========================================================================== */
 .app-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0 1rem;
-  margin-bottom: 2rem;
+  padding: var(--spacing-xs) var(--spacing-lg);
   width: 100%;
 }
 
@@ -55,8 +55,12 @@ Tabs system
 
 .tab-button[aria-selected="true"] {
   background: var(--color-primary);
-  color: var(--color-surface);
-  border-color: var(--color-primary);
+  color: var(--color-text-tab-selected);
+  border-color: var(--color-surface);
+}
+
+[data-theme="dark"] .tab-button[aria-selected="true"] {
+  border-color: var(--color-surface-select);
 }
 
 /* Color Panels */

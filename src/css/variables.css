@@ -13,8 +13,8 @@
    ========================================================================== */
 :root {
   /* Main Interface Colors */
-  --color-primary: hsl(210, 80%, 42%);
-  --color-primary-hover: hsl(210, 80%, 36%);
+  --color-primary: hsl(210, 80%, 35%);
+  --color-primary-hover: hsl(210, 96%, 20%);
   --color-success: hsl(96, 54%, 38%);
   --color-error: hsl(354, 65%, 54%);
 
@@ -23,11 +23,15 @@
   --color-surface-alt: hsl(210, 10%, 96%);
   --color-surface-input: hsl(220, 25%, 92%);
   --color-surface-error: hsl(354, 70%, 97%);
+  --color-surface-select: hsl(220, 25%, 85%);
 
   /* Text colors */
   --color-text-primary: hsl(220, 25%, 20%);
   --color-text-secondary: hsl(220, 15%, 35%);
   --color-text-muted: hsl(220, 10%, 50%);
+  --color-text-tab-selected: hsl(0, 0%, 100%);
+  --color-text-select: hsl(220, 25%, 20%);
+  --color-text-tooltip: hsl(0, 0%, 100%);
 
   /* Border colors */
   --color-border: hsl(220, 15%, 75%);
@@ -49,77 +53,77 @@
   --shadow-color-focus: hsla(207, 100%, 42%, 0.1);
   --shadow-color-overlay: hsla(0, 0%, 0%, 0.2);
 
-   /* Shadows */
-   --shadow-sm: 0 2px 4px var(--shadow-color);
-   --shadow-md: 0 3px 8px var(--shadow-color-overlay);
-   --shadow-focus: 0 0 0 2px var(--shadow-color-focus);
-   --shadow-base-color: 0 0 0 1px hsla(0, 0%, 100%, 0.5);
- 
- 
-   /* Borders */
-   --border-radius-sm: 4px;
-   --border-radius-md: 6px;
-   --border-radius-lg: 8px;
- 
-   /* Transitions */
-   --transition-base: 0.2s ease;
-   --transition-smooth: 0.3s ease;
- 
-   /* Spacing */
-   --spacing-xxs: 0.25rem; /* 4px */
-   --spacing-xs: 0.5rem; /* 8px */
-   --spacing-sm: 0.75rem; /* 12px */
-   --spacing-md: 1rem; /* 16px */
-   --spacing-lg: 1.5rem; /* 24px */
-   --spacing-xl: 2rem; /* 32px */
-   --spacing-xxl: 3rem; /* 48px */
- 
-   /* Typography */
-   --font-family-base: system-ui, -apple-system, sans-serif;
-   --font-family-mono: monospace;
- 
-   --font-size-xxs: 0.625rem; /* 10px */
-   --font-size-xs: 0.75rem; /* 12px */
-   --font-size-sm: 0.875rem; /* 14px */
-   --font-size-base: 1rem; /* 16px */
-   --font-size-md: 1.125rem; /* 18px */
-   --font-size-lg: 1.25rem; /* 20px */
- 
-   --line-height-base: 1.5;
+  /* Shadows */
+  --shadow-sm: 0 2px 4px var(--shadow-color);
+  --shadow-md: 0 3px 8px var(--shadow-color-overlay);
+  --shadow-focus: 0 0 0 2px var(--shadow-color-focus);
+  --shadow-base-color: 0 0 0 1px hsla(0, 5%, 53%, 0.5);
+
+  /* Borders */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+
+  /* Transitions */
+  --transition-base: 0.2s ease;
+  --transition-smooth: 0.3s ease;
+
+  /* Spacing */
+  --spacing-xxs: 0.25rem; /* 4px */
+  --spacing-xs: 0.5rem; /* 8px */
+  --spacing-sm: 0.75rem; /* 12px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-xxl: 3rem; /* 48px */
+
+  /* Typography */
+  --font-family-base: system-ui, -apple-system, sans-serif;
+  --font-family-mono: monospace;
+
+  --font-size-xxs: 0.625rem; /* 10px */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-md: 1.125rem; /* 18px */
+  --font-size-lg: 1.25rem; /* 20px */
+
+  --line-height-base: 1.5;
 }
 
 /* Dark theme */
 [data-theme="dark"] {
   /* Main Interface Colors */
-  --color-primary: hsl(210, 80%, 50%);
-  --color-primary-hover: hsl(210, 80%, 45%);
-  --color-success: hsl(96, 54%, 45%);
-  --color-error: hsl(354, 65%, 60%);
+  --color-primary: hsl(210, 96%, 20%);
+  --color-primary-hover: hsl(210, 80%, 35%);
+  --color-success: hsl(96, 60%, 45%);
+  --color-error: hsl(354, 70%, 60%);
 
   /* Background colors */
-  --color-surface: hsl(220, 25%, 20%);
-  --color-surface-alt: hsl(210, 15%, 15%);
-  --color-surface-input: hsl(220, 25%, 25%);
+  --color-surface: hsl(220, 15%, 15%);
+  --color-surface-alt: hsl(220, 15%, 20%);
+  --color-surface-input: hsl(220, 15%, 18%);
   --color-surface-error: hsl(354, 70%, 15%);
+  --color-surface-select: hsl(218, 19%, 88%);
 
   /* Text colors */
-  --color-text-primary: hsl(220, 15%, 85%);
-  --color-text-secondary: hsl(220, 15%, 75%);
-  --color-text-muted: hsl(220, 10%, 65%);
+  --color-text-primary: hsl(223, 14%, 90%);
+  --color-text-secondary: hsl(220, 25%, 85%);
+  --color-text-muted: hsl(220, 15%, 70%);
 
   /* Border colors */
-  --color-border: hsl(220, 15%, 30%);
-  --color-border-focus: hsl(215, 85%, 60%);
+  --color-border: hsl(220, 15%, 35%);
+  --color-border-focus: hsl(215, 85%, 70%);
 
   /* Tooltip */
-  --color-tooltip: hsl(210, 28%, 25%);
+  --color-tooltip: hsl(210, 28%, 30%);
 
   /* Patterns and States */
-  --color-checkerboard: hsl(220, 15%, 25%);
-  --color-empty-border: hsl(220, 15%, 35%);
+  --color-checkerboard: hsl(220, 15%, 30%);
+  --color-empty-border: hsl(220, 15%, 40%);
 
-  /* Shadow colors - adjusted for dark theme */
-  --shadow-color: hsla(220, 25%, 5%, 0.2);
-  --shadow-color-focus: hsla(207, 100%, 42%, 0.2);
+  /* Shadow colors */
+  --shadow-color: hsla(220, 25%, 5%, 0.3);
+  --shadow-color-focus: hsla(207, 100%, 60%, 0.3);
   --shadow-color-overlay: hsla(0, 0%, 0%, 0.4);
 }

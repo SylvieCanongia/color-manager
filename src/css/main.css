@@ -30,11 +30,13 @@
 
 body {
   display: flex;
+  flex-direction: column;
   font-family: var(--font-family-base);
   background-color: var(--color-surface);
   padding-inline: 5px;
   line-height: var(--line-height-base);
   font-size: var(--font-size-base);
+  color: var(--color-text-primary);
 }
 
 h2 {
@@ -58,7 +60,7 @@ button {
   align-items: center;
   max-width: 1200px;
   margin-inline: auto;
-  margin-block: var(--spacing-lg);
+  margin-block: var(--spacing-xs) var(--spacing-lg);
 }
 
 /* ==========================================================================
@@ -90,7 +92,7 @@ button {
   margin-bottom: var(--spacing-xxs);
   padding: var(--spacing-xs);
   background-color: var(--color-tooltip);
-  color: var(--color-surface);
+  color: var(--color-text-tooltip);
   font-size: var(--font-size-sm);
   border-radius: var(--border-radius-sm);
   white-space: normal;

@@ -16,20 +16,19 @@
     <link rel="stylesheet" href="./src/css/main.css" />
   </head>
   <body>
+    <header class="app-header">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Basculer entre le thème clair et sombre">
+        <svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5" />
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+        <svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" />
+        </svg>
+      </button>
+    </header>
     <div class="container">
-      <header class="app-header">
-        <h1>Générateur de Palettes de couleurs</h1>
-        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Basculer entre le thème clair et sombre">
-          <svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5" />
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-          </svg>
-          <svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" />
-          </svg>
-        </button>
-      </header>
-
+      <h1>Générateur de Palettes de couleurs</h1>
       <div class="app-layout">
         <!-- Left column : Entries -->
         <div class="inputs-column">
@@ -45,7 +44,7 @@
               <div class="color-group">
                 <!-- Quick Entry Section -->
                 <div class="input-section quick-input">
-                  <h3>Saisie rapide</h3>
+                  <h2>Saisie rapide</h2>
                   <div class="hsl-input-wrapper">
                     <label for="primaryHslInput">Format HSL :</label>
                     <div class="input-with-tooltip">
@@ -64,7 +63,7 @@
 
                 <!-- Detailed Entry Section -->
                 <div class="input-section detailed-input">
-                  <h3>Saisie détaillée</h3>
+                  <h2>Saisie détaillée</h2>
                   <div class="form-group">
                     <div class="input-group">
                       <label for="primary-hue">Teinte (0-360) :</label>
@@ -88,7 +87,7 @@
               <div class="color-group">
                 <!-- Quick Entry Section -->
                 <div class="input-section quick-input">
-                  <h3>Saisie rapide</h3>
+                  <h2>Saisie rapide</h2>
                   <div class="hsl-input-wrapper">
                     <label for="secondaryHslInput">Format HSL :</label>
                     <div class="input-with-tooltip">
@@ -107,7 +106,7 @@
 
                 <!-- Detailed Entry Section -->
                 <div class="input-section detailed-input">
-                  <h3>Saisie détaillée</h3>
+                  <h2>Saisie détaillée</h2>
                   <div class="form-group">
                     <div class="input-group">
                       <label for="secondary-hue">Teinte (0-360) :</label>
@@ -131,7 +130,7 @@
               <div class="color-group">
                 <!-- Quick Entry Section -->
                 <div class="input-section quick-input">
-                  <h3>Saisie rapide</h3>
+                  <h2>Saisie rapide</h2>
                   <div class="hsl-input-wrapper">
                     <label for="accentHslInput">Format HSL :</label>
                     <div class="input-with-tooltip">
@@ -150,7 +149,7 @@
 
                 <!-- Detailed Entry Section -->
                 <div class="input-section detailed-input">
-                  <h3>Saisie détaillée</h3>
+                  <h2>Saisie détaillée</h2>
                   <div class="form-group">
                     <div class="input-group">
                       <label for="accent-hue">Teinte (0-360) :</label>
