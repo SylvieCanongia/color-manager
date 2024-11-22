@@ -28,7 +28,15 @@
       </button>
     </header>
     <div class="container">
-      <h1>Générateur de Palettes de couleurs</h1>
+      <h1 class="container-heading">Générateur de Palettes de couleurs</h1>
+      <div class="copy-actions-all">
+        <button id="copyAllPalettes" class="copy-all-button" aria-label="Copier toutes les palettes">Copier toutes les palettes</button>
+        <select class="format-select copy-all-select" aria-label="Format d'export">
+          <option value="hsl">HSL</option>
+          <option value="rgb">RGB</option>
+          <option value="hex">HEX</option>
+        </select>
+      </div>
       <div class="app-layout">
         <!-- Left column : Entries -->
         <div class="inputs-column">

@@ -11,7 +11,7 @@
 // src/js/main.js
 import { initTabs } from "./components/tabs.js";
 import { initColorInputs } from "./components/colorInput.js";
-import { initPalettes } from "./components/palette.js";
+import { initPalettes, initCopyAllPalettes } from "./components/palette.js";
 import { initTheme } from "./utils/theme.js";
 
 // Wait for all resources to load
@@ -21,6 +21,7 @@ window.addEventListener("load", () => {
     initTabs();
     initColorInputs();
     initPalettes();
+    initCopyAllPalettes();
     initTheme();
 
     // Log successful initialization

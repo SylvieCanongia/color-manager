@@ -141,6 +141,32 @@
 /* ==========================================================================
    Action Buttons
    ========================================================================== */
+
+.copy-actions-all {
+  position: absolute;
+  right: 0;
+  top: 50px;
+}
+
+.copy-all-button {
+  background: var(--color-primary);
+  padding: 2px var(--spacing-xs);
+  color: var(--color-text-tab-selected);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  width: 158px;
+}
+
+.copy-all-button:hover {
+  background: var(--color-primary-hover);
+}
+
+[data-theme="dark"] .copy-all-button {
+  border-color: hsla(210, 80%, 35%, 0.7);
+}
+
 .copy-actions {
   position: absolute;
   right: -10px;
@@ -153,9 +179,9 @@
 
 .format-select {
   /* base styles */
-  line-height: calc(var(--line-height-base) + 0.1);
+  line-height: calc(var(--line-height-base) + 0.4);
   padding-left: var(--spacing-xxs);
-  background: var(--color-surface-select);
+  background-color: var(--color-surface-select);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-md);
   color: var(--color-text-select);
@@ -171,12 +197,21 @@
 }
 
 .format-select:hover {
-  border: 2px solid var(--color-text-select);
+  border: 1px inset var(--color-border-focus);
 }
 
 .format-select:focus {
   outline: none;
-  border-color: var(--color-border-focus);
+  border: 1px solid var(--color-border-focus);
+}
+
+.copy-all-select {
+  background-color: var(--color-surface-copy-all-select);
+  line-height: revert;
+  font-size: var(--font-size-xs);
+  width: 50px;
+  background-position: right 7px center;
+  padding: 8px 10px;
 }
 
 .copy-button {

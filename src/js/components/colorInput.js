@@ -51,19 +51,21 @@ export const initColorInputs = () => {
     // Handle HSL input changes
     const handleHSLInput = () => {
       const value = hslInput.value.trim();
-      console.log("value", value);
+
       // Clear all if empty
       if (!value) {
         clearInputs();
+        errorElement.textContent = "";
+        errorElement.classList.remove("visible");
+        hslInput.setAttribute("aria-invalid", "false");
         return;
       }
 
       const validationResult = isValidHSL(value);
-      console.log("validationResult", validationResult);
+
       if (!validationResult.isValid) {
         errorElement.textContent = validationResult.error;
         errorElement.classList.add("visible");
-        console.log("validationResult.error", validationResult.error);
         hslInput.setAttribute("aria-invalid", "true");
         return;
       }

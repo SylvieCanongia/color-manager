@@ -19,7 +19,10 @@ const TYPES = {
   ACCENT: "accent",
 };
 
-// Create empty palette boxes
+/**
+ * Creates empty palette boxes with checkerboard pattern
+ * @returns {Array<HTMLElement>} Array of empty box elements
+ */
 const createEmptyPalette = () => {
   const boxes = [];
   for (let i = 0; i < 11; i++) {
@@ -32,7 +35,12 @@ const createEmptyPalette = () => {
   return boxes;
 };
 
-// Create color box element
+/**
+ * Creates a color box element with HSL background
+ * @param {Object} hsl - HSL color values
+ * @param {boolean} isBase - Whether this is the base color
+ * @returns {HTMLElement} Color box element
+ */
 const createColorBox = (hsl, isBase = false) => {
   const box = document.createElement("div");
   box.className = `color-box${isBase ? " base-color" : ""}`;
@@ -49,7 +57,13 @@ const createColorBox = (hsl, isBase = false) => {
   return box;
 };
 
-// Update palette display
+/**
+ * Updates palette display with new colors or empty state
+ * @param {string} type - Color type
+ * @param {Array} variations - Array of HSL color variations
+ * @param {string} paletteType - Palette type (Normal or Vivid)
+ * @returns {void}
+ */
 const updatePalette = (type, variations, paletteType) => {
   const paletteElement = document.getElementById(`${type}${paletteType}Palette`);
   if (!paletteElement) return;
@@ -97,7 +111,11 @@ const updatePalette = (type, variations, paletteType) => {
   }
 };
 
-// Check if color has been set
+/**
+ * Checks if all HSL inputs have values for a specific color type
+ * @param {string} type - Color type (primary, secondary, accent)
+ * @returns {boolean} True if all inputs have values
+ */
 const hasColorValues = (type) => {
   const hue = document.getElementById(`${type}-hue`).value;
   const saturation = document.getElementById(`${type}-saturation`).value;
@@ -105,13 +123,20 @@ const hasColorValues = (type) => {
   return hue !== "" && saturation !== "" && lightness !== "";
 };
 
-// Export function to reset palettes
+/**
+ * Resets all palettes for a specific color type
+ * @param {string} type - Color type (primary, secondary, accent)
+ * @returns {void}
+ */
 export const resetPalettes = (type) => {
   updatePalette(type, null, "Normal");
   updatePalette(type, null, "Vivid");
 };
 
-// Initialize palette generation
+/**
+ * Initializes all color palettes (Normal and Vivid variants)
+ * @returns {void}
+ */
 export const initPalettes = () => {
   const form = document.getElementById("paletteForm");
   if (!form) {
@@ -156,4 +181,68 @@ export const initPalettes = () => {
     event.preventDefault();
     Object.values(TYPES).forEach(generatePalettes);
   });
+};
+
+/**
+ * Copies all generated palettes in selected format (HSL, RGB, HEX)
+ * @returns {void}
+ */
+export const initCopyAllPalettes = () => {
+  const copyAllButton = document.getElementById("copyAllPalettes");
+  const formatSelect = document.querySelector(".copy-all-select");
+
+  if (!copyAllButton || !formatSelect) return;
+
+  copyAllButton.onclick = () => {
+    const format = formatSelect.value;
+    const allPalettes = [];
+
+    // Colors types
+    Object.values(TYPES).forEach((type) => {
+      // Palettes types
+      ["Normal", "Vivid"].forEach((paletteType) => {
+        const paletteElement = document.getElementById(`${type}${paletteType}Palette`);
+        if (!paletteElement) return;
+
+        // Get palette colors
+        const colors = Array.from(paletteElement.children)
+          .filter((box) => box.classList.contains("color-box") && !box.classList.contains("empty-box"))
+          .map((box, index) => {
+            const ariaLabel = box.getAttribute("aria-label");
+            const hslMatch = ariaLabel.match(/HSL\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+            if (!hslMatch) return "";
+
+            const hsl = {
+              hue: parseInt(hslMatch[1]),
+              saturation: parseInt(hslMatch[2]),
+              lightness: parseInt(hslMatch[3]),
+            };
+
+            return `--color-${type}-${paletteType.toLowerCase()}-${index * 100}: ${createColorString(hsl, format)};`;
+          })
+          .filter((color) => color !== "");
+
+        if (colors.length) {
+          allPalettes.push(`/* ${type} ${paletteType} */`);
+          allPalettes.push(...colors);
+          allPalettes.push("");
+        }
+      });
+    });
+
+    if (allPalettes.length) {
+      navigator.clipboard.writeText(allPalettes.join("\n"));
+
+      // Save original text
+      const originalText = copyAllButton.textContent;
+      // Add class and change the text
+      copyAllButton.classList.add("copied");
+      copyAllButton.textContent = "Copié !";
+
+      setTimeout(() => {
+        copyAllButton.classList.remove("copied");
+        copyAllButton.textContent = originalText;
+      }, 2200);
+    }
+  };
 };

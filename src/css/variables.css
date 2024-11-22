@@ -21,9 +21,10 @@
   /* Background colors */
   --color-surface: hsl(220, 25%, 85%);
   --color-surface-alt: hsl(210, 10%, 96%);
-  --color-surface-input: hsl(220, 25%, 92%);
+  --color-surface-input-section: hsl(220, 25%, 92%);
   --color-surface-error: hsl(354, 70%, 97%);
   --color-surface-select: hsl(220, 25%, 85%);
+  --color-surface-copy-all-select: hsl(0, 0%, 100%);
 
   /* Text colors */
   --color-text-primary: hsl(220, 25%, 20%);
@@ -31,6 +32,7 @@
   --color-text-muted: hsl(220, 10%, 50%);
   --color-text-tab-selected: hsl(0, 0%, 100%);
   --color-text-select: hsl(220, 25%, 20%);
+  --color-text-input: hsl(220, 25%, 20%);
   --color-text-tooltip: hsl(0, 0%, 100%);
   --color-text-input-error: hsl(0, 0%, 100%);
 
@@ -103,7 +105,7 @@
   /* Background colors */
   --color-surface: hsl(220, 15%, 15%);
   --color-surface-alt: hsl(220, 15%, 20%);
-  --color-surface-input: hsl(220, 15%, 18%);
+  --color-surface-input-section: hsl(220, 15%, 18%);
   --color-surface-error: hsl(354, 70%, 15%);
   --color-surface-select: hsl(218, 19%, 88%);
 
@@ -111,6 +113,12 @@
   --color-text-primary: hsl(223, 14%, 90%);
   --color-text-secondary: hsl(220, 25%, 85%);
   --color-text-muted: hsl(220, 15%, 70%);
+
+  --color-text-tab-selected: hsl(0, 0%, 100%);
+  --color-text-select: hsl(220, 25%, 20%);
+  --color-text-input: hsl(220, 25%, 20%);
+  --color-text-tooltip: hsl(0, 0%, 100%);
+  --color-text-input-error: hsl(0, 0%, 100%);
 
   /* Border colors */
   --color-border: hsl(220, 15%, 35%);

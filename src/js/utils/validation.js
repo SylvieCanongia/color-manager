@@ -68,6 +68,13 @@ export const isValidHSL = (hslString) => {
 
 // Validate detailed inputs format and values
 export const validateDetailedInput = (value, min, max) => {
+    if (value.trim() === '') {
+        return {
+          isValid: true,
+          error: ''
+        };
+      }
+      
     const numValue = parseInt(value);
     
     if (isNaN(numValue)) {

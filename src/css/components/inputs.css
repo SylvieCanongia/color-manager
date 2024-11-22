@@ -78,7 +78,7 @@ input:focus {
    ========================================================================== */
 .input-section {
   position: relative;
-  background-color: var(--color-surface-input);
+  background-color: var(--color-surface-input-section);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-md);
   border: 1px solid var(--color-border);
@@ -108,8 +108,16 @@ input[type="number"] {
   padding: var(--spacing-xs);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
-  background: var(--color-surface);
-  color: var(--color-text-primary);
+}
+
+input[type="number"],
+.hsl-input {
+  color: var(--color-text-input);
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+  border-color: var(--color-primary);
 }
 
 /* Spinner buttons for Chrome, Safari, Edge */
@@ -131,7 +139,7 @@ input[type="number"] {
 input[type="number"]:hover,
 input[type="number"]:focus {
   -moz-appearance: number-input;
-  appearance: textfield;
+  appearance: number-input;
 }
 
 /* Focus states */
@@ -168,10 +176,6 @@ input[type="number"]:focus {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
   font-family: var(--font-family-mono);
-}
-
-input[type="number"]:focus {
-  border-color: var(--color-primary);
 }
 
 /* ==========================================================================
@@ -227,5 +231,5 @@ input[type="number"][aria-invalid="true"] {
 }
 
 [data-theme="dark"] .submit-button {
-  border-color: hsla(210, 80%, 35%, 0.3);
+  border-color: hsla(210, 80%, 35%, 0.5);
 }
