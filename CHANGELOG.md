@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 
 - Detailed input validation with error messages
 - Add recommendations for optimal palettes
+- Copy all palettes at once
+- Fix input error states
 
 ## [1.0.3] - 2024-11-21
 

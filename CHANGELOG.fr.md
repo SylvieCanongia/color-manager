@@ -6,6 +6,8 @@ Toutes les modifications notables seront documentées dans ce fichier.
 
 - Validation des champs de saisie détaillée avec messages d'erreur
 - Ajout des recommandations pour les palettes optimales
+- Copie simultanée de toutes les palettes
+- Correction des états d'erreur des inputs
 
 ## [1.0.3] - 2024-11-21
 

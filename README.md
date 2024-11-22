@@ -17,11 +17,13 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 - Dual input system: quick HSL input and detailed component inputs
 - Real-time color preview
 - Accessibility-first design with screen reader support
-- Copy palettes to clipboard
-- Empty state management
-- Modern, responsive interface
+- Flexible palette copying :
+  - Copy individual palettes
+  - Copy all palettes at once
 - Multi-format color export (HSL, RGB, HEX)
+- Empty state management
 - Light/Dark theme support with system preference detection
+- Modern, responsive interface
 
 ### Usage
 
@@ -63,10 +65,12 @@ Un outil web pour générer des palettes de couleurs HSL avec variantes claires 
 - Double système de saisie : entrée HSL rapide et entrées détaillées par composant
 - Prévisualisation en temps réel
 - Conception axée sur l'accessibilité avec support des lecteurs d'écran
-- Copie des palettes dans le presse-papier
+- Copie flexible des palettes :
+  - Copie individuelle des palettes
+  - Copie simultanée de toutes les palettes
+- Export multi-format des couleurs (HSL, RGB, HEX)
 - Gestion des états vides
 - Interface moderne et responsive
-- Export multi-format des couleurs (HSL, RGB, HEX)
 - Support des thèmes clair/sombre avec détection des préférences système
 
 ### Utilisation
