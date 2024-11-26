@@ -3,6 +3,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2024-11-25
+
+- Add multi-format support (HSL, RGB, HEX) for quick input
+- Add automatic format conversion to HSL
+- Add help messages for detailed inputs
+- Improve tooltips and placeholders
+
 ## [1.0.4] - 2024-11-22
 
 - Detailed input validation with error messages

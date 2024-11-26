@@ -2,6 +2,13 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.5] - 2024-11-25
+
+- Ajout du support multi-format (HSL, RGB, HEX) pour la saisie rapide
+- Conversion automatique des formats vers HSL
+- Messages d'aide pour la saisie détaillée
+- Amélioration des tooltips et des placeholders
+
 ## [1.0.4] - 2024-11-22
 
 - Validation des champs de saisie détaillée avec messages d'erreur

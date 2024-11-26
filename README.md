@@ -4,7 +4,7 @@
 
 ## Overview
 
-A web tool for generating HSL color palettes with light and dark variants, designed for developers. Features real-time preview, accessibility support, and CSS variables export.
+A web tool for generating color palettes with light and dark variants, supporting HSL, RGB, and HEX formats. Features real-time preview, accessibility support, and CSS variables export.
 
 ### Links
 
@@ -14,7 +14,9 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 ### Features
 
 - HSL color palette generator with Normal (5% steps) and Vivid (10% steps) variants
-- Dual input system: quick HSL input and detailed component inputs
+- Dual input system :
+  - Quick color input (HSL, RGB, or HEX)
+  - Detailed HSL component inputs
 - Real-time color preview
 - Accessibility-first design with screen reader support
 - Flexible palette copying :
@@ -28,8 +30,8 @@ A web tool for generating HSL color palettes with light and dark variants, desig
 ### Usage
 
 1. Enter your color using either:
-   - Quick HSL input (e.g., hsl(320, 80%, 58%))
-   - Separate inputs for Hue (0-360), Saturation (0-100%), and Lightness (0-100%)
+   - Quick input (e.g., hsl(320, 80%, 58%), rgb(255, 100, 50), or #FF6432)
+   - Separate HSL inputs for Hue (0-360), Saturation (0-100%), and Lightness (0-100%)
 2. Get instant preview of your color
 3. Generate and copy color palettes
 
@@ -52,7 +54,7 @@ For best color palette results:
 
 ## Aperçu
 
-Un outil web pour générer des palettes de couleurs HSL avec variantes claires et foncées, conçu pour les développeurs. Propose une prévisualisation en temps réel, un support d'accessibilité et l'export de variables CSS.
+Un outil web pour générer des palettes de couleurs avec variantes claires et foncées, supportant les formats HSL, RGB et HEX. Propose une prévisualisation en temps réel, un support d'accessibilité et l'export de variables CSS.
 
 ### Liens
 
@@ -62,7 +64,9 @@ Un outil web pour générer des palettes de couleurs HSL avec variantes claires 
 ### Fonctionnalités
 
 - Générateur de palettes HSL avec variantes Normal (pas de 5%) et Vivid (pas de 10%)
-- Double système de saisie : entrée HSL rapide et entrées détaillées par composant
+- Double système de saisie :
+  - Entrée rapide (HSL, RGB ou HEX)
+  - Entrées détaillées des composantes HSL
 - Prévisualisation en temps réel
 - Conception axée sur l'accessibilité avec support des lecteurs d'écran
 - Copie flexible des palettes :
@@ -76,8 +80,8 @@ Un outil web pour générer des palettes de couleurs HSL avec variantes claires 
 ### Utilisation
 
 1. Saisissez votre couleur via :
-   - L'entrée HSL rapide (ex : hsl(320, 80%, 58%))
-   - Les entrées séparées pour Teinte (0-360), Saturation (0-100%) et Luminosité (0-100%)
+   - L'entrée rapide (ex : hsl(320, 80%, 58%), rgb(255, 100, 50) ou #FF6432)
+   - Les entrées HSL séparées pour Teinte (0-360), Saturation (0-100%) et Luminosité (0-100%)
 2. Obtenez une prévisualisation instantanée
 3. Générez et copiez les palettes de couleurs
 
