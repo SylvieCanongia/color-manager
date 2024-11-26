@@ -10,7 +10,8 @@
 
 // src/js/components/colorInput.js
 
-import { isValidHSL, validateDetailedInput } from "../utils/validation.js";
+import { isValidHSL, isValidRGB, isValidHEX, detectColorFormat, validateDetailedInput } from "../utils/validation.js";
+import { rgbToHsl, hexToHsl } from "../utils/colorUtils.js";
 import { updatePreview } from "./preview.js";
 import { resetPalettes } from "./palette.js";
 
@@ -51,6 +52,8 @@ export const initColorInputs = () => {
     // Handle HSL input changes
     const handleHSLInput = () => {
       const value = hslInput.value.trim();
+      const detailedInputs = [hueInput, saturationInput, lightnessInput];
+      const helpMessage = detailedInputs[0].closest(".detailed-input").querySelector(".help-message");
 
       // Clear all if empty
       if (!value) {
@@ -58,10 +61,69 @@ export const initColorInputs = () => {
         errorElement.textContent = "";
         errorElement.classList.remove("visible");
         hslInput.setAttribute("aria-invalid", "false");
+        // Enable detailed inputs and clear help message
+        detailedInputs.forEach((input) => {
+          input.disabled = false;
+          input.value = "";
+          input.title = "";
+        });
+        helpMessage.textContent = "";
+        helpMessage.classList.remove("visible");
         return;
       }
 
-      const validationResult = isValidHSL(value);
+      // Detect input format
+      const format = detectColorFormat(value);
+      let hslValues;
+      let validationResult;
+
+      // Handle detailed inputs state based on format
+      if (format !== "hsl" && format !== null) {
+        const message = "Saisie détaillée disponible uniquement pour le format HSL";
+        detailedInputs.forEach((input) => {
+          input.disabled = true;
+          input.value = "";
+          input.title = message; // Add native tooltip on hover
+        });
+        helpMessage.textContent = message;
+        helpMessage.classList.add("visible");
+      } else {
+        detailedInputs.forEach((input) => {
+          input.disabled = false;
+          input.title = ""; // Remove tooltip
+        });
+        helpMessage.textContent = "";
+        helpMessage.classList.remove("visible");
+      }
+
+      switch (format) {
+        case "hsl":
+          validationResult = isValidHSL(value);
+          if (validationResult.isValid) {
+            hslValues = validationResult.values;
+          }
+          break;
+
+        case "rgb":
+          validationResult = isValidRGB(value);
+          if (validationResult.isValid) {
+            hslValues = rgbToHsl(validationResult.values);
+          }
+          break;
+
+        case "hex":
+          validationResult = isValidHEX(value);
+          if (validationResult.isValid) {
+            hslValues = hexToHsl(validationResult.values);
+          }
+          break;
+
+        default:
+          validationResult = {
+            isValid: false,
+            error: "Format invalide. Utilisez HSL, RGB ou HEX",
+          };
+      }
 
       if (!validationResult.isValid) {
         errorElement.textContent = validationResult.error;
@@ -73,8 +135,8 @@ export const initColorInputs = () => {
       errorElement.textContent = "";
       errorElement.classList.remove("visible");
       hslInput.setAttribute("aria-invalid", "false");
-      updateDetailedInputs(validationResult.values);
-      updatePreview(type, validationResult.values);
+      updateDetailedInputs(hslValues);
+      updatePreview(type, hslValues);
     };
 
     // Handle detailed inputs changes

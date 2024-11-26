@@ -138,3 +138,80 @@ export const createColorString = (hsl, format) => {
       return createHSLString(hsl);
   }
 };
+
+// ===================================================================
+//  Multi formats entries - add the conversion of hex to hsl
+// ===================================================================
+
+/**
+ * Converts RGB color values to HSL format
+ * @param {Object} rgb - RGB color object
+ * @param {number} rgb.r - Red value (0-255)
+ * @param {number} rgb.g - Green value (0-255)
+ * @param {number} rgb.b - Blue value (0-255)
+ * @returns {Object} HSL color object with hue (0-360), saturation (0-100), lightness (0-100)
+ */
+export const rgbToHsl = ({ r, g, b }) => {
+  // Convert RGB values to 0-1 range
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0;
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+
+  return {
+    hue: Math.round(h * 360),
+    saturation: Math.round(s * 100),
+    lightness: Math.round(l * 100)
+  };
+};
+
+/**
+ * Converts hexadecimal color to RGB format
+ * @param {string} hex - Hexadecimal color string (with or without #)
+ * @returns {Object} RGB color object with r, g, b values (0-255)
+ */
+export const hexToRgb = (hex) => {
+  // Remove # if present
+  hex = hex.replace(/^#/, '');
+
+  // Parse hex values
+  let r, g, b;
+  if (hex.length === 3) {
+    r = parseInt(hex[0] + hex[0], 16);
+    g = parseInt(hex[1] + hex[1], 16);
+    b = parseInt(hex[2] + hex[2], 16);
+  } else {
+    r = parseInt(hex.slice(0, 2), 16);
+    g = parseInt(hex.slice(2, 4), 16);
+    b = parseInt(hex.slice(4, 6), 16);
+  }
+
+  return { r, g, b };
+};
+
+/**
+ * Converts hexadecimal color to HSL format
+ * @param {string} hex - Hexadecimal color string (with or without #)
+ * @returns {Object} HSL color object with hue, saturation, lightness
+ */
+export const hexToHsl = (hex) => {
+  const rgb = hexToRgb(hex);
+  return rgbToHsl(rgb);
+};

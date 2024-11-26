@@ -83,8 +83,8 @@ button {
   display: inline-block;
   vertical-align: middle;
   color: var(--color-tooltip);
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   fill: currentColor;
 }
 
@@ -109,6 +109,9 @@ button {
   max-width: 250px;
   text-align: center;
   box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* Tooltip arrow */
