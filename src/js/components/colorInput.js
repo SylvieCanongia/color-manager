@@ -1,5 +1,5 @@
 /*
- * Color Manager - A web tool for generating HSL color palettes
+ * Web Palette Lab - A web tool for generating color palettes
  * Copyright (C) 2024 Sylvie Canongia
  *
  * This program is free software: you can redistribute it and/or modify

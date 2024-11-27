@@ -1,4 +1,4 @@
-# Color Manager
+# Web Palette Lab
 
 [English](#overview) | [Français](#aperçu)
 
@@ -8,8 +8,8 @@ A web tool for generating color palettes with light and dark variants, supportin
 
 ### Links
 
-- 🔗 [Live Demo](https://sylviecanongia.github.io/color-manager/)
-- 💻 [GitHub Repository](https://github.com/SylvieCanongia/color-manager)
+- 🔗 [Live Demo](https://sylviecanongia.github.io/web-palette-lab/)
+- 💻 [GitHub Repository](https://github.com/SylvieCanongia/web-palette-lab)
 
 ### Features
 
@@ -58,8 +58,8 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 
 ### Liens
 
-- 🔗 [Démo en ligne](https://sylviecanongia.github.io/color-manager/)
-- 💻 [Dépôt GitHub](https://github.com/SylvieCanongia/color-manager)
+- 🔗 [Démo en ligne](https://sylviecanongia.github.io/web-palette-lab/)
+- 💻 [Dépôt GitHub](https://github.com/SylvieCanongia/web-palette-lab)
 
 ### Fonctionnalités
 
