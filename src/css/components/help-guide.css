@@ -98,7 +98,7 @@
 
 .dialog-tabs button[aria-selected="true"] {
   background-color: var(--modal-tab-active);
-  color: var(--modal-bg);
+  color: var(--color-white);
 }
 
 .dialog-body {
@@ -117,5 +117,35 @@
 
 .help-content p {
   margin-bottom: var(--spacing-xs);
-  line-height: 1.6;
+}
+
+.help-dialog li {
+  /* add bullets */
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.help-content h4,
+.help-content p,
+.help-dialog li {
+  line-height: 1.7;
+}
+
+.help-dialog li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5em;
+}
+
+.features-list li:first-child {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.help-dialog .copy-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: var(--modal-heading-sections);
 }

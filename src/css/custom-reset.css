@@ -87,6 +87,12 @@ h6 {
   /* hyphens: auto; */
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 /*
   9. Create a root stacking context
 */

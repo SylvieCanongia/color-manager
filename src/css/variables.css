@@ -18,6 +18,7 @@
   --color-success: hsl(96, 54%, 38%);
   --color-error: hsl(354, 84%, 43%);
   --color-help: hsl(210, 80%, 35%);
+  --color-white: hsl(0, 0%, 100%);
 
   /* Background colors */
   --color-surface: hsl(220, 25%, 85%);
@@ -162,13 +163,14 @@
 
   /* Modal styles */
   --help-dialog-backdrop: hsla(0, 0%, 0%, 0.5);
-  --modal-bg: hsl(25, 100%, 5%);
+  /* --modal-bg: hsl(207, 100%, 5%); */
+  --modal-bg: hsl(210, 96%, 20%);
   --modal-text: hsl(25, 48%, 95%);
   --modal-border: hsl(35, 15%, 25%);
   --modal-border-inside: hsla(25, 54%, 85%, 0.5);
   --modal-heading: hsl(25, 94%, 75%);
   --modal-heading-sections: hsl(25, 97%, 65%);
-  --modal-tab-active: hsl(25, 75%, 45%);
+  --modal-tab-active: hsl(25, 75%, 40%);
   --modal-tab-inactive-hover: hsla(25, 100%, 15%, 0.5);
   --modal-hover: hsl(25, 91%, 85%);
 }

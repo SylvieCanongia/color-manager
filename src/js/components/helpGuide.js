@@ -10,62 +10,128 @@
 
 // src/js/components/helpGuide.js
 
+import { guideContent } from "../utils/guideContent.js";
+
 /**
- * Help guide content in both languages
- * @type {Object}
+ * Renders different types of content sections
  */
-export const guideContent = {
-  fr: {
-    sections: [
-      {
-        title: "Saisie des couleurs",
-        content: ["• Saisie rapide : Entrez une couleur au format HSL, RGB ou HEX", "• Saisie détaillée : Utilisez les champs individuels HSL (disponible uniquement pour le format HSL)", "• Formats acceptés :", "  - HSL : hsl(320, 80%, 58%)", "  - RGB : rgb(255, 100, 50)", "  - HEX : #FF6432 ou #F64"],
-      },
-      {
-        title: "Génération de palettes",
-        content: ["• Normal : Variations avec pas de 5%", "• Vivid : Variations plus contrastées avec pas de 10%", "• Chaque palette génère 11 variations de la couleur de base"],
-      },
-      {
-        title: "Export des couleurs",
-        content: ["• Choisissez le format d'export (HSL, RGB, HEX)", "• Copiez une palette individuelle", "• Utilisez 'Copier toutes les palettes' pour exporter l'ensemble", "• Les couleurs sont exportées en variables CSS"],
-      },
-      {
-        title: "Recommandations",
-        content: ["Pour des palettes optimales :", "• Saturation > 0% pour éviter les gris purs", "• Luminosité entre 40% et 60% pour la couleur de base", "• Évitez saturation 0% avec luminosité très faible"],
-      },
-    ],
-  },
-  en: {
-    sections: [
-      {
-        title: "Color Input",
-        content: ["• Quick input: Enter a color in HSL, RGB, or HEX format", "• Detailed input: Use individual HSL fields (available only for HSL format)", "• Accepted formats:", "  - HSL: hsl(320, 80%, 58%)", "  - RGB: rgb(255, 100, 50)", "  - HEX: #FF6432 or #F64"],
-      },
-      {
-        title: "Palette Generation",
-        content: ["• Normal: Variations with 5% steps", "• Vivid: More contrasted variations with 10% steps", "• Each palette generates 11 variations of the base color"],
-      },
-      {
-        title: "Color Export",
-        content: ["• Choose export format (HSL, RGB, HEX)", "• Copy individual palettes", "• Use 'Copy all palettes' to export everything", "• Colors are exported as CSS variables"],
-      },
-      {
-        title: "Recommendations",
-        content: ["For optimal palettes:", "• Saturation > 0% to avoid pure grays", "• Lightness between 40% and 60% for base color", "• Avoid 0% saturation with very low lightness"],
-      },
-    ],
-  },
+const renderHelpers = {
+  renderFormats: (formats) => `
+    <div class="format-list">
+      <h4>${formats.title}</h4>
+      <ul class="color-formats" role="list">
+        ${formats.formats
+          .map(
+            (format) => `
+          <li>
+            <span class="format-type">${format.type} :</span>
+            <code>${format.example}</code>
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+    </div>
+  `,
+
+  renderVariations: (variations) => `
+    <div class="variations-list">
+      <h4>${variations.title}</h4>
+      <ul role="list">
+        ${variations.variations
+          .map(
+            (v) => `
+          <li>
+            <strong>${v.type} :</strong> ${v.description}
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+    </div>
+  `,
+
+  renderFeatures: (features) => `
+    <div class="features-list">
+      <h4>${features.title}</h4>
+      <ul role="list">
+        ${features.features
+          .map(
+            (f) => `
+          <li>
+            <strong>${f.action} :</strong> ${f.description}
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+    </div>
+  `,
+
+  renderGuidelines: (guidelines) => `
+    <div class="guidelines-list">
+      <h4>${guidelines.title}</h4>
+      <ul role="list">
+        ${guidelines.guidelines
+          .map(
+            (g) => `
+          <li>
+            <strong>${g.rule} :</strong> ${g.value}
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+    </div>
+  `,
+};
+
+/**
+ * Renders a single section of the help guide
+ * @param {Object} section - Section data object
+ * @returns {string} HTML string
+ */
+const renderSection = (section) => {
+  const renderContentItem = (item) => {
+    if (typeof item === "string") return `<p>${item}</p>`;
+    if (item.title && item.description) {
+      return `
+        <div class="content-item">
+          <h4>${item.title}</h4>
+          <p>${item.description}</p>
+        </div>
+      `;
+    }
+    if (item.formats) return renderHelpers.renderFormats(item);
+    if (typeof item === "string") return `<p>${item}</p>`;
+    if (item.formats) return renderHelpers.renderFormats(item);
+    if (item.variations) return renderHelpers.renderVariations(item);
+    if (item.features) return renderHelpers.renderFeatures(item);
+    if (item.guidelines) return renderHelpers.renderGuidelines(item);
+    return "";
+  };
+  return `
+    <section class="help-section" aria-labelledby="section-${section.title.toLowerCase().replace(/\s+/g, "-")}">
+      <h3 id="section-${section.title.toLowerCase().replace(/\s+/g, "-")}">${section.title}</h3>
+      <div class="help-content">
+        ${section.content.map(renderContentItem).join("")}
+      </div>
+    </section>
+  `;
 };
 
 /**
  * Initializes the help guide functionality
  */
 export const initHelpGuide = () => {
-  const dialog = document.getElementById("helpDialog");
-  const helpButton = document.getElementById("helpButton");
-  const closeButton = dialog.querySelector(".close-button");
-  const tabButtons = dialog.querySelectorAll('[role="tab"]');
-  const dialogBody = dialog.querySelector(".dialog-body");
+  // Cache DOM elements
+  const elements = {
+    dialog: document.getElementById("helpDialog"),
+    helpButton: document.getElementById("helpButton"),
+    closeButton: document.querySelector("#helpDialog .close-button"),
+    tabButtons: document.querySelectorAll('#helpDialog [role="tab"]'),
+    dialogBody: document.querySelector("#helpDialog .dialog-body"),
+  };
 
   // Current language state
   let currentLang = "fr";
@@ -76,60 +142,39 @@ export const initHelpGuide = () => {
    */
   const renderContent = (lang) => {
     const content = guideContent[lang];
-    console.log(content);
-    dialogBody.innerHTML = content.sections
-      .map(
-        (section) => `
-        <section class="help-section">
-          <h3>${section.title}</h3>
-          <div class="help-content">
-            ${section.content.map((line) => `<p>${line}</p>`).join("")}
-          </div>
-        </section>
-      `
-      )
-      .join("");
+    elements.dialogBody.innerHTML = content.sections.map(renderSection).join("");
   };
 
-  /**
-   * Handles language tab selection
-   * @param {Event} e - Click event
-   */
-  const handleTabClick = (e) => {
-    const lang = e.target.textContent.toLowerCase();
-    if (lang === currentLang) return;
+  // Event handlers
+  const handlers = {
+    openDialog: () => {
+      elements.dialog.showModal();
+      renderContent(currentLang);
+    },
 
-    // Update tabs state
-    tabButtons.forEach((btn) => {
-      btn.setAttribute("aria-selected", btn === e.target);
-    });
+    closeDialog: () => elements.dialog.close(),
 
-    currentLang = lang;
-    renderContent(lang);
+    handleOutsideClick: (e) => {
+      if (e.target === elements.dialog) elements.dialog.close();
+    },
+
+    switchLanguage: (e) => {
+      const lang = e.target.textContent.toLowerCase();
+      if (lang === currentLang) return;
+
+      elements.tabButtons.forEach((btn) => {
+        btn.setAttribute("aria-selected", btn === e.target);
+      });
+
+      currentLang = lang;
+      renderContent(lang);
+    },
   };
 
-  // Event listeners
-  helpButton.addEventListener("click", () => {
-    dialog.showModal();
-    renderContent(currentLang);
-  });
-
-  closeButton.addEventListener("click", () => {
-    dialog.close();
-  });
-
-  // Close dialog when clicking outside
-  dialog.addEventListener("click", (e) => {
-    if (e.target === dialog) dialog.close();
-  });
-
-  // Language switching
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", handleTabClick);
-  });
-
-  // Handle escape key
-  dialog.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") dialog.close();
-  });
+  // Event Listeners
+  elements.helpButton.addEventListener("click", handlers.openDialog);
+  elements.closeButton.addEventListener("click", handlers.closeDialog);
+  elements.dialog.addEventListener("click", handlers.handleOutsideClick);
+  elements.tabButtons.forEach((btn) => btn.addEventListener("click", handlers.switchLanguage));
+  elements.dialog.addEventListener("keydown", (e) => e.key === "Escape" && handlers.closeDialog());
 };
