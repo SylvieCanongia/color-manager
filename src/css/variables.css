@@ -45,6 +45,13 @@
   /* Tooltip */
   --color-tooltip: hsl(210, 28%, 45%);
 
+  /* Theme toggle */
+  --color-sun-hover: hsl(25, 75%, 45%);
+
+  /* Help button */
+  --color-button-icon-light: hsl(210, 10%, 96%);
+  /* --color-button-icon-dark: hsl(210, 90%, 24%); */
+
   /* Patterns and States */
   --color-checkerboard: hsl(220, 15%, 90%);
   --color-empty-border: hsl(220, 15%, 80%);
@@ -94,6 +101,19 @@
   --font-size-lg: 1.25rem; /* 20px */
 
   --line-height-base: 1.5;
+
+  /* Modal styles */
+  --help-dialog-backdrop: hsla(0, 0%, 42%, 0.5);
+  --modal-bg: hsl(25, 48%, 95%);
+  --modal-text: hsl(25, 100%, 5%);
+  --modal-border: hsl(35, 25%, 90%);
+  --modal-border-inside: hsla(25, 100%, 25%, 0.3);
+  --modal-heading: hsl(25, 100%, 15%);
+  --modal-heading-sections: hsl(25, 100%, 45%);
+  --modal-tab-active: hsl(25, 100%, 25%);
+  --modal-tab-inactive-hover: hsla(25, 100%, 25%, 0.2);
+  --modal-hover: hsl(25, 60%, 70%);
+  --modal-close-button-hover: hsl(25, 100%, 5%);
 }
 
 /* Dark theme */
@@ -139,4 +159,16 @@
   --shadow-color: hsla(220, 25%, 5%, 0.3);
   --shadow-color-focus: hsla(207, 100%, 60%, 0.3);
   --shadow-color-overlay: hsla(0, 0%, 0%, 0.4);
+
+  /* Modal styles */
+  --help-dialog-backdrop: hsla(0, 0%, 0%, 0.5);
+  --modal-bg: hsl(25, 100%, 5%);
+  --modal-text: hsl(25, 48%, 95%);
+  --modal-border: hsl(35, 15%, 25%);
+  --modal-border-inside: hsla(25, 54%, 85%, 0.5);
+  --modal-heading: hsl(25, 94%, 75%);
+  --modal-heading-sections: hsl(25, 97%, 65%);
+  --modal-tab-active: hsl(25, 75%, 45%);
+  --modal-tab-inactive-hover: hsla(25, 100%, 15%, 0.5);
+  --modal-hover: hsl(25, 91%, 85%);
 }
