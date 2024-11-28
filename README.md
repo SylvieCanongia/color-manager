@@ -24,8 +24,9 @@ A web tool for generating color palettes with light and dark variants, supportin
   - Copy all palettes at once
 - Multi-format color export (HSL, RGB, HEX)
 - Empty state management
-- Light/Dark theme support with system preference detection
 - Modern, responsive interface
+- Light/Dark theme support with system preference detection
+- Integrated bilingual user guide (FR/EN)
 
 ### Usage
 
@@ -45,7 +46,6 @@ For best color palette results:
 
 ### Coming Soon
 
-- Integrated user guide
 - Customizable variable naming
 - Direct CSS file download
 - Social sharing
@@ -76,6 +76,7 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 - Gestion des états vides
 - Interface moderne et responsive
 - Support des thèmes clair/sombre avec détection des préférences système
+- Guide utilisateur intégré bilingue (FR/EN)
 
 ### Utilisation
 
@@ -95,7 +96,6 @@ Pour obtenir les meilleures palettes de couleurs :
 
 ### À venir
 
-- Guide utilisateur intégré
 - Nommage personnalisable des variables
 - Téléchargement direct de fichiers CSS
 - Partage social

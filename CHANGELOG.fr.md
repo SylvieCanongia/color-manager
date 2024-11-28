@@ -2,6 +2,12 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.6] - 2024-11-28
+
+- Ajout du guide utilisateur bilingue intégré
+- Ajout d'une modale avec documentation FR/EN
+- Ajout du bouton d'aide dans l'en-tête
+
 ## [1.0.5] - 2024-11-25
 
 - Ajout du support multi-format (HSL, RGB, HEX) pour la saisie rapide
