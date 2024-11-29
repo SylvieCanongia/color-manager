@@ -61,6 +61,7 @@ export const guideContent = {
             features: [
               { action: "Copie individuelle", description: `Copier une palette en cliquant sur <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>` },
               { action: "Copie globale", description: "Copier toutes les palettes en cliquant sur le bouton 'Copier toutes les palettes'" },
+              { action: "Préfixe personnalisé", description: "Personnaliser le préfixe des variables CSS via le champ dédié" },
             ],
           },
           "Les couleurs sont exportées en variables CSS",
@@ -126,6 +127,7 @@ export const guideContent = {
             features: [
               { action: "Individual copy", description: `Copy a palette by clicking on <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>` },
               { action: "Global copy", description: "Copy all palettes by clicking on the 'Copy all palettes' button" },
+              { action: "Custom prefix", description: "Customize CSS variables prefix using the dedicated input field" }
             ],
           },
           "Colors are exported as CSS variables",
