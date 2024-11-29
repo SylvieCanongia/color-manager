@@ -11,6 +11,7 @@
 // src/js/components/palette.js
 
 import { createHSLString, createColorString, generatePaletteVariations } from "../utils/colorUtils.js";
+import { generateVariableName, getCurrentPrefix } from "../utils/cssVarPrefix.js";
 
 // Constants for palette generation
 const TYPES = {
@@ -100,7 +101,9 @@ const updatePalette = (type, variations, paletteType) => {
     copyButton.onclick = () => {
       const formatSelect = copyButton.parentElement.querySelector(".format-select");
       const format = formatSelect ? formatSelect.value : "hsl";
-      const cssVariables = variations.map((hsl, index) => `--color-${type.toLowerCase()}-${paletteType.toLowerCase()}-${index * 100}: ${createColorString(hsl, format)};`).join("\n");
+      const customPrefix = getCurrentPrefix();
+
+      const cssVariables = variations.map((hsl, index) => `${generateVariableName(customPrefix, type, paletteType, index)}: ${createColorString(hsl, format)};`).join("\n");
 
       navigator.clipboard.writeText(cssVariables);
       copyButton.classList.add("copied");
@@ -195,6 +198,7 @@ export const initCopyAllPalettes = () => {
 
   copyAllButton.onclick = () => {
     const format = formatSelect.value;
+    const customPrefix = getCurrentPrefix();
     const allPalettes = [];
 
     // Colors types
@@ -218,7 +222,7 @@ export const initCopyAllPalettes = () => {
               lightness: parseInt(hslMatch[3]),
             };
 
-            return `--color-${type}-${paletteType.toLowerCase()}-${index * 100}: ${createColorString(hsl, format)};`;
+            return `${generateVariableName(customPrefix, type, paletteType.toLowerCase(), index)}: ${createColorString(hsl, format)};`;
           })
           .filter((color) => color !== "");
 

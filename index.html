@@ -34,13 +34,22 @@
     </header>
     <div class="container">
       <h1 class="container-heading">Générateur de Palettes de couleurs</h1>
-      <div class="copy-actions-all">
-        <button id="copyAllPalettes" class="copy-all-button" aria-label="Copier toutes les palettes">Copier toutes les palettes</button>
-        <select class="format-select copy-all-select" aria-label="Format d'export">
-          <option value="hsl">HSL</option>
-          <option value="rgb">RGB</option>
-          <option value="hex">HEX</option>
-        </select>
+      <div class="actions-wrapper-container">
+        <div class="actions-wrapper">
+          <!-- CSS Variable Prefix Input -->
+          <div class="prefix-input-wrapper">
+            <label for="cssVarPrefix">Préfixe variables :</label>
+            <input type="text" id="cssVarPrefix" placeholder="wp" pattern="[a-z0-9-]+" title="Lettres minuscules, chiffres et tirets uniquement" />
+          </div>
+          <div class="copy-actions-all">
+            <button id="copyAllPalettes" class="copy-all-button" aria-label="Copier toutes les palettes">Copier toutes les palettes</button>
+            <select class="format-select copy-all-select" aria-label="Format d'export">
+              <option value="hsl">HSL</option>
+              <option value="rgb">RGB</option>
+              <option value="hex">HEX</option>
+            </select>
+          </div>
+        </div>
       </div>
       <div class="app-layout">
         <!-- Left column : Entries -->
@@ -83,17 +92,17 @@
                   <h2>Saisie détaillée (HSL)</h2>
                   <div class="form-group">
                     <div class="input-group">
-                      <label for="primary-hue">Teinte (0-360) :</label>
+                      <label for="primary-hue"><span>Teinte </span><span>(0-360) :</span></label>
                       <input type="number" id="primary-hue" name="primary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="primary-saturation">Saturation (0-100%) :</label>
+                      <label for="primary-saturation"><span>Saturation </span><span>(0-100%) :</span></label>
                       <input type="number" id="primary-saturation" name="primary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="primary-lightness">Luminosité (0-100%) :</label>
+                      <label for="primary-lightness"><span>Luminosité </span><span>(0-100%) :</span></label>
                       <input type="number" id="primary-lightness" name="primary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>

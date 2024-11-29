@@ -58,7 +58,15 @@
 
 @media (max-width: 415px) {
   .palette {
-    grid-template-columns: repeat(auto-fit, minmax(27px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(26px, 1fr));
+    gap: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .palette {
+    grid-template-columns: repeat(auto-fit, minmax(24px, 1fr));
+    gap: 0;
   }
 }
 
@@ -142,21 +150,15 @@
    Action Buttons
    ========================================================================== */
 
-.copy-actions-all {
-  position: absolute;
-  right: 0;
-  top: 50px;
-}
-
 .copy-all-button {
   background: var(--color-primary);
-  padding: 2px var(--spacing-xs);
+  padding: 2px var(--spacing-sm);
   color: var(--color-text-tab-selected);
   border: 1px solid transparent;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-size: var(--font-size-xs);
-  width: 158px;
+  /* width: 166px; */
 }
 
 .copy-all-button:hover {

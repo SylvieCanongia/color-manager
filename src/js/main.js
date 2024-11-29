@@ -14,6 +14,7 @@ import { initColorInputs } from "./components/colorInput.js";
 import { initPalettes, initCopyAllPalettes } from "./components/palette.js";
 import { initTheme } from "./utils/theme.js";
 import { initHelpGuide } from "./components/helpGuide.js";
+import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
 
 // Wait for all resources to load
 window.addEventListener("load", () => {
@@ -25,6 +26,7 @@ window.addEventListener("load", () => {
     initCopyAllPalettes();
     initTheme();
     initHelpGuide();
+    initCssVarPrefix();
 
     // Log successful initialization
     console.info("Application initialized successfully");
