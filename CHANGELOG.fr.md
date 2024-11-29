@@ -2,6 +2,13 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.7] - 2024-11-29
+
+- Ajout de la personnalisation du préfixe des variables CSS
+- Suppression du préfixe "color-"
+- Amélioration du design responsive
+- Ajustement des styles pour une meilleure cohérence visuelle
+
 ## [1.0.6] - 2024-11-28
 
 - Ajout du guide utilisateur bilingue intégré

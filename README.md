@@ -33,8 +33,9 @@ A web tool for generating color palettes with light and dark variants, supportin
 1. Enter your color using either:
    - Quick input (e.g., hsl(320, 80%, 58%), rgb(255, 100, 50), or #FF6432)
    - Separate HSL inputs for Hue (0-360), Saturation (0-100%), and Lightness (0-100%)
-2. Get instant preview of your color
-3. Generate and copy color palettes
+2. Get instant preview
+3. Customize your CSS variables prefix (optional)
+4. Generate and copy color palettes in desired format (HSL, RGB or HEX)
 
 ### Recommendations for optimal palettes
 
@@ -46,8 +47,9 @@ For best color palette results:
 
 ### Coming Soon
 
-- Customizable variable naming
-- Direct CSS file download
+- CSS file export
+- WCAG contrast checking
+- Harmonious color presets
 - Social sharing
 
 ---
@@ -84,7 +86,8 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
    - L'entrée rapide (ex : hsl(320, 80%, 58%), rgb(255, 100, 50) ou #FF6432)
    - Les entrées HSL séparées pour Teinte (0-360), Saturation (0-100%) et Luminosité (0-100%)
 2. Obtenez une prévisualisation instantanée
-3. Générez et copiez les palettes de couleurs
+3. Personnalisez le préfixe de vos variables CSS (optionnel)
+4. Générez et copiez les palettes de couleurs au format souhaité (HSL, RGB ou HEX)
 
 ### Recommandations pour les palettes optimales
 
@@ -96,6 +99,7 @@ Pour obtenir les meilleures palettes de couleurs :
 
 ### À venir
 
-- Nommage personnalisable des variables
-- Téléchargement direct de fichiers CSS
+- Export de fichiers CSS
+- Contrôle de contraste WCAG
+- Préréglages de couleurs harmonieuses
 - Partage social

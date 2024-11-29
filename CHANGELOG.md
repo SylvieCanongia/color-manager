@@ -3,6 +3,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2024-11-29
+
+- Add CSS variables prefix customization
+- Remove of "color-" prefix
+- Improve responsive design
+- Adjust styles for better visual consistency
+
 ## [1.0.6] - 2024-11-28
 
 - Add integrated bilingual user guide
