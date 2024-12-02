@@ -27,6 +27,8 @@ A web tool for generating color palettes with light and dark variants, supportin
 - Modern, responsive interface
 - Light/Dark theme support with system preference detection
 - Integrated bilingual user guide (FR/EN)
+- Event-driven state management
+- Comprehensive test coverage with Jest
 
 ### Usage
 
@@ -79,6 +81,8 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 - Interface moderne et responsive
 - Support des thèmes clair/sombre avec détection des préférences système
 - Guide utilisateur intégré bilingue (FR/EN)
+- Gestion d'état pilotée par événements
+- Couverture de tests complète avec Jest
 
 ### Utilisation
 

@@ -3,6 +3,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2024-12-02
+
+- Add event-driven state management system
+- Implement centralized color store
+- Add comprehensive Jest test suite
+- Improve error handling and validation
+- Add event documentation
+
 ## [1.0.7] - 2024-11-29
 
 - Add CSS variables prefix customization

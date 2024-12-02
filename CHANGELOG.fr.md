@@ -2,6 +2,14 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.8] - 2024-12-02
+
+- Ajout d'un système de gestion d'état par événements
+- Implémentation d'un store centralisé pour les couleurs
+- Ajout d'une suite de tests complète avec Jest
+- Amélioration de la gestion des erreurs et de la validation
+- Ajout de la documentation des événements
+
 ## [1.0.7] - 2024-11-29
 
 - Ajout de la personnalisation du préfixe des variables CSS
