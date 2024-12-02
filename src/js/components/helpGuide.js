@@ -9,7 +9,7 @@
  */
 
 // src/js/components/helpGuide.js
-
+import { eventBus } from "../utils/eventBus.js";
 import { guideContent } from "../utils/guideContent.js";
 
 /**
@@ -143,6 +143,7 @@ export const initHelpGuide = () => {
   const renderContent = (lang) => {
     const content = guideContent[lang];
     elements.dialogBody.innerHTML = content.sections.map(renderSection).join("");
+    eventBus.emit("guideContentUpdated", { lang });
   };
 
   // Event handlers
@@ -150,12 +151,19 @@ export const initHelpGuide = () => {
     openDialog: () => {
       elements.dialog.showModal();
       renderContent(currentLang);
+      eventBus.emit("guideOpened");
     },
 
-    closeDialog: () => elements.dialog.close(),
+    closeDialog: () => {
+      elements.dialog.close();
+      eventBus.emit("guideClosed");
+    },
 
     handleOutsideClick: (e) => {
-      if (e.target === elements.dialog) elements.dialog.close();
+      if (e.target === elements.dialog) {
+        elements.dialog.close();
+        eventBus.emit("guideClosed");
+      }
     },
 
     switchLanguage: (e) => {
@@ -168,6 +176,7 @@ export const initHelpGuide = () => {
 
       currentLang = lang;
       renderContent(lang);
+      eventBus.emit("languageChanged", { lang });
     },
   };
 
@@ -176,5 +185,14 @@ export const initHelpGuide = () => {
   elements.closeButton.addEventListener("click", handlers.closeDialog);
   elements.dialog.addEventListener("click", handlers.handleOutsideClick);
   elements.tabButtons.forEach((btn) => btn.addEventListener("click", handlers.switchLanguage));
-  elements.dialog.addEventListener("keydown", (e) => e.key === "Escape" && handlers.closeDialog());
+  elements.dialog.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      handlers.closeDialog();
+    }
+  });
+
+  // Subscribe to theme changes if needed
+  eventBus.subscribe("themeChanged", ({ theme }) => {
+    elements.dialog.setAttribute("data-theme", theme);
+  });
 };

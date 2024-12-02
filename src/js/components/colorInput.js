@@ -9,10 +9,9 @@
  */
 
 // src/js/components/colorInput.js
-
+import { eventBus } from "../utils/eventBus.js";
 import { isValidHSL, isValidRGB, isValidHEX, detectColorFormat, validateDetailedInput } from "../utils/validation.js";
 import { rgbToHsl, hexToHsl } from "../utils/colorUtils.js";
-import { updatePreview } from "./preview.js";
 import { resetPalettes } from "./palette.js";
 
 // Color types constants
@@ -22,7 +21,7 @@ const TYPES = {
   ACCENT: "accent",
 };
 
-export const initColorInputs = () => {
+export const initColorInputs = (colorStore) => {
   // Initialize input handling for a specific color type
   const setupHSLInput = (type) => {
     const hslInput = document.getElementById(`${type}HslInput`);
@@ -45,7 +44,7 @@ export const initColorInputs = () => {
       saturationInput.value = "";
       lightnessInput.value = "";
       errorElement.textContent = "";
-      updatePreview(type, null);
+      colorStore.updateColor(type, null);
       resetPalettes(type); // Reset palettes when inputs are cleared
     };
 
@@ -136,7 +135,7 @@ export const initColorInputs = () => {
       errorElement.classList.remove("visible");
       hslInput.setAttribute("aria-invalid", "false");
       updateDetailedInputs(hslValues);
-      updatePreview(type, hslValues);
+      colorStore.updateColor(type, hslValues);
     };
 
     // Handle detailed inputs changes
@@ -170,7 +169,7 @@ export const initColorInputs = () => {
         lightness: lightness || 0,
       };
 
-      updatePreview(type, hsl);
+      colorStore.updateColor(type, hsl);
       hslInput.value = `hsl(${hsl.hue}, ${hsl.saturation}%, ${hsl.lightness}%)`;
     };
 

@@ -9,6 +9,7 @@
  */
 
 // src/js/utils/cssVarPrefix.js
+import { eventBus } from './eventBus.js';
 
 /**
  * Handles CSS variable prefix customization
@@ -39,16 +40,27 @@ export const initCssVarPrefix = () => {
   const savedPrefix = localStorage.getItem("cssVarPrefix");
   if (savedPrefix) {
     prefixInput.value = savedPrefix;
+    eventBus.emit('prefixUpdate', { prefix: savedPrefix });
   }
 
   // Handle prefix updates
   prefixInput.addEventListener("input", (e) => {
     const prefix = e.target.value.trim();
+
     if (prefix && /^[a-z0-9-]+$/.test(prefix)) {
       localStorage.setItem("cssVarPrefix", prefix);
+      eventBus.emit('prefixUpdate', { prefix });
     } else {
       localStorage.removeItem("cssVarPrefix");
+      eventBus.emit('prefixUpdate', { prefix: '' });
     }
+  });
+
+  // Subscribe to prefix reset events
+  eventBus.subscribe('resetPrefix', () => {
+    prefixInput.value = '';
+    localStorage.removeItem("cssVarPrefix");
+    eventBus.emit('prefixUpdate', { prefix: '' });
   });
 };
 

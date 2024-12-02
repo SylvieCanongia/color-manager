@@ -9,41 +9,62 @@
  */
 
 // src/js/utils/theme.js
+import { eventBus } from "./eventBus.js";
 
 export const initTheme = () => {
   const themeToggle = document.getElementById("themeToggle");
   const root = document.documentElement;
 
-  // Update icon and aria-label
+  /**
+   * Updates theme UI elements
+   * @param {string} theme - Theme name ('light' or 'dark')
+   */
   const updateThemeUI = (theme) => {
     const label = theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre";
     themeToggle.setAttribute("aria-label", label);
+    eventBus.emit("themeChanged", { theme });
   };
 
-  // Define the theme
+  /**
+   * Sets theme and persists preference
+   * @param {string} theme - Theme name ('light' or 'dark')
+   */
   const setTheme = (theme) => {
     root.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
     updateThemeUI(theme);
   };
 
-  // Initialization of the theme
+  /**
+   * Handles system color scheme changes
+   * @param {MediaQueryListEvent} e - Media query change event
+   */
+  const handleColorSchemeChange = (e) => {
+    if (!localStorage.getItem("theme")) {
+      setTheme(e.matches ? "dark" : "light");
+    }
+  };
+
+  // Initialize theme
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem("theme");
   const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
 
   setTheme(initialTheme);
 
-  // Button event listener
+  // Theme toggle handler
   themeToggle.addEventListener("click", () => {
     const newTheme = root.getAttribute("data-theme") === "light" ? "dark" : "light";
     setTheme(newTheme);
   });
 
-  // Listen to system preference changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    if (!localStorage.getItem("theme")) {
-      setTheme(e.matches ? "dark" : "light");
-    }
-  });
+  // System preference handler with error handling
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  try {
+    mediaQuery.addEventListener("change", handleColorSchemeChange);
+  } catch (e) {
+    console.warn("MediaQueryList.addEventListener not supported");
+    // Handle initial state only
+    setTheme(mediaQuery.matches ? "dark" : "light");
+  }
 };

@@ -9,7 +9,7 @@
  */
 
 // src/js/components/palette.js
-
+import { eventBus } from "../utils/eventBus.js";
 import { createHSLString, createColorString, generatePaletteVariations } from "../utils/colorUtils.js";
 import { generateVariableName, getCurrentPrefix } from "../utils/cssVarPrefix.js";
 
@@ -115,18 +115,6 @@ const updatePalette = (type, variations, paletteType) => {
 };
 
 /**
- * Checks if all HSL inputs have values for a specific color type
- * @param {string} type - Color type (primary, secondary, accent)
- * @returns {boolean} True if all inputs have values
- */
-const hasColorValues = (type) => {
-  const hue = document.getElementById(`${type}-hue`).value;
-  const saturation = document.getElementById(`${type}-saturation`).value;
-  const lightness = document.getElementById(`${type}-lightness`).value;
-  return hue !== "" && saturation !== "" && lightness !== "";
-};
-
-/**
  * Resets all palettes for a specific color type
  * @param {string} type - Color type (primary, secondary, accent)
  * @returns {void}
@@ -138,9 +126,10 @@ export const resetPalettes = (type) => {
 
 /**
  * Initializes all color palettes (Normal and Vivid variants)
+ * @param {Object} colorStore - Color store instance
  * @returns {void}
  */
-export const initPalettes = () => {
+export const initPalettes = (colorStore) => {
   const form = document.getElementById("paletteForm");
   if (!form) {
     console.warn("Palette form not found in the DOM");
@@ -150,44 +139,44 @@ export const initPalettes = () => {
   // Initialize empty palettes immediately
   Object.values(TYPES).forEach(resetPalettes);
 
-  const generatePalettes = (type) => {
+  // Subscribe to color updates
+  eventBus.subscribe("colorUpdate", ({ type, color }) => {
+    if (!color) {
+      resetPalettes(type);
+      return;
+    }
+
     try {
-      if (!hasColorValues(type)) {
-        resetPalettes(type);
-        return;
-      }
-
-      const hue = parseInt(document.getElementById(`${type}-hue`).value);
-      const saturation = parseInt(document.getElementById(`${type}-saturation`).value);
-      const lightness = parseInt(document.getElementById(`${type}-lightness`).value);
-
-      if (isNaN(hue) || isNaN(saturation) || isNaN(lightness)) {
-        throw new Error("Invalid color values");
-      }
-
-      const baseHsl = { hue, saturation, lightness };
-
       // Generate normal variations
-      const normalVariations = generatePaletteVariations(baseHsl, "NORMAL");
+      const normalVariations = generatePaletteVariations(color, "NORMAL");
       updatePalette(type, normalVariations, "Normal");
 
       // Generate vivid variations
-      const vividVariations = generatePaletteVariations(baseHsl, "VIVID");
+      const vividVariations = generatePaletteVariations(color, "VIVID");
       updatePalette(type, vividVariations, "Vivid");
     } catch (error) {
       console.error(`Error generating palettes for ${type}:`, error);
       resetPalettes(type);
     }
-  };
+  });
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    Object.values(TYPES).forEach(generatePalettes);
+  // Subscribe to format updates
+  eventBus.subscribe("formatUpdate", (format) => {
+    Object.values(TYPES).forEach((type) => {
+      const color = colorStore.getColor(type);
+      if (color) {
+        const normalVariations = generatePaletteVariations(color, "NORMAL");
+        const vividVariations = generatePaletteVariations(color, "VIVID");
+        updatePalette(type, normalVariations, "Normal");
+        updatePalette(type, vividVariations, "Vivid");
+      }
+    });
   });
 };
 
 /**
  * Copies all generated palettes in selected format (HSL, RGB, HEX)
+ * @param {Object} colorStore - Color store instance
  * @returns {void}
  */
 export const initCopyAllPalettes = () => {

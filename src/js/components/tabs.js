@@ -1,7 +1,7 @@
 /*
  * Web Palette Lab - A web tool for generating color palettes
  * Copyright (C) 2024 Sylvie Canongia
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -9,61 +9,83 @@
  */
 
 // src/js/components/tabs.js
+import { eventBus } from "../utils/eventBus.js";
 
+/**
+ * Keyboard navigation constants
+ * @constant {Object}
+ */
 const KEYS = {
-  LEFT: 'ArrowLeft',
-  RIGHT: 'ArrowRight'
+  LEFT: "ArrowLeft",
+  RIGHT: "ArrowRight",
 };
 
+/**
+ * Initializes tab navigation system
+ * @returns {void}
+ */
 export const initTabs = () => {
-  const tabList = document.querySelector('.color-tabs');
-  const tabs = Array.from(document.querySelectorAll('.tab-button'));
-  const panels = Array.from(document.querySelectorAll('.color-panel'));
+  const tabList = document.querySelector(".color-tabs");
+  const tabs = Array.from(document.querySelectorAll(".tab-button"));
+  const panels = Array.from(document.querySelectorAll(".color-panel"));
 
+  /**
+   * Switches active tab and panel
+   * @param {HTMLElement} selectedTab - The tab to activate
+   */
   const switchTab = (selectedTab) => {
-      // Mise à jour des onglets
-      tabs.forEach(tab => {
-          const isSelected = tab === selectedTab;
-          tab.setAttribute('aria-selected', isSelected);
-          tab.classList.toggle('active', isSelected);
-      });
+    const colorType = selectedTab.getAttribute("data-color-type");
 
-      // Mise à jour des panneaux
-      panels.forEach(panel => {
-          panel.hidden = panel.id !== selectedTab.getAttribute('aria-controls');
-      });
+    // Update tabs
+    tabs.forEach((tab) => {
+      const isSelected = tab === selectedTab;
+      tab.setAttribute("aria-selected", isSelected);
+      tab.classList.toggle("active", isSelected);
+    });
+
+    // Update panels
+    panels.forEach((panel) => {
+      panel.hidden = panel.id !== selectedTab.getAttribute("aria-controls");
+    });
+
+    // Emit tab change event
+    eventBus.emit('tabChange', { colorType });
   };
 
+  /**
+   * Handles keyboard navigation
+   * @param {KeyboardEvent} event - Keyboard event
+   */
   const handleKeyboard = (event) => {
-      const currentTab = document.activeElement;
-      if (!tabs.includes(currentTab)) return;
+    const currentTab = document.activeElement;
+    if (!tabs.includes(currentTab)) return;
 
-      const index = tabs.indexOf(currentTab);
-      let newIndex;
+    const index = tabs.indexOf(currentTab);
+    let newIndex;
 
-      switch (event.key) {
-          case KEYS.LEFT:
-              newIndex = index > 0 ? index - 1 : tabs.length - 1;
-              break;
-          case KEYS.RIGHT:
-              newIndex = index < tabs.length - 1 ? index + 1 : 0;
-              break;
-          default:
-              return;
-      }
+    switch (event.key) {
+      case KEYS.LEFT:
+        newIndex = index > 0 ? index - 1 : tabs.length - 1;
+        break;
+      case KEYS.RIGHT:
+        newIndex = index < tabs.length - 1 ? index + 1 : 0;
+        break;
+      default:
+        return;
+    }
 
-      event.preventDefault();
-      tabs[newIndex].focus();
-      switchTab(tabs[newIndex]);
+    event.preventDefault();
+    tabs[newIndex].focus();
+    switchTab(tabs[newIndex]);
   };
 
   // Event listeners
-  tabs.forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab));
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => switchTab(tab));
   });
 
-  tabList.addEventListener('keydown', handleKeyboard);
+  tabList.addEventListener("keydown", handleKeyboard);
 
-  // Initialisation
+  // Initialize with first tab
   switchTab(tabs[0]);
 };

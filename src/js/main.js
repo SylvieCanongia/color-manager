@@ -9,24 +9,76 @@
  */
 
 // src/js/main.js
+import { eventBus } from './utils/eventBus.js';
+import { createColorStore } from './utils/colorStore.js';
 import { initTabs } from "./components/tabs.js";
 import { initColorInputs } from "./components/colorInput.js";
 import { initPalettes, initCopyAllPalettes } from "./components/palette.js";
 import { initTheme } from "./utils/theme.js";
 import { initHelpGuide } from "./components/helpGuide.js";
 import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
+import { createColorString } from './utils/colorUtils.js';
+
+// Create store instance
+let colorStore;
+
+/**
+ * Handles color updates in the UI
+ * @param {Object} param0 - Color update event data
+ * @param {string} param0.type - Color type (primary/secondary/accent)
+ * @param {string} param0.color - Color value
+ */
+const handleColorUpdate = ({ type, color }) => {
+  if (!color) return;
+  
+  const preview = document.querySelector(`#${type}ColorPreview`);
+  const valueDisplay = document.querySelector(`#${type}ColorValue`);
+  
+  if (preview) {
+    preview.style.backgroundColor = color;
+    preview.classList.remove('empty-preview');
+  }
+  
+  if (valueDisplay) {
+    valueDisplay.textContent = color;
+  }
+};
+
+/**
+ * Updates all color displays with the new format
+ * @param {string} format - Color format (hex/rgb/hsl)
+ */
+const updateAllColorDisplays = (format) => {
+  ['primary', 'secondary', 'accent'].forEach(type => {
+    const color = colorStore.getColor(type);
+    if (color) {
+      const converted = createColorString(color, format);
+      const valueDisplay = document.querySelector(`#${type}ColorValue`);
+      if (valueDisplay) {
+        valueDisplay.textContent = converted;
+      }
+    }
+  });
+};
 
 // Wait for all resources to load
 window.addEventListener("load", () => {
   try {
+    // Initialize core utilities
+    colorStore = createColorStore();
+
     // Initialize UI components in specific order
     initTabs();
-    initColorInputs();
-    initPalettes();
+    initColorInputs(colorStore);
+    initPalettes(colorStore);
     initCopyAllPalettes();
     initTheme();
     initHelpGuide();
     initCssVarPrefix();
+
+    // Setup event subscriptions
+    eventBus.subscribe('colorUpdate', handleColorUpdate);
+    eventBus.subscribe('formatUpdate', updateAllColorDisplays);
 
     // Log successful initialization
     console.info("Application initialized successfully");
