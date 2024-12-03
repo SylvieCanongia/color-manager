@@ -82,6 +82,7 @@
   --transition-smooth: 0.3s ease;
 
   /* Spacing */
+  --spacing-xxxs: 0.125rem; /* 2px */
   --spacing-xxs: 0.25rem; /* 4px */
   --spacing-xs: 0.5rem; /* 8px */
   --spacing-sm: 0.75rem; /* 12px */
