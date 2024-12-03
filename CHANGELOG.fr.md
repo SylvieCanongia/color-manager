@@ -2,6 +2,12 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.9] - 2024-12-03
+
+- Ajout de la fonctionnalité d'export de fichier CSS
+- Ajout de la sélection du format pour l'export CSS
+- Ajout du retour visuel pour l'action d'export
+
 ## [1.0.8] - 2024-12-02
 
 - Ajout d'un système de gestion d'état par événements

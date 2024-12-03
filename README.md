@@ -29,6 +29,7 @@ A web tool for generating color palettes with light and dark variants, supportin
 - Integrated bilingual user guide (FR/EN)
 - Event-driven state management
 - Comprehensive test coverage with Jest
+- CSS file export with custom prefix
 
 ### Usage
 
@@ -38,6 +39,7 @@ A web tool for generating color palettes with light and dark variants, supportin
 2. Get instant preview
 3. Customize your CSS variables prefix (optional)
 4. Generate and copy color palettes in desired format (HSL, RGB or HEX)
+5. Export all palettes to a CSS file with your custom prefix and preferred format
 
 ### Recommendations for optimal palettes
 
@@ -49,7 +51,6 @@ For best color palette results:
 
 ### Coming Soon
 
-- CSS file export
 - WCAG contrast checking
 - Harmonious color presets
 - Social sharing
@@ -83,6 +84,7 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 - Guide utilisateur intégré bilingue (FR/EN)
 - Gestion d'état pilotée par événements
 - Couverture de tests complète avec Jest
+- Export de fichier CSS avec préfixe personnalisé
 
 ### Utilisation
 
@@ -92,6 +94,7 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 2. Obtenez une prévisualisation instantanée
 3. Personnalisez le préfixe de vos variables CSS (optionnel)
 4. Générez et copiez les palettes de couleurs au format souhaité (HSL, RGB ou HEX)
+5. Exportez toutes les palettes dans un fichier CSS avec votre préfixe personnalisé et le format de votre choix
 
 ### Recommandations pour les palettes optimales
 
@@ -103,7 +106,6 @@ Pour obtenir les meilleures palettes de couleurs :
 
 ### À venir
 
-- Export de fichiers CSS
 - Contrôle de contraste WCAG
 - Préréglages de couleurs harmonieuses
 - Partage social

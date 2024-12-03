@@ -3,6 +3,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.9] - 2024-12-03
+
+- Add CSS file export functionality
+- Add format selection for CSS export
+- Add visual feedback for export action
+
 ## [1.0.8] - 2024-12-02
 
 - Add event-driven state management system
