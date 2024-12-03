@@ -41,6 +41,21 @@
             <label for="cssVarPrefix">Préfixe :</label>
             <input type="text" id="cssVarPrefix" placeholder="wp" pattern="[a-z0-9-]+" title="Lettres minuscules, chiffres et tirets uniquement" />
           </div>
+          <div class="export-actions-all">
+            <button id="exportAllPalettes" class="export-all-button" aria-label="Exporter toutes les palettes">
+              <svg class="export-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.1763 22.9203c0.8057 0 1.4561 -0.6505 1.4561 -1.4562V5.33131c0 -0.3882 -0.1554 -0.7668 -0.4369 -1.0386l-2.912 -2.7956c-0.2719 -0.2718 -0.6407 -0.4174 -1.0192 -0.4174H3.82361c-0.8056 0 -1.456 0.6504 -1.456 1.4561V21.4641c0 0.8057 0.6504 1.4562 1.456 1.4562H20.1763Z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.68762 10.0753 3.31348 -3.3137 3.3137 3.3137"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.9984 6.76233V17.2372"></path>
+              </svg>
+              <span class="button-text">Exporter</span>
+            </button>
+            <select class="format-select export-all-select" aria-label="Format d'export">
+              <option value="hsl">HSL</option>
+              <option value="rgb">RGB</option>
+              <option value="hex">HEX</option>
+            </select>
+          </div>
           <div class="copy-actions-all">
             <button id="copyAllPalettes" class="copy-all-button" aria-label="Copier toutes les palettes">
               <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
@@ -49,7 +64,7 @@
               <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
               </svg>
-              Copier tout
+              <span class="button-text">Copier tout</span>
             </button>
             <select class="format-select copy-all-select" aria-label="Format de copie">
               <option value="hsl">HSL</option>

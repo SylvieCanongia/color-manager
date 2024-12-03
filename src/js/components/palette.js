@@ -10,7 +10,7 @@
 
 // src/js/components/palette.js
 import { eventBus } from "../utils/eventBus.js";
-import { createHSLString, createColorString, generatePaletteVariations } from "../utils/colorUtils.js";
+import { createHSLString, createColorString, generatePaletteWithConfig, generatePaletteVariations } from "../utils/colorUtils.js";
 import { generateVariableName, getCurrentPrefix } from "../utils/cssVarPrefix.js";
 
 // Constants for palette generation
@@ -175,6 +175,69 @@ export const initPalettes = (colorStore) => {
 };
 
 /**
+ * Initializes export functionality for all palettes
+ * @param {Object} colorStore - Color store instance
+ */
+export const initExportAllPalettes = (colorStore) => {
+  const exportButton = document.getElementById("exportAllPalettes");
+  const formatSelect = document.querySelector(".export-all-select");
+
+  if (!exportButton || !formatSelect) return;
+
+  exportButton.onclick = () => {
+    const format = formatSelect.value;
+    const customPrefix = getCurrentPrefix();
+    const allPalettes = [];
+
+    // Generate CSS content
+    Object.values(TYPES).forEach((type) => {
+      const color = colorStore.getColor(type);
+      if (!color) return;
+
+      ["Normal", "Vivid"].forEach((paletteType) => {
+        const variations = generatePaletteWithConfig(color, {
+          type: paletteType.toUpperCase(),
+        });
+
+        if (variations.length) {
+          allPalettes.push(`/* ${type} ${paletteType} */`);
+          variations.forEach((hsl, index) => {
+            allPalettes.push(`${generateVariableName(customPrefix, type, paletteType.toLowerCase(), index)}: ${createColorString(hsl, format)};`);
+          });
+          allPalettes.push("");
+        }
+      });
+    });
+
+    if (allPalettes.length) {
+      // Create and download file
+      const content = `:root {\n  ${allPalettes.join("\n  ")}\n}`;
+      const blob = new Blob([content], { type: "text/css" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "palette.css";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      // Save original text
+      const buttonText = exportButton.querySelector('.button-text');
+      const originalText = exportButton.textContent;
+      // Visual feedback
+      exportButton.classList.add("exported");
+      buttonText.textContent = "Exporté !";
+      
+      setTimeout(() => {
+        exportButton.classList.remove("exported");
+        buttonText.textContent = originalText;
+      }, 2200);
+    }
+  };
+};
+
+/**
  * Copies all generated palettes in selected format (HSL, RGB, HEX)
  * @param {Object} colorStore - Color store instance
  * @returns {void}
@@ -227,14 +290,15 @@ export const initCopyAllPalettes = () => {
       navigator.clipboard.writeText(allPalettes.join("\n"));
 
       // Save original text
-      const originalText = copyAllButton.textContent;
-      // Add class and change the text
+      const buttonText = copyAllButton.querySelector('.button-text');
+      const originalText = buttonText.textContent;
+      // Visual feedback
       copyAllButton.classList.add("copied");
-      copyAllButton.textContent = "Copié !";
+      buttonText.textContent = "Copié !";
 
       setTimeout(() => {
         copyAllButton.classList.remove("copied");
-        copyAllButton.textContent = originalText;
+        buttonText.textContent = originalText;
       }, 2200);
     }
   };

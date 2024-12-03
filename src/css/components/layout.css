@@ -52,7 +52,6 @@ Tabs system
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
-  /* align-self: end; */
   width: 100%;
 }
 
@@ -80,13 +79,19 @@ Tabs system
 }
 
 @media (max-width: 576px) {
+  .actions-wrapper-container {
+    width: auto;
+  }
+
   .actions-wrapper {
     flex-direction: column;
     align-items: center;
   }
 
-  .copy-actions-all, .export-actions-all {
-    width: 100%;
+  .copy-actions-all,
+  .export-actions-all {
+    width: min-content;
+    align-self: flex-start;
   }
 }
 

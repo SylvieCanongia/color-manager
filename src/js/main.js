@@ -13,7 +13,7 @@ import { eventBus } from "./utils/eventBus.js";
 import { createColorStore } from "./utils/colorStore.js";
 import { initTabs } from "./components/tabs.js";
 import { initColorInputs } from "./components/colorInput.js";
-import { initPalettes, initCopyAllPalettes } from "./components/palette.js";
+import { initPalettes, initExportAllPalettes, initCopyAllPalettes } from "./components/palette.js";
 import { initTheme } from "./utils/theme.js";
 import { initHelpGuide } from "./components/helpGuide.js";
 import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
@@ -32,15 +32,12 @@ window.addEventListener("load", () => {
     initTabs();
     initColorInputs(colorStore);
     initPalettes(colorStore);
+    initExportAllPalettes(colorStore);
     initCopyAllPalettes();
     initPreview();
     initTheme();
     initHelpGuide();
     initCssVarPrefix();
-
-    // Setup event subscriptions
-    eventBus.subscribe("colorUpdate", handleColorUpdate);
-    eventBus.subscribe("formatUpdate", updateAllColorDisplays);
 
     // Log successful initialization
     console.info("Application initialized successfully");

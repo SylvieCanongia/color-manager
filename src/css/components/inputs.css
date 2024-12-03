@@ -31,7 +31,7 @@
   font-size: var(--font-size-xs);
   background-color: var(--color-primary);
   display: block;
-  height: 30px;
+  height: 31px;
   padding: 2px var(--spacing-sm);
   border-radius: var(--border-radius-sm);
   line-height: 2.1;
@@ -39,7 +39,7 @@
 
 .prefix-input-wrapper input {
   width: 100px;
-  height: 30px;
+  height: 31px;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
   color: var(--color-text-input);
