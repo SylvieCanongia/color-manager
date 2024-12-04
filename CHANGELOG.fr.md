@@ -2,6 +2,13 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.10] - 2024-12-04
+
+- Amélioration de la documentation du code avec JSDoc
+- Ajout de la documentation complète du système d'événements
+- Documentation des flux de données et des interactions entre composants
+- Standardisation du format de documentation
+
 ## [1.0.9] - 2024-12-03
 
 - Ajout de la fonctionnalité d'export de fichier CSS
