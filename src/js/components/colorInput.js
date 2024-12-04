@@ -9,7 +9,15 @@
  */
 
 // src/js/components/colorInput.js
-import { eventBus } from "../utils/eventBus.js";
+
+/**
+ * Color input handling and validation
+ * @module components/colorInput
+ * @description Manages color input fields, format detection, and validation
+ */
+
+/** @typedef {import('../utils/colorStore.js').ColorStore} ColorStore */
+
 import { isValidHSL, isValidRGB, isValidHEX, detectColorFormat, validateDetailedInput } from "../utils/validation.js";
 import { rgbToHsl, hexToHsl } from "../utils/colorUtils.js";
 import { resetPalettes } from "./palette.js";
@@ -21,8 +29,15 @@ const TYPES = {
   ACCENT: "accent",
 };
 
+/**
+ * Initializes color input handling for all color types (primary, secondary, accent)
+ * @param {ColorStore} colorStore - Color store instance for state
+ */
 export const initColorInputs = (colorStore) => {
-  // Initialize input handling for a specific color type
+  /**
+   * Sets up HSL input handling for a specific color type
+   * @param {string} type - Color type (primary/secondary/accent)
+   */
   const setupHSLInput = (type) => {
     const hslInput = document.getElementById(`${type}HslInput`);
     const errorElement = document.getElementById(`${type}HslError`);
@@ -30,14 +45,22 @@ export const initColorInputs = (colorStore) => {
     const saturationInput = document.getElementById(`${type}-saturation`);
     const lightnessInput = document.getElementById(`${type}-lightness`);
 
-    // Update detailed inputs with HSL values
+    /**
+     * Updates detailed input fields with HSL values
+     * @param {Object} hsl - HSL color object
+     * @param {number} hsl.hue - Hue value (0-360)
+     * @param {number} hsl.saturation - Saturation value (0-100)
+     * @param {number} hsl.lightness - Lightness value (0-100)
+     */
     const updateDetailedInputs = (hsl) => {
       hueInput.value = hsl.hue;
       saturationInput.value = hsl.saturation;
       lightnessInput.value = hsl.lightness;
     };
 
-    // Clear all inputs and reset palettes
+    /**
+     * Clears all input fields and resets palettes
+     */
     const clearInputs = () => {
       hslInput.value = "";
       hueInput.value = "";
@@ -48,7 +71,10 @@ export const initColorInputs = (colorStore) => {
       resetPalettes(type); // Reset palettes when inputs are cleared
     };
 
-    // Handle HSL input changes
+    /**
+     * Handles changes in the HSL input field
+     * Validates input format and updates color state
+     */
     const handleHSLInput = () => {
       const value = hslInput.value.trim();
       const detailedInputs = [hueInput, saturationInput, lightnessInput];
@@ -138,7 +164,11 @@ export const initColorInputs = (colorStore) => {
       colorStore.updateColor(type, hslValues);
     };
 
-    // Handle detailed inputs changes
+    /**
+     * Handles changes in detailed HSL input fields
+     * Validates input values and updates color state
+     * @param {Event} event - Input event object
+     */
     const handleDetailedInput = (event) => {
       const input = event.target;
       const min = parseInt(input.min);

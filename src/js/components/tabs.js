@@ -9,6 +9,13 @@
  */
 
 // src/js/components/tabs.js
+
+/**
+ * Tab navigation system
+ * @module components/tabs
+ * @description Manages color type tabs and panel switching
+ */
+
 import { eventBus } from "../utils/eventBus.js";
 
 /**
@@ -32,6 +39,7 @@ export const initTabs = () => {
   /**
    * Switches active tab and panel
    * @param {HTMLElement} selectedTab - The tab to activate
+   * @emits {tabChange} { colorType } When active tab changes
    */
   const switchTab = (selectedTab) => {
     const colorType = selectedTab.getAttribute("data-color-type");

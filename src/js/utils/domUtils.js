@@ -10,7 +10,18 @@
 
 // src/js/utils/domUtils.js
 
-// Create element with attributes
+/**
+ * DOM utility functions
+ * @module domUtils
+ */
+
+/**
+ * Creates an HTML element with specified attributes and text content
+ * @param {string} tag - HTML tag name
+ * @param {Object} [attributes={}] - Element attributes
+ * @param {string} [text=''] - Text content
+ * @returns {HTMLElement} Created element
+ */
 export const createElement = (tag, attributes = {}, text = '') => {
   const element = document.createElement(tag);
   
@@ -29,14 +40,22 @@ export const createElement = (tag, attributes = {}, text = '') => {
   return element;
 };
 
-// Remove all children from an element
+/**
+ * Removes all child nodes from an element
+ * @param {HTMLElement} element - Element to clear
+ */
 export const clearElement = (element) => {
   while (element.firstChild) {
       element.removeChild(element.firstChild);
   }
 };
 
-// Add or remove class based on condition
+/**
+ * Toggles a class on an element based on a condition
+ * @param {HTMLElement} element - Target element
+ * @param {string} className - Class to toggle
+ * @param {boolean} condition - Condition for toggling
+ */
 export const toggleClass = (element, className, condition) => {
   element.classList.toggle(className, condition);
 };

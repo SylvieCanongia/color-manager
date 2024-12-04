@@ -9,15 +9,27 @@
  */
 
 // src/js/utils/theme.js
+
+/**
+ * Theme management module
+ * @module theme
+ */
+
 import { eventBus } from "./eventBus.js";
 
+/**
+ * Initializes theme functionality with system preference detection and persistence
+ * @function
+ * @emits {themeChanged} When theme changes either by user action or system preference
+ */
 export const initTheme = () => {
   const themeToggle = document.getElementById("themeToggle");
   const root = document.documentElement;
 
   /**
-   * Updates theme UI elements
+   * Updates theme UI elements and notifies subscribers
    * @param {string} theme - Theme name ('light' or 'dark')
+   * @emits {themeChanged} { theme } - Theme change event
    */
   const updateThemeUI = (theme) => {
     const label = theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre";
@@ -25,9 +37,10 @@ export const initTheme = () => {
     eventBus.emit("themeChanged", { theme });
   };
 
-  /**
+   /**
    * Sets theme and persists preference
    * @param {string} theme - Theme name ('light' or 'dark')
+   * @fires updateThemeUI
    */
   const setTheme = (theme) => {
     root.setAttribute("data-theme", theme);
@@ -38,6 +51,7 @@ export const initTheme = () => {
   /**
    * Handles system color scheme changes
    * @param {MediaQueryListEvent} e - Media query change event
+   * @fires setTheme
    */
   const handleColorSchemeChange = (e) => {
     if (!localStorage.getItem("theme")) {
@@ -45,7 +59,7 @@ export const initTheme = () => {
     }
   };
 
-  // Initialize theme
+  // Initialize theme with system preference or saved preference
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem("theme");
   const initialTheme = savedTheme || (prefersDark ? "dark" : "light");

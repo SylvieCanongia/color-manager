@@ -9,7 +9,13 @@
  */
 
 // src/js/main.js
-import { eventBus } from "./utils/eventBus.js";
+
+/**
+ * Main application entry point
+ * @module main
+ * @description Initializes the application components and state management
+ */
+
 import { createColorStore } from "./utils/colorStore.js";
 import { initTabs } from "./components/tabs.js";
 import { initColorInputs } from "./components/colorInput.js";
@@ -19,10 +25,21 @@ import { initHelpGuide } from "./components/helpGuide.js";
 import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
 import { initPreview } from "./components/preview.js";
 
-// Create store instance
+/**
+ * Global color store instance
+ * @type {Object}
+ */
 let colorStore;
 
-// Wait for all resources to load
+/**
+ * Initializes the application
+ * Follows a specific order to ensure proper component dependencies:
+ * 1. Core utilities (colorStore)
+ * 2. UI components (tabs, inputs, palettes)
+ * 3. Theme and guide features
+ * 
+ * @throws {Error} When initialization fails
+ */
 window.addEventListener("load", () => {
   try {
     // Initialize core utilities
@@ -44,7 +61,10 @@ window.addEventListener("load", () => {
   } catch (error) {
     console.error("Failed to initialize application:", error);
 
-    // Display user-friendly error message if needed
+    /**
+     * Display user-friendly error message
+     * @param {string} message - Error message to display
+     */
     const container = document.querySelector(".container");
     if (container) {
       const errorMessage = document.createElement("div");

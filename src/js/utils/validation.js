@@ -9,6 +9,13 @@
  */
 
 // src/js/utils/validation.js
+
+/**
+ * Color format validation
+ * @module utils/validation
+ * @description Validates color formats (HSL, RGB, HEX) and detailed inputs
+ */
+
 import { eventBus } from "./eventBus.js";
 
 // Regular expression for HSL format validation
@@ -32,6 +39,7 @@ const MESSAGES = {
  * Validates HSL string format and values
  * @param {string} hslString - HSL color string to validate
  * @returns {Object} Validation result with isValid and error/values properties
+ * @emits {validationError} { type: "hsl", message } - Validation error event
  */
 export const isValidHSL = (hslString) => {
   const match = HSL_REGEX.exec(hslString);
@@ -101,6 +109,7 @@ export const detectColorFormat = (value) => {
  * Validates RGB color string format and values
  * @param {string} value - RGB color string to validate
  * @returns {Object} Validation result with isValid and error/values properties
+ * @emits {validationError} { type: "rgb", message } - Validation error event
  */
 export const isValidRGB = (value) => {
   const match = value.match(RGB_REGEX);
@@ -133,6 +142,7 @@ export const isValidRGB = (value) => {
  * Validates hexadecimal color string format
  * @param {string} value - Hexadecimal color string to validate
  * @returns {Object} Validation result with isValid and error/values properties
+ * @emits {validationError} { type: "hex", message } - Emitted when validation fails
  */
 export const isValidHEX = (value) => {
   if (!HEX_REGEX.test(value)) {
@@ -157,6 +167,9 @@ export const isValidHEX = (value) => {
  * @param {number} min - Minimum allowed value
  * @param {number} max - Maximum allowed value
  * @returns {Object} Validation result with isValid and error properties
+ * @emits {validationError} { type: "detailed", message } - Emitted when validation fails with:
+ *   - INVALID_NUMBER if value is not a number
+ *   - Range error message if value is outside [min, max]
  */
 export const validateDetailedInput = (value, min, max) => {
   if (value.trim() === "") {

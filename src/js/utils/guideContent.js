@@ -12,8 +12,48 @@
 
 /**
  * Help guide content in French and English
- * Content structure optimized for accessibility and maintainability
- * @type {Object}
+ * @module guideContent
+ * @description Bilingual content structure for the application help guide
+ */
+
+/**
+ * @typedef {Object} Format
+ * @property {string} type - Format type (HSL, RGB, HEX)
+ * @property {string} example - Example of color in this format
+ */
+
+/**
+ * @typedef {Object} Variation
+ * @property {string} type - Variation type (Normal, Vivid)
+ * @property {string} description - Description of the variation
+ */
+
+/**
+ * @typedef {Object} Feature
+ * @property {string} action - Feature name
+ * @property {string} description - Feature description with optional HTML
+ */
+
+/**
+ * @typedef {Object} Guideline
+ * @property {string} rule - Guideline rule name
+ * @property {string} value - Guideline value or recommendation
+ */
+
+/**
+ * @typedef {Object} ContentSection
+ * @property {string} title - Section title
+ * @property {Array<Object|string>} content - Array of content items
+ */
+
+/**
+ * @typedef {Object} GuideContent
+ * @property {Array<ContentSection>} sections - Guide sections
+ */
+
+/**
+ * Bilingual guide content
+ * @type {Object.<string, GuideContent>}
  */
 export const guideContent = {
   fr: {

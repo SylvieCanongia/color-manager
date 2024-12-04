@@ -31,6 +31,8 @@ export const generateVariableName = (prefix, type, paletteType, index) => {
 
 /**
  * Initialize prefix input functionality
+ * @emits {prefixUpdate} { prefix } When prefix changes
+ * @listens {resetPrefix} Resets prefix to empty value
  */
 export const initCssVarPrefix = () => {
   const prefixInput = document.getElementById("cssVarPrefix");

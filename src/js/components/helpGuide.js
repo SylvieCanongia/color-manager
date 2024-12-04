@@ -9,13 +9,30 @@
  */
 
 // src/js/components/helpGuide.js
+
+/**
+ * Help guide dialog component
+ * @module components/helpGuide
+ * @description Manages bilingual help guide modal with theme support
+ */
+
 import { eventBus } from "../utils/eventBus.js";
 import { guideContent } from "../utils/guideContent.js";
 
 /**
- * Renders different types of content sections
+ * Helper functions for rendering different types of content sections
+ * @namespace renderHelpers
  */
 const renderHelpers = {
+  /**
+   * Renders a list of color formats with examples
+   * @param {Object} formats - Format information
+   * @param {string} formats.title - Section title
+   * @param {Array<Object>} formats.formats - List of formats
+   * @param {string} formats.formats[].type - Format type
+   * @param {string} formats.formats[].example - Format example
+   * @returns {string} HTML string for formats section
+   */
   renderFormats: (formats) => `
     <div class="format-list">
       <h4>${formats.title}</h4>
@@ -34,6 +51,15 @@ const renderHelpers = {
     </div>
   `,
 
+  /**
+   * Renders a list of color variations
+   * @param {Object} variations - Variation information
+   * @param {string} variations.title - Section title
+   * @param {Array<Object>} variations.variations - List of variations
+   * @param {string} variations.variations[].type - Variation type
+   * @param {string} variations.variations[].description - Variation description
+   * @returns {string} HTML string for variations section
+   */
   renderVariations: (variations) => `
     <div class="variations-list">
       <h4>${variations.title}</h4>
@@ -51,6 +77,15 @@ const renderHelpers = {
     </div>
   `,
 
+  /**
+   * Renders a list of features
+   * @param {Object} features - Feature information
+   * @param {string} features.title - Section title
+   * @param {Array<Object>} features.features - List of features
+   * @param {string} features.features[].action - Feature action
+   * @param {string} features.features[].description - Feature description
+   * @returns {string} HTML string for features section
+   */
   renderFeatures: (features) => `
     <div class="features-list">
       <h4>${features.title}</h4>
@@ -68,6 +103,15 @@ const renderHelpers = {
     </div>
   `,
 
+  /**
+   * Renders a list of guidelines
+   * @param {Object} guidelines - Guideline information
+   * @param {string} guidelines.title - Section title
+   * @param {Array<Object>} guidelines.guidelines - List of guidelines
+   * @param {string} guidelines.guidelines[].rule - Guideline rule
+   * @param {string} guidelines.guidelines[].value - Guideline value
+   * @returns {string} HTML string for guidelines section
+   */
   renderGuidelines: (guidelines) => `
     <div class="guidelines-list">
       <h4>${guidelines.title}</h4>
@@ -122,6 +166,11 @@ const renderSection = (section) => {
 
 /**
  * Initializes the help guide functionality
+ * @listens {themeChanged} Updates guide theme
+ * @emits {guideOpened} When guide opens
+ * @emits {guideClosed} When guide closes
+ * @emits {languageChanged} { lang } When language changes
+ * @emits {guideContentUpdated} { lang } When guide content is updated
  */
 export const initHelpGuide = () => {
   // Cache DOM elements

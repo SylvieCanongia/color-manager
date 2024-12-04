@@ -9,11 +9,19 @@
  */
 
 // src/js/components/preview.js
+
+/**
+ * Color preview component
+ * @module components/preview
+ * @description Handles real-time color preview display and updates
+ */
+
 import { eventBus } from "../utils/eventBus.js";
 import { createHSLString } from "../utils/colorUtils.js";
 
 /**
  * Initialize preview component
+ * @listens {colorUpdate} Updates preview display when color changes
  */
 export const initPreview = () => {
   // Subscribe to color updates

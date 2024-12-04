@@ -8,17 +8,25 @@
  * (at your option) any later version.
  */
 
+// src/js/utils/eventBus.js
+
 /**
  * Simple event bus for handling application-wide events
  * @module eventBus
+ * @description Centralized event system for managing color updates, theme changes, validation errors and UI interactions
  */
 export const eventBus = {
   events: {},
 
-  /**
+   /**
    * Subscribe to an event
-   * @param {string} event - Event name
-   * @param {Function} callback - Callback function
+   * @param {string} event - Event name from EVENTS constant
+   * @param {Function} callback - Callback function to handle the event
+   * @returns {Function} Unsubscribe function
+   * @example
+   * eventBus.subscribe('colorUpdate', ({ type, color }) => {
+   *   // Handle color update
+   * });
    */
   subscribe(event, callback) {
     if (!this.events[event]) this.events[event] = [];
@@ -28,8 +36,10 @@ export const eventBus = {
 
   /**
    * Emit an event
-   * @param {string} event - Event name
-   * @param {*} data - Event data
+   * @param {string} event - Event name from EVENTS constant
+   * @param {*} data - Event payload (see EVENTS documentation for payload types)
+   * @example
+   * eventBus.emit('colorUpdate', { type: 'primary', color: hslColor });
    */
   emit(event, data) {
     if (this.events[event]) {
@@ -39,8 +49,11 @@ export const eventBus = {
 
   /**
    * Unsubscribe from an event
-   * @param {string} event - Event name
-   * @param {Function} callback - Callback function
+   * @param {string} event - Event name from EVENTS constant
+   * @param {Function} callback - Callback function to remove
+   * @example
+   * const unsubscribe = eventBus.subscribe('themeChanged', handleTheme);
+   * unsubscribe(); // Later when needed
    */
   unsubscribe(event, callback) {
     if (this.events[event]) {

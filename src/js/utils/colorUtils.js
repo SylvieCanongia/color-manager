@@ -11,6 +11,12 @@
 // src/js/utils/colorUtils.js
 
 /**
+ * Color manipulation utilities
+ * @module utils/colorUtils
+ * @description Provides color conversion, palette generation and color calculations
+ */
+
+/**
  * Creates an HSL color string from component values
  * @param {Object} params - HSL color components
  * @param {number} params.hue - Hue value (0-360)

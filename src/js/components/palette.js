@@ -9,6 +9,15 @@
  */
 
 // src/js/components/palette.js
+
+/**
+ * Palette generation and management
+ * @module components/palette
+ * @description Handles color palette generation, display and interactions
+ */
+
+/** @typedef {import('../utils/colorStore.js').ColorStore} ColorStore */
+
 import { eventBus } from "../utils/eventBus.js";
 import { createHSLString, createColorString, generatePaletteWithConfig, generatePaletteVariations } from "../utils/colorUtils.js";
 import { generateVariableName, getCurrentPrefix } from "../utils/cssVarPrefix.js";
@@ -126,7 +135,9 @@ export const resetPalettes = (type) => {
 
 /**
  * Initializes all color palettes (Normal and Vivid variants)
- * @param {Object} colorStore - Color store instance
+ * @param {ColorStore} colorStore - Color store instance for state
+ * @listens {colorUpdate} Updates palettes when color changes
+ * @listens {formatUpdate} Updates color format in palettes
  * @returns {void}
  */
 export const initPalettes = (colorStore) => {
@@ -176,7 +187,8 @@ export const initPalettes = (colorStore) => {
 
 /**
  * Initializes export functionality for all palettes
- * @param {Object} colorStore - Color store instance
+ * @param {ColorStore} colorStore - Color store instance for state
+ * @returns {void}
  */
 export const initExportAllPalettes = (colorStore) => {
   const exportButton = document.getElementById("exportAllPalettes");
@@ -238,8 +250,7 @@ export const initExportAllPalettes = (colorStore) => {
 };
 
 /**
- * Copies all generated palettes in selected format (HSL, RGB, HEX)
- * @param {Object} colorStore - Color store instance
+ * Initializes copy functionality for all palettes
  * @returns {void}
  */
 export const initCopyAllPalettes = () => {
