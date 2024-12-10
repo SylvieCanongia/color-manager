@@ -1,0 +1,87 @@
+<!-- src/assets/icons/flags-sprite.svg -->
+<svg xmlns="http://www.w3.org/2000/svg">
+    <!-- French Flag (Drapeau tricolore) - Official colors -->
+    <symbol id="flag-fr" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <g fill-rule="evenodd">
+            <path fill="#fff" d="M0 0h640v480H0z"/>
+            <path fill="#002395" d="M0 0h213.3v480H0z"/>
+            <path fill="#ED2939" d="M426.7 0H640v480H426.7z"/>
+        </g>
+    </symbol>
+    
+    <!-- United Kingdom Flag (Union Jack) - Official colors -->
+    <symbol id="flag-en" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#012169" d="M0 0h640v480H0z"/>
+        <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/>
+        <path fill="#C8102E" d="m424 281 216 159v40L369 281h55zm-184 20 6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/>
+        <path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/>
+        <path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/>
+    </symbol>
+
+    <!-- Spanish Flag (Rojigualda) - Official colors -->
+    <symbol id="flag-es" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#AA151B" d="M0 0h640v480H0z"/>
+        <path fill="#F1BF00" d="M0 120h640v240H0z"/>
+    </symbol>
+
+    <!-- German Flag (Bundesflagge) - Official colors -->
+    <symbol id="flag-de" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#000" d="M0 0h640v160H0z"/>
+        <path fill="#DD0000" d="M0 160h640v160H0z"/>
+        <path fill="#FFCE00" d="M0 320h640v160H0z"/>
+    </symbol>
+
+    <!-- Italian Flag (Il Tricolore) - Official colors -->
+    <symbol id="flag-it" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <g fill-rule="evenodd">
+            <path fill="#fff" d="M0 0h640v480H0z"/>
+            <path fill="#009246" d="M0 0h213.3v480H0z"/>
+            <path fill="#CE2B37" d="M426.7 0H640v480H426.7z"/>
+        </g>
+    </symbol>
+
+    <!-- Basque Flag (Ikurriña) - Official colors -->
+    <symbol id="flag-eu" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#ED2939" d="M0 0h640v480H0z"/>
+        <path fill="#FFF" d="M0 240h640v2H0zM318 0h4v480h-4z"/>
+        <path fill="#00B140" d="M0 242l310-242 310 242-310 238z"/>
+    </symbol>
+
+    <!-- Portuguese Flag - Official colors -->
+    <symbol id="flag-pt" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#FF0000" d="M0 0h640v480H0z"/>
+        <path fill="#006600" d="M256 0h384v480H256z"/>
+        <circle cx="256" cy="240" r="80" fill="#FFFF00"/>
+        <path fill="#002D72" d="M256 180a60 60 0 100 120 60 60 0 000-120z"/>
+    </symbol>
+
+    <!-- Dutch Flag (Vlag van Nederland) - Official colors -->
+    <symbol id="flag-nl" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <g fill-rule="evenodd">
+            <path fill="#21468B" d="M0 320h640v160H0z"/>
+            <path fill="#FFF" d="M0 160h640v160H0z"/>
+            <path fill="#AE1C28" d="M0 0h640v160H0z"/>
+        </g>
+    </symbol>
+
+    <!-- Polish Flag (Flaga Polski) - Official colors -->
+    <symbol id="flag-pl" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <g fill-rule="evenodd">
+            <path fill="#fff" d="M0 0h640v480H0z"/>
+            <path fill="#DC143C" d="M0 240h640v240H0z"/>
+        </g>
+    </symbol>
+
+    <!-- Catalan Flag (Senyera) - Official colors -->
+    <symbol id="flag-ca" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#FCDD09" d="M0 0h640v480H0z"/>
+        <path stroke="#DA121A" stroke-width="60" d="M0 90h640M0 180h640M0 270h640M0 360h640"/>
+    </symbol>
+
+    <!-- Galician Flag (Bandeira de Galicia) - Official colors -->
+    <symbol id="flag-gl" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet">
+        <path fill="#fff" d="M0 0h640v480H0z"/>
+        <path fill="#0072CE" d="M80 0h480v480H80z"/>
+        <path fill="#DA121A" d="M0 0l640 480H0z"/>
+    </symbol>
+</svg>

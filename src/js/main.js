@@ -26,6 +26,7 @@ import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
 import { initPreview } from "./components/preview.js";
 import { initLanguagePicker } from "./components/languagePicker.js";
 import { updatePageTranslations } from "./utils/i18n.js";
+import { loadSvgSprite } from "./utils/loadSvgSprite.js";
 
 /**
  * Global color store instance
@@ -54,9 +55,15 @@ const displayErrorMessage = (container) => {
  * @returns {Promise<void>}
  */
 const initializeCoreFeatures = async () => {
+  try {
+    await loadSvgSprite("src/assets/icons/flags-sprite.svg");
     colorStore = createColorStore();
-    await initLanguagePicker();
-    await updatePageTranslations(document.documentElement.lang);
+    initLanguagePicker();
+    updatePageTranslations(document.documentElement.lang);
+} catch (error) {
+    console.error("Failed to initialize core features:", error);
+    throw error;
+}
 };
 
 /**

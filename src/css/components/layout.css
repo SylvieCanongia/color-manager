@@ -74,24 +74,28 @@ Tabs system
   .actions-wrapper {
     grid-column-start: 1;
     justify-content: center;
-    gap: var(--spacing-xxs);
+    gap: var(--spacing-md);
   }
 }
 
 @media (max-width: 576px) {
   .actions-wrapper-container {
     width: auto;
+    margin-block-end: var(--spacing-md);
   }
 
   .actions-wrapper {
-    flex-direction: column;
-    align-items: center;
+    display: revert;
   }
 
   .copy-actions-all,
   .export-actions-all {
-    width: min-content;
     align-self: flex-start;
+  }
+
+  .prefix-input-wrapper,
+  .export-actions-all {
+    margin-block-end: var(--spacing-xs);
   }
 }
 

@@ -17,12 +17,12 @@
   </head>
   <body>
     <header class="app-header">
-      <button type="button" class="help-button" id="helpButton" aria-label="Ouvrir le guide utilisateur">
+      <button type="button" class="help-button" id="helpButton" data-i18n-aria="helpButton" aria-label="Ouvrir le guide utilisateur">
         <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
         </svg>
       </button>
-      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Basculer entre le thème clair et sombre">
+      <button type="button" class="theme-toggle" id="themeToggle" data-i18n-aria="themeToggle" aria-label="Basculer entre le thème clair et sombre">
         <svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5" />
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
@@ -31,42 +31,118 @@
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" />
         </svg>
       </button>
+      <div class="language-picker custom-select">
+        <button class="selected-language" aria-haspopup="listbox" aria-expanded="false" aria-controls="language-list" data-i18n-aria="languageSelect" aria-label="Sélectionner la langue">
+          <svg class="flag-icon" aria-hidden="true" focusable="false">
+            <use href="#flag-fr"></use>
+          </svg>
+          <span class="flag-text">fr</span>
+        </button>
+        <ul class="language-list" role="listbox">
+          <li role="option" data-value="fr" aria-selected="true" lang="fr">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-fr"></use>
+            </svg>
+            <span class="flag-text">fr</span>
+          </li>
+          <li role="option" data-value="en" lang="en">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-en"></use>
+            </svg>
+            <span class="flag-text">en</span>
+          </li>
+          <li role="option" data-value="es" lang="es">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-es"></use>
+            </svg>
+            <span class="flag-text">es</span>
+          </li>
+          <li role="option" data-value="de" lang="de">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-de"></use>
+            </svg>
+            <span class="flag-text">de</span>
+          </li>
+          <li role="option" data-value="it" lang="it">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-it"></use>
+            </svg>
+            <span class="flag-text">it</span>
+          </li>
+          <li role="option" data-value="eu" lang="eu">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-eu"></use>
+            </svg>
+            <span class="flag-text">eu</span>
+          </li>
+          <li role="option" data-value="pt" lang="pt">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-pt"></use>
+            </svg>
+            <span class="flag-text">pt</span>
+          </li>
+          <li role="option" data-value="nl" lang="nl">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-nl"></use>
+            </svg>
+            <span class="flag-text">nl</span>
+          </li>
+          <li role="option" data-value="pl" lang="pl">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-pl"></use>
+            </svg>
+            <span class="flag-text">pl</span>
+          </li>
+          <li role="option" data-value="ca" lang="ca">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-ca"></use>
+            </svg>
+            <span class="flag-text">ca</span>
+          </li>
+          <li role="option" data-value="gl" lang="gl">
+            <svg class="flag-icon" aria-hidden="true" focusable="false">
+              <use href="#flag-gl"></use>
+            </svg>
+            <span class="flag-text">gl</span>
+          </li>
+        </ul>
+      </div>
     </header>
     <div class="container">
-      <h1 class="container-heading">Générateur de Palettes de couleurs</h1>
+      <h1 class="container-heading" data-i18n="title">Générateur de Palettes de couleurs</h1>
       <div class="actions-wrapper-container">
         <div class="actions-wrapper">
           <!-- CSS Variable Prefix Input -->
           <div class="prefix-input-wrapper">
-            <label for="cssVarPrefix">Préfixe :</label>
-            <input type="text" id="cssVarPrefix" placeholder="wp" pattern="[a-z0-9-]+" title="Lettres minuscules, chiffres et tirets uniquement" />
+            <label for="cssVarPrefix" data-i18n="prefix">Préfixe :</label>
+            <input type="text" id="cssVarPrefix" data-i18n-placeholder="prefixPlaceholder" placeholder="wp" pattern="[a-z0-9-]+" title="Lettres minuscules, chiffres et tirets uniquement" />
           </div>
           <div class="export-actions-all">
-            <button id="exportAllPalettes" class="export-all-button" aria-label="Exporter toutes les palettes">
+            <button id="exportAllPalettes" class="export-all-button" data-i18n-aria="exportAll" aria-label="Exporter toutes les palettes">
               <svg class="export-icon" aria-hidden="true" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.1763 22.9203c0.8057 0 1.4561 -0.6505 1.4561 -1.4562V5.33131c0 -0.3882 -0.1554 -0.7668 -0.4369 -1.0386l-2.912 -2.7956c-0.2719 -0.2718 -0.6407 -0.4174 -1.0192 -0.4174H3.82361c-0.8056 0 -1.456 0.6504 -1.456 1.4561V21.4641c0 0.8057 0.6504 1.4562 1.456 1.4562H20.1763Z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.68762 10.0753 3.31348 -3.3137 3.3137 3.3137"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.9984 6.76233V17.2372"></path>
               </svg>
-              <span class="button-text">Exporter</span>
+              <span class="button-text" data-i18n="export">Exporter</span>
             </button>
-            <select class="format-select export-all-select" aria-label="Format d'export">
+            <select class="format-select export-all-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
               <option value="hsl">HSL</option>
               <option value="rgb">RGB</option>
               <option value="hex">HEX</option>
             </select>
           </div>
           <div class="copy-actions-all">
-            <button id="copyAllPalettes" class="copy-all-button" aria-label="Copier toutes les palettes">
+            <button id="copyAllPalettes" class="copy-all-button" data-i18n-aria="copyAllPalettes" aria-label="Copier toutes les palettes">
               <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
               </svg>
               <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
               </svg>
-              <span class="button-text">Copier tout</span>
+              <span class="button-text" data-i18n="copyAll">Copier tout</span>
             </button>
-            <select class="format-select copy-all-select" aria-label="Format de copie">
+            <select class="format-select copy-all-select" data-i18n-aria="copyFormat" aria-label="Format de copie">
               <option value="hsl">HSL</option>
               <option value="rgb">RGB</option>
               <option value="hex">HEX</option>
@@ -77,7 +153,7 @@
       <div class="app-layout">
         <!-- Left column : Entries -->
         <div class="inputs-column">
-          <div class="color-tabs" role="tablist" aria-label="Sélection de couleur">
+          <div class="color-tabs" role="tablist" data-i18n-aria="colorTabsLabel" aria-label="Sélection de couleur">
             <button class="tab-button active" role="tab" aria-selected="true" aria-controls="primaryPanel" id="primaryTab">Primary</button>
             <button class="tab-button" role="tab" aria-selected="false" aria-controls="secondaryPanel" id="secondaryTab">Secondary</button>
             <button class="tab-button" role="tab" aria-selected="false" aria-controls="accentPanel" id="accentTab">Accent</button>
@@ -89,17 +165,17 @@
               <div class="color-group">
                 <!-- Quick Entry Section -->
                 <div class="input-section quick-input">
-                  <h2>Saisie rapide (HSL, RGB, HEX)</h2>
+                  <h2 data-i18n="quickInputTitle">Saisie rapide (HSL, RGB, HEX)</h2>
                   <div class="hsl-input-wrapper">
                     <div class="input-with-tooltip">
-                      <input type="text" id="primaryHslInput" class="hsl-input" placeholder="hsl(320, 80%, 58%) ou #FF6432" aria-label="Saisie de couleur en format HSL, RGB ou HEX" aria-describedby="primaryHslTooltip" />
+                      <input type="text" id="primaryHslInput" class="hsl-input" data-i18n-placeholder="quickInputPlaceholder" placeholder="hsl(320, 80%, 58%) ou #FF6432" data-i18n-aria="colorInput" aria-label="Saisie de couleur en format HSL, RGB ou HEX" aria-describedby="primaryHslTooltip" />
                       <span class="info-icon" role="tooltip" id="primaryHslTooltip">
                         <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
                           <rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor" />
                           <path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="white" />
                         </svg>
                         <span class="tooltip-text">
-                          <span>Formats acceptés :</span>
+                          <span data-i18n="formatsAccepted">Formats acceptés :</span>
                           <span>HSL : hsl(320, 80%, 58%)</span>
                           <span>RGB : rgb(255, 100, 50)</span>
                           <span>HEX : #FF6432 ou #F64</span>
@@ -112,21 +188,21 @@
 
                 <!-- Detailed Entry Section -->
                 <div class="input-section detailed-input">
-                  <h2>Saisie détaillée (HSL)</h2>
+                  <h2 data-i18n="detailedInputTitle">Saisie détaillée (HSL)</h2>
                   <div class="form-group">
                     <div class="input-group">
-                      <label for="primary-hue"><span>Teinte </span><span>(0-360) :</span></label>
-                      <input type="number" id="primary-hue" name="primary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
+                      <label for="primary-hue"><span data-i18n="hueLabel">Teinte </span><span data-i18n="hueRange">(0-360) :</span></label>
+                      <input type="number" id="primary-hue" name="primary-hue" min="0" max="360" data-i18n-aria="hueLabelAria" aria-label="Teinte de 0 à 360 degrés" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="primary-saturation"><span>Saturation </span><span>(0-100%) :</span></label>
-                      <input type="number" id="primary-saturation" name="primary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+                      <label for="primary-saturation"><span data-i18n="saturationLabel">Saturation </span><span data-i18n="percentageRange">(0-100%) :</span></label>
+                      <input type="number" id="primary-saturation" name="primary-saturation" min="0" max="100" data-i18n-aria="saturationLabelAria" aria-label="Saturation de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="primary-lightness"><span>Luminosité </span><span>(0-100%) :</span></label>
-                      <input type="number" id="primary-lightness" name="primary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
+                      <label for="primary-lightness"><span data-i18n="lightnessLabel">Luminosité </span><span data-i18n="percentageRange">(0-100%) :</span></label>
+                      <input type="number" id="primary-lightness" name="primary-lightness" min="0" max="100" data-i18n-aria="lightnessLabelAria" aria-label="Luminosité de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <span class="help-message" role="status"></span>
@@ -140,17 +216,17 @@
               <div class="color-group">
                 <!-- Quick Entry Section -->
                 <div class="input-section quick-input">
-                  <h2>Saisie rapide (HSL, RGB, HEX)</h2>
+                  <h2 data-i18n="quickInputTitle">Saisie rapide (HSL, RGB, HEX)</h2>
                   <div class="hsl-input-wrapper">
                     <div class="input-with-tooltip">
-                      <input type="text" id="secondaryHslInput" class="hsl-input" placeholder="Ex: hsl(320, 80%, 58%) ou #FF6432" aria-label="Saisie de couleur en format HSL, RGB ou HEX" aria-describedby="secondaryHslTooltip" />
+                      <input type="text" id="secondaryHslInput" class="hsl-input" data-i18n-placeholder="quickInputPlaceholder" placeholder="hsl(320, 80%, 58%) ou #FF6432" data-i18n-aria="colorInput" aria-label="Saisie de couleur en format HSL, RGB ou HEX" aria-describedby="secondaryHslTooltip" />
                       <span class="info-icon" role="tooltip" id="secondaryHslTooltip">
                         <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
                           <rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor" />
                           <path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="white" />
                         </svg>
                         <span class="tooltip-text">
-                          <span>Formats acceptés :</span>
+                          <span data-i18n="formatsAccepted">Formats acceptés :</span>
                           <span>HSL : hsl(320, 80%, 58%)</span>
                           <span>RGB : rgb(255, 100, 50)</span>
                           <span>HEX : #FF6432 ou #F64</span>
@@ -163,21 +239,21 @@
 
                 <!-- Detailed Entry Section -->
                 <div class="input-section detailed-input">
-                  <h2>Saisie détaillée (HSL)</h2>
+                  <h2 data-i18n="detailedInputTitle">Saisie détaillée (HSL)</h2>
                   <div class="form-group">
                     <div class="input-group">
-                      <label for="secondary-hue">Teinte (0-360) :</label>
-                      <input type="number" id="secondary-hue" name="secondary-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
+                      <label for="secondary-hue" data-i18n="hueLabel">Teinte <span data-i18n="hueRange">(0-360) :</span></label>
+                      <input type="number" id="secondary-hue" name="secondary-hue" min="0" max="360" data-i18n-aria="hueLabelAria" aria-label="Teinte de 0 à 360 degrés" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="secondary-saturation">Saturation (0-100%) :</label>
-                      <input type="number" id="secondary-saturation" name="secondary-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+                      <label for="secondary-saturation"><span data-i18n="saturationLabel">Saturation </span><span data-i18n="percentageRange">(0-100%) :</span></label>
+                      <input type="number" id="secondary-saturation" name="secondary-saturation" min="0" max="100" data-i18n-aria="saturationLabelAria" aria-label="Saturation de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="secondary-lightness">Luminosité (0-100%) :</label>
-                      <input type="number" id="secondary-lightness" name="secondary-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
+                      <label for="secondary-lightness"><span data-i18n="lightnessLabel">Luminosité </span><span data-i18n="percentageRange">(0-100%) :</span></label>
+                      <input type="number" id="secondary-lightness" name="secondary-lightness" min="0" max="100" data-i18n-aria="lightnessLabelAria" aria-label="Luminosité de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <span class="help-message" role="status"></span>
@@ -191,18 +267,18 @@
               <div class="color-group">
                 <!-- Quick Entry Section -->
                 <div class="input-section quick-input">
-                  <h2>Saisie rapide (HSL, RGB, HEX)</h2>
+                  <h2 data-i18n="quickInputTitle">Saisie rapide (HSL, RGB, HEX)</h2>
                   <div class="hsl-input-wrapper">
                     <!-- <label for="accentHslInput">Format HSL :</label> -->
                     <div class="input-with-tooltip">
-                      <input type="text" id="accentHslInput" class="hsl-input" placeholder="Ex: hsl(320, 80%, 58%) ou #FF6432" aria-label="Saisie de couleur en format HSL, RGB ou HEX" aria-describedby="accentHslTooltip" />
+                      <input type="text" id="accentHslInput" class="hsl-input" data-i18n-placeholder="quickInputPlaceholder" placeholder="hsl(320, 80%, 58%) ou #FF6432" data-i18n-aria="colorInput" aria-label="Saisie de couleur en format HSL, RGB ou HEX" aria-describedby="accentHslTooltip" />
                       <span class="info-icon" role="tooltip" id="accentHslTooltip">
                         <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
                           <rect x="2" y="2" width="20" height="20" rx="2" fill="currentColor" />
                           <path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6z" fill="white" />
                         </svg>
                         <span class="tooltip-text">
-                          <span>Formats acceptés :</span>
+                          <span data-i18n="formatsAccepted">Formats acceptés :</span>
                           <span>HSL : hsl(320, 80%, 58%)</span>
                           <span>RGB : rgb(255, 100, 50)</span>
                           <span>HEX : #FF6432 ou #F64</span>
@@ -215,21 +291,21 @@
 
                 <!-- Detailed Entry Section -->
                 <div class="input-section detailed-input">
-                  <h2>Saisie détaillée (HSL)</h2>
+                  <h2 data-i18n="detailedInputTitle">Saisie détaillée (HSL)</h2>
                   <div class="form-group">
                     <div class="input-group">
-                      <label for="accent-hue">Teinte (0-360) :</label>
+                      <label for="accent-hue" data-i18n="hueLabel">Teinte <span data-i18n="hueRange">(0-360) :</span></label>
                       <input type="number" id="accent-hue" name="accent-hue" min="0" max="360" aria-label="Teinte de 0 à 360 degrés" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="accent-saturation">Saturation (0-100%) :</label>
-                      <input type="number" id="accent-saturation" name="accent-saturation" min="0" max="100" aria-label="Saturation de 0 à 100 pourcents" />
+                      <label for="accent-saturation"><span data-i18n="saturationLabel">Saturation </span><span data-i18n="percentageRange">(0-100%) :</span></label>
+                      <input type="number" id="accent-saturation" name="accent-saturation" min="0" max="100" data-i18n-aria="saturationLabelAria" aria-label="Saturation de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <div class="input-group">
-                      <label for="accent-lightness">Luminosité (0-100%) :</label>
-                      <input type="number" id="accent-lightness" name="accent-lightness" min="0" max="100" aria-label="Luminosité de 0 à 100 pourcents" />
+                      <label for="accent-lightness"><span data-i18n="lightnessLabel">Luminosité </span><span data-i18n="percentageRange">(0-100%) :</span></label>
+                      <input type="number" id="accent-lightness" name="accent-lightness" min="0" max="100" data-i18n-aria="lightnessLabelAria" aria-label="Luminosité de 0 à 100 pourcents" />
                       <span class="error-message" role="alert"></span>
                     </div>
                     <span class="help-message" role="status"></span>
@@ -269,18 +345,18 @@
           <div class="all-palettes">
             <!-- Primary Palettes -->
             <div class="palette-section">
-              <h2>Palettes "Primary"</h2>
+              <h2 data-i18n="palettesPrimaryTitle">Palettes "Primary"</h2>
               <div class="palettes">
                 <section class="palette-container">
                   <h3>Normal</h3>
                   <div id="primaryNormalPalette" class="palette"></div>
                   <div class="copy-actions">
-                    <select class="format-select" aria-label="Format d'export">
+                    <select class="format-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
                       <option value="hsl">HSL</option>
                       <option value="rgb">RGB</option>
                       <option value="hex">HEX</option>
                     </select>
-                    <button id="copyPrimaryNormal" class="copy-button" aria-label="Copier la palette">
+                    <button id="copyPrimaryNormal" class="copy-button" data-i18n-aria="copyPaletteAria" aria-label="Copier la palette">
                       <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
                       </svg>
@@ -294,12 +370,12 @@
                   <h3>Vivid</h3>
                   <div id="primaryVividPalette" class="palette"></div>
                   <div class="copy-actions">
-                    <select class="format-select" aria-label="Format d'export">
+                    <select class="format-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
                       <option value="hsl">HSL</option>
                       <option value="rgb">RGB</option>
                       <option value="hex">HEX</option>
                     </select>
-                    <button id="copyPrimaryVivid" class="copy-button" aria-label="Copier la palette">
+                    <button id="copyPrimaryVivid" class="copy-button" data-i18n-aria="copyPaletteAria" aria-label="Copier la palette">
                       <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
                       </svg>
@@ -314,18 +390,18 @@
 
             <!-- Secondary Palettes -->
             <div class="palette-section">
-              <h2>Palettes "Secondary"</h2>
+              <h2 data-i18n="palettesSecondaryTitle">Palettes "Secondary"</h2>
               <div class="palettes">
                 <section class="palette-container">
                   <h3>Normal</h3>
                   <div id="secondaryNormalPalette" class="palette"></div>
                   <div class="copy-actions">
-                    <select class="format-select" aria-label="Format d'export">
+                    <select class="format-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
                       <option value="hsl">HSL</option>
                       <option value="rgb">RGB</option>
                       <option value="hex">HEX</option>
                     </select>
-                    <button id="copySecondaryNormal" class="copy-button" aria-label="Copier la palette">
+                    <button id="copySecondaryNormal" class="copy-button" data-i18n-aria="copyPaletteAria" aria-label="Copier la palette">
                       <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
                       </svg>
@@ -339,12 +415,12 @@
                   <h3>Vivid</h3>
                   <div id="secondaryVividPalette" class="palette"></div>
                   <div class="copy-actions">
-                    <select class="format-select" aria-label="Format d'export">
+                    <select class="format-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
                       <option value="hsl">HSL</option>
                       <option value="rgb">RGB</option>
                       <option value="hex">HEX</option>
                     </select>
-                    <button id="copySecondaryVivid" class="copy-button" aria-label="Copier la palette">
+                    <button id="copySecondaryVivid" class="copy-button" data-i18n-aria="copyPaletteAria" aria-label="Copier la palette">
                       <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
                       </svg>
@@ -359,18 +435,18 @@
 
             <!-- Accent Palettes -->
             <div class="palette-section">
-              <h2>Palettes "Accent"</h2>
+              <h2 data-i18n="palettesAccentTitle">Palettes "Accent"</h2>
               <div class="palettes">
                 <section class="palette-container">
                   <h3>Normal</h3>
                   <div id="accentNormalPalette" class="palette"></div>
                   <div class="copy-actions">
-                    <select class="format-select" aria-label="Format d'export">
+                    <select class="format-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
                       <option value="hsl">HSL</option>
                       <option value="rgb">RGB</option>
                       <option value="hex">HEX</option>
                     </select>
-                    <button id="copyAccentNormal" class="copy-button" aria-label="Copier la palette">
+                    <button id="copyAccentNormal" class="copy-button" data-i18n-aria="copyPaletteAria" aria-label="Copier la palette">
                       <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
                       </svg>
@@ -384,12 +460,12 @@
                   <h3>Vivid</h3>
                   <div id="accentVividPalette" class="palette"></div>
                   <div class="copy-actions">
-                    <select class="format-select" aria-label="Format d'export">
+                    <select class="format-select" data-i18n-aria="exportFormat" aria-label="Format d'export">
                       <option value="hsl">HSL</option>
                       <option value="rgb">RGB</option>
                       <option value="hex">HEX</option>
                     </select>
-                    <button id="copyAccentVivid" class="copy-button" aria-label="Copier la palette">
+                    <button id="copyAccentVivid" class="copy-button" data-i18n-aria="copyPaletteAria" aria-label="Copier la palette">
                       <svg class="copy-icon" aria-hidden="true" viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
                       </svg>
@@ -408,10 +484,10 @@
     <dialog id="helpDialog" class="help-dialog">
       <div class="help-content">
         <header class="dialog-header">
-          <h2>Guide d'utilisation</h2>
-          <button class="close-button" aria-label="Fermer le guide">×</button>
+          <h2 data-i18n="helpDialogTitle">Guide d'utilisation</h2>
+          <button class="close-button" data-i18n-aria="closeDialog" aria-label="Fermer le guide">×</button>
         </header>
-        <div class="dialog-tabs" role="tablist">
+        <div class="dialog-tabs" role="tablist" data-i18n-aria="dialogTabs" aria-label="Sélectionner la langue du guide">
           <button role="tab" aria-selected="true">FR</button>
           <button role="tab" aria-selected="false">EN</button>
         </div>

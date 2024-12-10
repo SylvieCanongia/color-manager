@@ -1,0 +1,129 @@
+/*
+ * Web Palette Lab - A web tool for generating color palettes
+ * Copyright (C) 2024 Sylvie Canongia
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ */
+
+/* SVG sprite */
+.flags-sprite-container {
+  position: absolute;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* ================== */
+
+.language-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-primary);
+  transition: var(--transition-base);
+}
+
+.selected-language {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  gap: 4px;
+  padding-block: var(--spacing-xs);
+  padding-inline-start: var(--spacing-sm);
+  padding-inline-end: var(--spacing-lg);
+  background-color: var(--color-selected-language);
+  background: var(--color-button-icon-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  position: relative;
+}
+
+.selected-language::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+}
+
+.selected-language:hover {
+  border-color: var(--color-border-focus);
+}
+
+[data-theme="dark"] .selected-language:hover {
+  border-color: var(--color-sun-hover);
+}
+
+.selected-language:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.language-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 3px;
+  padding: 0;
+  list-style: none;
+  background: var(--color-button-icon-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+
+.language-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxs);
+  padding: 6px 10px;
+  cursor: pointer;
+  background-color: var(--color-button-icon-light);
+}
+
+.language-list li:hover {
+  background-color: var(--color-select-language-option-hover);
+}
+
+.language-list li[aria-selected="true"] {
+  background-color: var(--color-selected-language);
+}
+
+.language-list li:first-child {
+  border-start-start-radius: var(--border-radius-sm);
+  border-start-end-radius: var(--border-radius-sm);
+}
+
+.language-list li:last-child {
+  border-end-start-radius: var(--border-radius-sm);
+  border-end-end-radius: var(--border-radius-sm);
+}
+
+.flag-icon {
+  width: 20px;
+  height: 15px;
+}
+
+.flag-text {
+  min-width: 20px;
+  color: var(--color-text-select);
+}

@@ -28,6 +28,8 @@
   --color-surface-select: hsl(220, 25%, 85%);
   --color-surface-copy-all-select: hsl(0, 0%, 100%);
   --color-input-disabled: hsl(220, 10%, 85%);
+  --color-selected-language: hsla(0, 1%, 30%, 0.5);
+  --color-select-language-option-hover: hsla(0, 1%, 30%, 0.2);
 
   /* Text colors */
   --color-text-primary: hsl(220, 25%, 20%);
