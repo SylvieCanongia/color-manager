@@ -24,12 +24,58 @@ import { initTheme } from "./utils/theme.js";
 import { initHelpGuide } from "./components/helpGuide.js";
 import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
 import { initPreview } from "./components/preview.js";
+import { initLanguagePicker } from "./components/languagePicker.js";
+import { updatePageTranslations } from "./utils/i18n.js";
 
 /**
  * Global color store instance
  * @type {Object}
  */
 let colorStore;
+
+/**
+ * Creates and displays an error message element
+ * @param {HTMLElement} container - Container element for the error message
+ */
+const displayErrorMessage = (container) => {
+    if (!container) return;
+
+    const errorMessage = document.createElement("div");
+    Object.assign(errorMessage, {
+        className: "error-message"
+    });
+    errorMessage.setAttribute("role", "alert");
+    errorMessage.setAttribute("data-i18n", "errorLoadingApp");
+    container.prepend(errorMessage);
+};
+
+/**
+ * Initializes core application features
+ * @returns {Promise<void>}
+ */
+const initializeCoreFeatures = async () => {
+    colorStore = createColorStore();
+    await initLanguagePicker();
+    await updatePageTranslations(document.documentElement.lang);
+};
+
+/**
+ * Initializes UI components in the correct order
+ * @returns {Promise<void>}
+ */
+const initializeUIComponents = async () => {
+    await Promise.all([
+        initTabs(),
+        initColorInputs(colorStore),
+        initPalettes(colorStore),
+        initExportAllPalettes(colorStore),
+        initCopyAllPalettes(),
+        initPreview(),
+        initTheme(),
+        initHelpGuide(),
+        initCssVarPrefix()
+    ]);
+};
 
 /**
  * Initializes the application
@@ -40,38 +86,17 @@ let colorStore;
  * 
  * @throws {Error} When initialization fails
  */
-window.addEventListener("load", () => {
-  try {
-    // Initialize core utilities
-    colorStore = createColorStore();
-
-    // Initialize UI components in specific order
-    initTabs();
-    initColorInputs(colorStore);
-    initPalettes(colorStore);
-    initExportAllPalettes(colorStore);
-    initCopyAllPalettes();
-    initPreview();
-    initTheme();
-    initHelpGuide();
-    initCssVarPrefix();
-
-    // Log successful initialization
-    console.info("Application initialized successfully");
-  } catch (error) {
-    console.error("Failed to initialize application:", error);
-
-    /**
-     * Display user-friendly error message
-     * @param {string} message - Error message to display
-     */
-    const container = document.querySelector(".container");
-    if (container) {
-      const errorMessage = document.createElement("div");
-      errorMessage.className = "error-message";
-      errorMessage.setAttribute("role", "alert");
-      errorMessage.textContent = "Une erreur est survenue lors du chargement de l'application. Veuillez rafraîchir la page.";
-      container.prepend(errorMessage);
+const initializeApp = async () => {
+    try {
+        await initializeCoreFeatures();
+        await initializeUIComponents();
+        
+        console.info("Application initialized successfully");
+    } catch (error) {
+        console.error("Failed to initialize application:", error);
+        displayErrorMessage(document.querySelector(".container"));
     }
-  }
-});
+};
+
+// Initialize app when DOM is fully loaded
+window.addEventListener("load", initializeApp);
