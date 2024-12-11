@@ -2,6 +2,16 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.11] - 2024-12-11
+
+- Ajout du support multilingue avec 11 langues
+- Implémentation du sélecteur de langue avec icônes de drapeaux
+- Ajout du chargement asynchrone des sprites SVG
+- Amélioration de la navigation clavier pour la sélection de langue
+- Ajout de la persistance du choix de langue
+- Amélioration de l'accessibilité pour le changement de langue
+- Mise à jour de la documentation pour refléter le support multilingue
+
 ## [1.0.10] - 2024-12-04
 
 - Amélioration de la documentation du code avec JSDoc

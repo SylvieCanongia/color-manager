@@ -27,6 +27,10 @@ A web tool for generating color palettes with light and dark variants, supportin
 - Modern, responsive interface
 - Light/Dark theme support with system preference detection
 - Integrated bilingual user guide (FR/EN)
+- Multilingual support with 11 languages:
+  - English, French, Spanish, German, Italian
+  - Basque, Portuguese, Dutch, Polish
+  - Catalan, Galician
 - Event-driven state management
 - Comprehensive test coverage with Jest
 - CSS file export with custom prefix
@@ -82,6 +86,10 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 - Interface moderne et responsive
 - Support des thèmes clair/sombre avec détection des préférences système
 - Guide utilisateur intégré bilingue (FR/EN)
+- Support multilingue avec 11 langues :
+  - Français, Anglais, Espagnol, Allemand, Italien
+  - Basque, Portugais, Néerlandais, Polonais
+  - Catalan, Galicien
 - Gestion d'état pilotée par événements
 - Couverture de tests complète avec Jest
 - Export de fichier CSS avec préfixe personnalisé

@@ -3,6 +3,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.11] - 2024-12-11
+
+- Add multilingual support with 11 languages
+- Implement language picker with flag icons
+- Add asynchronous SVG sprite loading
+- Enhance keyboard navigation for language selection
+- Add language persistence
+- Improve accessibility for language switching
+- Update documentation to reflect multilingual support
+
 ## [1.0.10] - 2024-12-04
 
 - Enhance code documentation with JSDoc
