@@ -485,13 +485,12 @@
       <div class="help-content">
         <header class="dialog-header">
           <h2 data-i18n="helpDialogTitle">Guide d'utilisation</h2>
-          <button class="close-button" data-i18n-aria="closeDialog" aria-label="Fermer le guide">×</button>
+          <button class="close-button close-dialog" data-i18n-aria="closeDialog" aria-label="Fermer le guide">×</button>
         </header>
         <div class="dialog-tabs" role="tablist" data-i18n-aria="dialogTabs" aria-label="Sélectionner la langue du guide">
-          <button role="tab" aria-selected="true">FR</button>
-          <button role="tab" aria-selected="false">EN</button>
+          <!-- Tabs will be created dynamically -->
         </div>
-        <div class="dialog-body">
+        <div id="guideContent" class="dialog-body">
           <!-- Content will be dynamically loaded -->
         </div>
       </div>

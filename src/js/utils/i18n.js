@@ -10,13 +10,14 @@
 
 // src/js/utils/i18n.js
 
-import { translations } from '../config/translations.js';
+import { translations } from "../config/translations.js";
+import { eventBus } from "./eventBus.js";
 
 /**
  * Default language code
  * @constant {string}
  */
-export const DEFAULT_LANGUAGE = 'fr';
+export const DEFAULT_LANGUAGE = "fr";
 
 /**
  * Check if language is supported
@@ -24,7 +25,7 @@ export const DEFAULT_LANGUAGE = 'fr';
  * @returns {boolean} True if language is supported
  */
 const isLanguageSupported = (lang) => {
-    return lang in translations;
+  return lang in translations;
 };
 
 /**
@@ -33,71 +34,79 @@ const isLanguageSupported = (lang) => {
  * @param {string} [lang=document.documentElement.lang] - Language code (e.g., 'fr', 'en')
  * @returns {string} Translated text or key if translation not found
  * @throws {Error} If key is missing
- * 
+ *
  * @example
  * // Returns "Color Palette Generator" if lang is 'en'
  * getText('title', 'en');
- * 
+ *
  * // Uses document language and falls back to default if translation missing
  * getText('copyAll');
  */
 export const getText = (key, lang = document.documentElement.lang) => {
-    if (!key) {
-        console.warn('Translation key is missing');
-        return '';
-    }
+  if (!key) {
+    console.warn("Translation key is missing");
+    return "";
+  }
 
-    if (!isLanguageSupported(lang)) {
-        console.warn(`Unsupported language: ${lang}, falling back to ${DEFAULT_LANGUAGE}`);
-        lang = DEFAULT_LANGUAGE;
-    }
+  if (!isLanguageSupported(lang)) {
+    console.warn(`Unsupported language: ${lang}, falling back to ${DEFAULT_LANGUAGE}`);
+    lang = DEFAULT_LANGUAGE;
+  }
 
+  const translation = translations[lang]?.[key] || translations[DEFAULT_LANGUAGE][key];
+  if (!translation) {
+    console.warn(`Translation missing for key: ${key}`);
+    return key;
+  }
 
-    const translation = translations[lang]?.[key] || translations[DEFAULT_LANGUAGE][key];
-    if (!translation) {
-        console.warn(`Translation missing for key: ${key}`);
-        return key;
-    }
-
-    return translation;
+  return translation;
 };
 
 /**
  * Update all translatable elements in the DOM
  * Updates text content, aria labels, and placeholders based on the selected language
- * 
+ *
  * @param {string} lang - Language code (e.g., 'fr', 'en')
+ * @emits {translationsLoaded} When translations are applied
  * @throws {Error} If language code is invalid or missing
- * 
+ *
  * Elements are selected based on data attributes:
  * - data-i18n: For text content
  * - data-i18n-aria: For aria-label attributes
  * - data-i18n-placeholder: For input placeholders
- * 
+ *
  * @example
  * // HTML: <button data-i18n-aria="helpButton">...</button>
  * updatePageTranslations('en');
  */
 export const updatePageTranslations = (lang) => {
-    if (!lang) {
-        throw new Error('Language code is required');
-    }
+  if (!lang) {
+    throw new Error("Language code is required");
+  }
 
+  try {
     // Update aria-labels
-    document.querySelectorAll('[data-i18n-aria]').forEach(element => {
-        const key = element.getAttribute('data-i18n-aria');
-        element.setAttribute('aria-label', getText(key, lang));
+    document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+      const key = element.getAttribute("data-i18n-aria");
+      element.setAttribute("aria-label", getText(key, lang));
     });
 
     // Update text content
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        element.textContent = getText(key, lang);
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      const key = element.getAttribute("data-i18n");
+      element.textContent = getText(key, lang);
     });
 
     // Update placeholders
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        element.placeholder = getText(key, lang);
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+      const key = element.getAttribute("data-i18n-placeholder");
+      element.placeholder = getText(key, lang);
     });
+
+    // Emit event when translations are loaded
+    eventBus.emit("translationsLoaded", { lang });
+  } catch (error) {
+    console.error("Error updating translations:", error);
+    throw error;
+  }
 };

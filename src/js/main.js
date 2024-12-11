@@ -25,8 +25,9 @@ import { initHelpGuide } from "./components/helpGuide.js";
 import { initCssVarPrefix } from "./utils/cssVarPrefix.js";
 import { initPreview } from "./components/preview.js";
 import { initLanguagePicker } from "./components/languagePicker.js";
-import { updatePageTranslations } from "./utils/i18n.js";
+import { updatePageTranslations, getText } from "./utils/i18n.js";
 import { loadSvgSprite } from "./utils/loadSvgSprite.js";
+import { eventBus } from "./utils/eventBus.js";
 
 /**
  * Global color store instance
@@ -39,15 +40,24 @@ let colorStore;
  * @param {HTMLElement} container - Container element for the error message
  */
 const displayErrorMessage = (container) => {
-    if (!container) return;
+  if (!container) return;
 
-    const errorMessage = document.createElement("div");
-    Object.assign(errorMessage, {
-        className: "error-message"
-    });
-    errorMessage.setAttribute("role", "alert");
-    errorMessage.setAttribute("data-i18n", "errorLoadingApp");
-    container.prepend(errorMessage);
+  const errorMessage = document.createElement("div");
+  Object.assign(errorMessage, {
+    className: "error-message",
+  });
+  errorMessage.setAttribute("role", "alert");
+  errorMessage.setAttribute("data-i18n", "errorLoadingApp");
+  container.prepend(errorMessage);
+
+  // Update error message translation when language changes
+  eventBus.subscribe("translationsLoaded", ({ lang }) => {
+    if (errorMessage && errorMessage.parentNode) {
+      const key = errorMessage.getAttribute("data-i18n");
+      const translatedText = getText(key, lang);
+      errorMessage.textContent = translatedText;
+    }
+  });
 };
 
 /**
@@ -58,12 +68,12 @@ const initializeCoreFeatures = async () => {
   try {
     await loadSvgSprite("src/assets/icons/flags-sprite.svg");
     colorStore = createColorStore();
-    initLanguagePicker();
+    initLanguagePicker(colorStore);
     updatePageTranslations(document.documentElement.lang);
-} catch (error) {
+  } catch (error) {
     console.error("Failed to initialize core features:", error);
     throw error;
-}
+  }
 };
 
 /**
@@ -71,17 +81,7 @@ const initializeCoreFeatures = async () => {
  * @returns {Promise<void>}
  */
 const initializeUIComponents = async () => {
-    await Promise.all([
-        initTabs(),
-        initColorInputs(colorStore),
-        initPalettes(colorStore),
-        initExportAllPalettes(colorStore),
-        initCopyAllPalettes(),
-        initPreview(),
-        initTheme(),
-        initHelpGuide(),
-        initCssVarPrefix()
-    ]);
+  await Promise.all([initTabs(), initColorInputs(colorStore), initPalettes(colorStore), initExportAllPalettes(colorStore), initCopyAllPalettes(), initPreview(), initTheme(), initHelpGuide(), initCssVarPrefix()]);
 };
 
 /**
@@ -90,19 +90,19 @@ const initializeUIComponents = async () => {
  * 1. Core utilities (colorStore)
  * 2. UI components (tabs, inputs, palettes)
  * 3. Theme and guide features
- * 
+ *
  * @throws {Error} When initialization fails
  */
 const initializeApp = async () => {
-    try {
-        await initializeCoreFeatures();
-        await initializeUIComponents();
-        
-        console.info("Application initialized successfully");
-    } catch (error) {
-        console.error("Failed to initialize application:", error);
-        displayErrorMessage(document.querySelector(".container"));
-    }
+  try {
+    await initializeCoreFeatures();
+    await initializeUIComponents();
+
+    console.info("Application initialized successfully");
+  } catch (error) {
+    console.error("Failed to initialize application:", error);
+    displayErrorMessage(document.querySelector(".container"));
+  }
 };
 
 // Initialize app when DOM is fully loaded

@@ -32,10 +32,12 @@ export const EVENTS = {
   TAB_CHANGE: "tabChange", // { colorType: "primary"|"secondary"|"accent" }
 
   // Guide Events
-  GUIDE_CONTENT_UPDATED: "guideContentUpdated", // { lang: "fr"|"en" }
+  GUIDE_CONTENT_UPDATED: "guideContentUpdated", // { lang: string } - Now supports all languages
   GUIDE_OPENED: "guideOpened", // No payload
   GUIDE_CLOSED: "guideClosed", // No payload
-  LANGUAGE_CHANGED: "languageChanged", // { lang: "fr"|"en" }
+  // Language Management
+  LANGUAGE_UPDATE: "languageUpdate", // { lang: string } - When language changes
+  TRANSLATIONS_LOADED: "translationsLoaded", // { lang: string } - When translations are loaded
 };
 
 /**
@@ -54,36 +56,50 @@ export const EVENTS = {
  * Format Flow:
  * 1. colorStore.js → eventBus (FORMAT_UPDATE)
  * 2. palette.js listens to FORMAT_UPDATE
- * 
+ *
  * Guide Flow:
  * 1. helpGuide.js → eventBus (GUIDE_OPENED, GUIDE_CLOSED)
  * 2. helpGuide.js → eventBus (GUIDE_CONTENT_UPDATED) when content changes
  * 3. helpGuide.js → eventBus (LANGUAGE_CHANGED) when language switches
  * 4. helpGuide.js listens to THEME_CHANGED for theme updates
- * 
+ *
  * Prefix Flow:
  * 1. cssVarPrefix.js → eventBus (PREFIX_UPDATE) when prefix changes
  * 2. cssVarPrefix.js listens to RESET_PREFIX to clear prefix
  * 3. cssVarPrefix.js → eventBus (PREFIX_UPDATE) after reset
- * 
+ *
  * Tab Flow:
  * 1. tabs.js → eventBus (TAB_CHANGE) when active tab changes
  * 2. Other components can listen to TAB_CHANGE for tab-specific updates
+ *
+ * Language Flow:
+ * 1. languagePicker.js → eventBus (LANGUAGE_UPDATE)
+ * 2. i18n.js listens to LANGUAGE_UPDATE
+ * 3. i18n.js → eventBus (TRANSLATIONS_LOADED)
+ * 4. UI Components listen to TRANSLATIONS_LOADED
  */
 
 /**
  * Event Listeners by Component
- * 
+ *
  * preview.js:
  * - COLOR_UPDATE
- * 
+ *
  * palette.js:
  * - COLOR_UPDATE
  * - FORMAT_UPDATE
- * 
+ * - TRANSLATIONS_LOADED
+ *
  * helpGuide.js:
  * - THEME_CHANGED
- * 
+ * - LANGUAGE_UPDATE
+ *
  * cssVarPrefix.js:
  * - RESET_PREFIX
+ *
+ * colorInput.js:
+ * - TRANSLATIONS_LOADED
+ *
+ * i18n.js:
+ * - LANGUAGE_UPDATE
  */

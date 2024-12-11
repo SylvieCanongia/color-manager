@@ -18,6 +18,7 @@
 
 import { eventBus } from "../utils/eventBus.js";
 import { guideContent } from "../utils/guideContent.js";
+import { getText } from "../utils/i18n.js";
 
 /**
  * Helper functions for rendering different types of content sections
@@ -165,83 +166,111 @@ const renderSection = (section) => {
 };
 
 /**
- * Initializes the help guide functionality
- * @listens {themeChanged} Updates guide theme
- * @emits {guideOpened} When guide opens
- * @emits {guideClosed} When guide closes
- * @emits {languageChanged} { lang } When language changes
- * @emits {guideContentUpdated} { lang } When guide content is updated
+ * Generates HTML content for the help guide
+ * @param {Object} languageContent - Guide content for the selected language
+ * @param {Array<{title: string, content: Array<Object|string>}>} languageContent.sections - Guide sections
+ * @returns {string} Complete HTML for the guide content
+ */
+const generateGuideHTML = (languageContent) => {
+  if (!languageContent || !languageContent.sections) {
+    console.warn("Invalid guide content structure");
+    return "";
+  }
+
+  return `
+      <div class="guide-content" role="document">
+          ${languageContent.sections.map(renderSection).join("")}
+      </div>
+  `;
+};
+
+/**
+ * Initializes help guide functionality
+ * Sets up dialog controls, language switching, and theme support
+ * @description Manages help guide modal with dynamic language support and theme handling
+ * @listens {languageUpdate} Updates guide content when language changes
+ * @listens {themeChanged} Updates dialog theme
+ * @emits {guideOpened} When guide dialog opens
+ * @emits {guideClosed} When guide dialog closes
+ * @emits {guideContentUpdated} When guide content is updated with new language
  */
 export const initHelpGuide = () => {
-  // Cache DOM elements
-  const elements = {
-    dialog: document.getElementById("helpDialog"),
-    helpButton: document.getElementById("helpButton"),
-    closeButton: document.querySelector("#helpDialog .close-button"),
-    tabButtons: document.querySelectorAll('#helpDialog [role="tab"]'),
-    dialogBody: document.querySelector("#helpDialog .dialog-body"),
-  };
+  const dialog = document.getElementById("helpDialog");
+  const closeButton = dialog?.querySelector(".close-dialog");
+  const helpButton = document.getElementById("helpButton");
+  const tabList = dialog?.querySelector('[role="tablist"]');
+  const currentLang = document.documentElement.lang;
 
-  // Current language state
-  let currentLang = "fr";
+  if (!dialog || !closeButton || !helpButton || !tabList) {
+    console.warn("Help guide elements not found");
+    return;
+  }
 
   /**
-   * Renders content for the selected language
-   * @param {string} lang - Language code ('fr' or 'en')
+   * Creates a single language tab element
+   * @param {string} lang - Language code
+   * @returns {HTMLButtonElement} Tab button element
    */
-  const renderContent = (lang) => {
-    const content = guideContent[lang];
-    elements.dialogBody.innerHTML = content.sections.map(renderSection).join("");
+  const createLanguageTab = (lang) => {
+    const tab = document.createElement("button");
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-selected", "true");
+    tab.textContent = lang.toUpperCase();
+    return tab;
+  };
+
+  /**
+   * Updates tab list with current language
+   * @param {string} lang - Language code
+   */
+  const updateTabList = (lang) => {
+    tabList.innerHTML = "";
+    const tab = createLanguageTab(lang);
+    tabList.appendChild(tab);
+  };
+
+  /**
+   * Updates guide content for selected language
+   * @param {string} lang - Language code
+   * @emits {guideContentUpdated} When content is updated
+   */
+  const updateGuideContent = (lang) => {
+    const content = dialog.querySelector("#guideContent");
+    if (!content) return;
+
+    const languageContent = guideContent[lang] || guideContent.en;
+    content.innerHTML = generateGuideHTML(languageContent);
     eventBus.emit("guideContentUpdated", { lang });
   };
 
-  // Event handlers
-  const handlers = {
-    openDialog: () => {
-      elements.dialog.showModal();
-      renderContent(currentLang);
-      eventBus.emit("guideOpened");
-    },
+  // Initialize with current language
+  updateTabList(currentLang);
+  updateGuideContent(currentLang);
 
-    closeDialog: () => {
-      elements.dialog.close();
-      eventBus.emit("guideClosed");
-    },
-
-    handleOutsideClick: (e) => {
-      if (e.target === elements.dialog) {
-        elements.dialog.close();
-        eventBus.emit("guideClosed");
-      }
-    },
-
-    switchLanguage: (e) => {
-      const lang = e.target.textContent.toLowerCase();
-      if (lang === currentLang) return;
-
-      elements.tabButtons.forEach((btn) => {
-        btn.setAttribute("aria-selected", btn === e.target);
-      });
-
-      currentLang = lang;
-      renderContent(lang);
-      eventBus.emit("languageChanged", { lang });
-    },
-  };
-
-  // Event Listeners
-  elements.helpButton.addEventListener("click", handlers.openDialog);
-  elements.closeButton.addEventListener("click", handlers.closeDialog);
-  elements.dialog.addEventListener("click", handlers.handleOutsideClick);
-  elements.tabButtons.forEach((btn) => btn.addEventListener("click", handlers.switchLanguage));
-  elements.dialog.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      handlers.closeDialog();
-    }
+  // Listen for language changes
+  eventBus.subscribe("languageUpdate", ({ lang }) => {
+    updateTabList(lang);
+    updateGuideContent(lang);
   });
 
-  // Subscribe to theme changes if needed
+  // Subscribe to theme changes
   eventBus.subscribe("themeChanged", ({ theme }) => {
-    elements.dialog.setAttribute("data-theme", theme);
+    dialog.setAttribute("data-theme", theme);
+  });
+
+  // Dialog management
+  helpButton.addEventListener("click", () => {
+    dialog.showModal();
+    eventBus.emit("guideOpened");
+  });
+
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+    eventBus.emit("guideClosed");
+  });
+
+  // Close on click outside
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) dialog.close();
   });
 };

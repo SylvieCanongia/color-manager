@@ -76,7 +76,6 @@
 }
 
 .language-list {
-  display: none;
   position: absolute;
   top: 100%;
   left: 0;
@@ -89,6 +88,17 @@
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
   z-index: 1000;
+  /* initial state */
+  opacity: 0;
+  display: none;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease-out,  transform 0.2s ease-out;
+}
+
+.language-list.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .language-list li {

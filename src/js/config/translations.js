@@ -56,6 +56,10 @@ export const translations = {
     closeDialog: "Fermer le guide",
     dialogTabs: "Sélectionner la langue du guide",
     errorLoadingApp: "Une erreur est survenue lors du chargement de l'application. Veuillez rafraîchir la page.",
+    copied: "Copié !",
+    exported: "Exporté !",
+    detailedHslOnly: "Saisie détaillée disponible uniquement pour le format HSL",
+    invalidFormat: "Format invalide. Utilisez HSL, RGB ou HEX",
   },
 
   // English
@@ -94,6 +98,10 @@ export const translations = {
     closeDialog: "Close guide",
     dialogTabs: "Select guide language",
     errorLoadingApp: "An error occurred while loading the application. Please refresh the page.",
+    copied: "Copied !",
+    exported: "Exported !",
+    detailedHslOnly: "Detailed input available only for HSL format",
+    invalidFormat: "Invalid format. Use HSL, RGB or HEX",
   },
 
   // Spanish (Español)
@@ -132,6 +140,10 @@ export const translations = {
     closeDialog: "Cerrar guía",
     dialogTabs: "Seleccionar idioma de la guía",
     errorLoadingApp: "Se ha producido un error al cargar la aplicación. Por favor, actualice la página.",
+    copied: "¡ Copiado !",
+    exported: "¡ Exportado !",
+    detailedHslOnly: "Entrada detallada disponible solo para formato HSL",
+    invalidFormat: "Formato inválido. Use HSL, RGB o HEX",
   },
 
   // German (Deutsch)
@@ -170,6 +182,10 @@ export const translations = {
     closeDialog: "Handbuch schließen",
     dialogTabs: "Sprache des Handbuchs auswählen",
     errorLoadingApp: "Beim Laden der Anwendung ist ein Fehler aufgetreten. Bitte laden Sie die Seite neu.",
+    copied: "Kopiert !",
+    exported: "Exportiert !",
+    detailedHslOnly: "Detaillierte Eingabe nur für HSL-Format verfügbar",
+    invalidFormat: "Ungültiges Format. Verwenden Sie HSL, RGB oder HEX",
   },
 
   // Italian (Italiano)
@@ -208,6 +224,10 @@ export const translations = {
     closeDialog: "Chiudi guida",
     dialogTabs: "Seleziona lingua della guida",
     errorLoadingApp: "Si è verificato un errore durante il caricamento dell'applicazione. Aggiorna la pagina.",
+    copied: "Copiato !",
+    exported: "Esportato !",
+    detailedHslOnly: "Input dettagliato disponibile solo per il formato HSL",
+    invalidFormat: "Formato non valido. Usa HSL, RGB o HEX",
   },
 
   // Basque (Euskara)
@@ -246,6 +266,10 @@ export const translations = {
     closeDialog: "Itxi gida",
     dialogTabs: "Hautatu gidaren hizkuntza",
     errorLoadingApp: "Errore bat gertatu da aplikazioa kargatzean. Mesedez, freskatu orria.",
+    copied: "Kopiatuta !",
+    exported: "Esportatuta !",
+    detailedHslOnly: "Sarrera xehatua HSL formaturako soilik",
+    invalidFormat: "Formatu baliogabea. Erabili HSL, RGB edo HEX",
   },
 
   // Portuguese (Português)
@@ -284,6 +308,10 @@ export const translations = {
     closeDialog: "Fechar guia",
     dialogTabs: "Selecionar idioma do guia",
     errorLoadingApp: "Ocorreu um erro ao carregar a aplicação. Por favor, atualize a página.",
+    copied: "Copiado !",
+    exported: "Exportado !",
+    detailedHslOnly: "Entrada detalhada disponível apenas para formato HSL",
+    invalidFormat: "Formato inválido. Use HSL, RGB ou HEX",
   },
   // Dutch (Nederlands) - suite
   nl: {
@@ -321,6 +349,10 @@ export const translations = {
     closeDialog: "Sluit handleiding",
     dialogTabs: "Selecteer handleidingtaal",
     errorLoadingApp: "Er is een fout opgetreden bij het laden van de applicatie. Vernieuw de pagina.",
+    copied: "Gekopieerd !",
+    exported: "Geëxporteerd !",
+    detailedHslOnly: "Gedetailleerde invoer alleen beschikbaar voor HSL-formaat",
+    invalidFormat: "Ongeldig formaat. Gebruik HSL, RGB of HEX",
   },
 
   // Polish (Polski)
@@ -359,6 +391,10 @@ export const translations = {
     closeDialog: "Zamknij przewodnik",
     dialogTabs: "Wybierz język przewodnika",
     errorLoadingApp: "Wystąpił błąd podczas ładowania aplikacji. Odśwież stronę.",
+    copied: "Skopiowano !",
+    exported: "Wyeksportowano !",
+    detailedHslOnly: "Szczegółowe wprowadzanie dostępne tylko dla formatu HSL",
+    invalidFormat: "Nieprawidłowy format. Użyj HSL, RGB lub HEX",
   },
 
   // Catalan (Català)
@@ -397,6 +433,10 @@ export const translations = {
     closeDialog: "Tanca la guia",
     dialogTabs: "Selecciona l'idioma de la guia",
     errorLoadingApp: "S'ha produït un error en carregar l'aplicació. Actualitza la pàgina.",
+    copied: "Copiat !",
+    exported: "Exportat !",
+    detailedHslOnly: "Entrada detallada disponible només per al format HSL",
+    invalidFormat: "Format invàlid. Utilitzeu HSL, RGB o HEX",
   },
 
   // Galician (Galego)
@@ -435,5 +475,9 @@ export const translations = {
     closeDialog: "Pechar guía",
     dialogTabs: "Seleccionar idioma da guía",
     errorLoadingApp: "Produciuse un erro ao cargar a aplicación. Actualiza a páxina.",
+    copied: "Copiado !",
+    exported: "Exportado !",
+    detailedHslOnly: "Entrada detallada dispoñible só para formato HSL",
+    invalidFormat: "Formato non válido. Use HSL, RGB ou HEX",
   },
 };

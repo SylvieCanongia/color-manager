@@ -21,6 +21,8 @@
 import { isValidHSL, isValidRGB, isValidHEX, detectColorFormat, validateDetailedInput } from "../utils/validation.js";
 import { rgbToHsl, hexToHsl } from "../utils/colorUtils.js";
 import { resetPalettes } from "./palette.js";
+import { getText } from "../utils/i18n.js";
+import { eventBus } from "../utils/eventBus.js";
 
 // Color types constants
 const TYPES = {
@@ -104,7 +106,7 @@ export const initColorInputs = (colorStore) => {
 
       // Handle detailed inputs state based on format
       if (format !== "hsl" && format !== null) {
-        const message = "Saisie détaillée disponible uniquement pour le format HSL";
+        const message = getText("detailedHslOnly");
         detailedInputs.forEach((input) => {
           input.disabled = true;
           input.value = "";
@@ -146,7 +148,7 @@ export const initColorInputs = (colorStore) => {
         default:
           validationResult = {
             isValid: false,
-            error: "Format invalide. Utilisez HSL, RGB ou HEX",
+            error: getText("invalidFormat"),
           };
       }
 
@@ -209,6 +211,24 @@ export const initColorInputs = (colorStore) => {
       input.addEventListener("input", handleDetailedInput);
     });
   };
+
+  // Subscribe to translation updates
+  eventBus.subscribe("translationsLoaded", ({ lang }) => {
+    Object.values(TYPES).forEach((type) => {
+      const helpMessage = document.querySelector(`#${type}-hue`).closest(".detailed-input").querySelector(".help-message");
+      const errorElement = document.getElementById(`${type}HslError`);
+
+      // Update help message if visible
+      if (helpMessage.classList.contains("visible")) {
+        helpMessage.textContent = getText("detailedHslOnly", lang);
+      }
+
+      // Update error message if visible
+      if (errorElement.classList.contains("visible")) {
+        errorElement.textContent = getText("invalidFormat", lang);
+      }
+    });
+  });
 
   // Initialize all color inputs
   Object.values(TYPES).forEach(setupHSLInput);

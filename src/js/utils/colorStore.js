@@ -28,6 +28,8 @@
  * @property {function(string): Object|null} getColor - Gets current color from store
  * @property {function(string): void} updateFormat - Updates color format
  * @property {function(): string} getFormat - Gets current color format
+ * @property {function(string): void} updateLanguage - Updates language in store and emits event
+ * @property {function(): string} getLanguage - Gets current language code from store
  */
 
 import { eventBus } from "./eventBus.js";
@@ -43,16 +45,17 @@ export const createColorStore = () => {
     accent: null,
     format: "hex",
     prefix: "--",
+    language: "fr", // Default language
   };
 
   /**
    * Update color in store and notify subscribers
- * @param {string} type - Color type (primary/secondary/accent)
- * @param {Object|null} color - HSL color object or null
- * @param {number} color.hue - Hue value (0-360)
- * @param {number} color.saturation - Saturation value (0-100)
- * @param {number} color.lightness - Lightness value (0-100)
- * @emits {colorUpdate} { type, color } - Color update event
+   * @param {string} type - Color type (primary/secondary/accent)
+   * @param {Object|null} color - HSL color object or null
+   * @param {number} color.hue - Hue value (0-360)
+   * @param {number} color.saturation - Saturation value (0-100)
+   * @param {number} color.lightness - Lightness value (0-100)
+   * @emits {colorUpdate} { type, color } - Color update event
    */
   const updateColor = (type, color) => {
     state[type] = color;
@@ -82,10 +85,28 @@ export const createColorStore = () => {
    */
   const getFormat = () => state.format;
 
+  /**
+   * Update language preference and notify subscribers
+   * @param {string} lang - Language code
+   * @emits {languageUpdate} lang - New language
+   */
+  const updateLanguage = (lang) => {
+    state.language = lang;
+    eventBus.emit("languageUpdate", { lang });
+  };
+
+  /**
+   * Get current language
+   * @returns {string} Current language code
+   */
+  const getLanguage = () => state.language;
+
   return {
     updateColor,
     getColor,
     updateFormat,
     getFormat,
+    updateLanguage,
+    getLanguage,
   };
 };

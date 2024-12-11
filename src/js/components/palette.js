@@ -21,6 +21,7 @@
 import { eventBus } from "../utils/eventBus.js";
 import { createHSLString, createColorString, generatePaletteWithConfig, generatePaletteVariations } from "../utils/colorUtils.js";
 import { generateVariableName, getCurrentPrefix } from "../utils/cssVarPrefix.js";
+import { getText } from "../utils/i18n.js";
 
 // Constants for palette generation
 const TYPES = {
@@ -183,6 +184,20 @@ export const initPalettes = (colorStore) => {
       }
     });
   });
+
+  // Subscribe to translation updates
+  eventBus.subscribe("translationsLoaded", ({ lang }) => {
+    const copyButtons = document.querySelectorAll(".copied .button-text");
+    const exportButtons = document.querySelectorAll(".exported .button-text");
+
+    copyButtons.forEach((button) => {
+      button.textContent = getText("copied");
+    });
+
+    exportButtons.forEach((button) => {
+      button.textContent = getText("exported");
+    });
+  });
 };
 
 /**
@@ -235,12 +250,12 @@ export const initExportAllPalettes = (colorStore) => {
       URL.revokeObjectURL(url);
 
       // Save original text
-      const buttonText = exportButton.querySelector('.button-text');
+      const buttonText = exportButton.querySelector(".button-text");
       const originalText = exportButton.textContent;
       // Visual feedback
       exportButton.classList.add("exported");
-      buttonText.textContent = "Exporté !";
-      
+      buttonText.textContent = getText("exported");
+
       setTimeout(() => {
         exportButton.classList.remove("exported");
         buttonText.textContent = originalText;
@@ -301,11 +316,11 @@ export const initCopyAllPalettes = () => {
       navigator.clipboard.writeText(allPalettes.join("\n"));
 
       // Save original text
-      const buttonText = copyAllButton.querySelector('.button-text');
+      const buttonText = copyAllButton.querySelector(".button-text");
       const originalText = buttonText.textContent;
       // Visual feedback
       copyAllButton.classList.add("copied");
-      buttonText.textContent = "Copié !";
+      buttonText.textContent = getText("copied");
 
       setTimeout(() => {
         copyAllButton.classList.remove("copied");
