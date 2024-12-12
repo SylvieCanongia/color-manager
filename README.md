@@ -4,7 +4,7 @@
 
 ## Overview
 
-A web tool for generating color palettes with light and dark variants, supporting HSL, RGB, and HEX formats. Features real-time preview, accessibility support, and CSS variables export.
+A web tool for generating color palettes with light and dark variants, supporting HSL, RGB, and HEX formats. Features real-time preview, accessibility support, CSS variables export, and multilingual interface in 11 languages. Includes dynamic state management and a comprehensive user guide.
 
 ### Links
 
