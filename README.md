@@ -26,7 +26,7 @@ A web tool for generating color palettes with light and dark variants, supportin
 - Empty state management
 - Modern, responsive interface
 - Light/Dark theme support with system preference detection
-- Integrated bilingual user guide (FR/EN)
+- Integrated multilingual user guide
 - Multilingual support with 11 languages:
   - English, French, Spanish, German, Italian
   - Basque, Portuguese, Dutch, Polish
@@ -85,7 +85,7 @@ Un outil web pour générer des palettes de couleurs avec variantes claires et f
 - Gestion des états vides
 - Interface moderne et responsive
 - Support des thèmes clair/sombre avec détection des préférences système
-- Guide utilisateur intégré bilingue (FR/EN)
+- Guide utilisateur intégré multilingue
 - Support multilingue avec 11 langues :
   - Français, Anglais, Espagnol, Allemand, Italien
   - Basque, Portugais, Néerlandais, Polonais

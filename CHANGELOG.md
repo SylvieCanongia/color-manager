@@ -3,6 +3,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.12] - 2024-12-12
+
+- Integrate state management system for translations
+- Implement event-driven architecture for language handling
+- Adapt user guide to support all languages
+- Add complete interface translations
+- Add user guide translations in 11 languages
+- Improve copy and export state management
+
 ## [1.0.11] - 2024-12-11
 
 - Add multilingual support with 11 languages

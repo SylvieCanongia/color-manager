@@ -2,6 +2,15 @@
 
 Toutes les modifications notables seront documentées dans ce fichier.
 
+## [1.0.12] - 2024-12-12
+
+- Intégration du système de gestion d'état pour les traductions
+- Implémentation de l'architecture événementielle pour la gestion des langues
+- Adaptation du guide utilisateur pour supporter toutes les langues
+- Ajout des traductions complètes pour l'interface
+- Ajout des traductions du guide utilisateur dans 11 langues
+- Amélioration de la gestion des états de copie et d'export
+
 ## [1.0.11] - 2024-12-11
 
 - Ajout du support multilingue avec 11 langues
