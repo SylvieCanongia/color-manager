@@ -243,7 +243,7 @@ export const initExportAllPalettes = (colorStore) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "palette.css";
+      link.download = `${getText("palette_file")}.css`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

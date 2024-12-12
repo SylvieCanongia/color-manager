@@ -60,6 +60,7 @@ export const translations = {
     exported: "Exporté !",
     detailedHslOnly: "Saisie détaillée disponible uniquement pour le format HSL",
     invalidFormat: "Format invalide. Utilisez HSL, RGB ou HEX",
+    palette_file: "palette",
   },
 
   // English
@@ -102,6 +103,7 @@ export const translations = {
     exported: "Exported !",
     detailedHslOnly: "Detailed input available only for HSL format",
     invalidFormat: "Invalid format. Use HSL, RGB or HEX",
+    palette_file: "palette"
   },
 
   // Spanish (Español)
@@ -144,6 +146,7 @@ export const translations = {
     exported: "¡ Exportado !",
     detailedHslOnly: "Entrada detallada disponible solo para formato HSL",
     invalidFormat: "Formato inválido. Use HSL, RGB o HEX",
+    palette_file: "paleta"
   },
 
   // German (Deutsch)
@@ -186,6 +189,7 @@ export const translations = {
     exported: "Exportiert !",
     detailedHslOnly: "Detaillierte Eingabe nur für HSL-Format verfügbar",
     invalidFormat: "Ungültiges Format. Verwenden Sie HSL, RGB oder HEX",
+    palette_file: "farbpalette"
   },
 
   // Italian (Italiano)
@@ -228,6 +232,7 @@ export const translations = {
     exported: "Esportato !",
     detailedHslOnly: "Input dettagliato disponibile solo per il formato HSL",
     invalidFormat: "Formato non valido. Usa HSL, RGB o HEX",
+    palette_file: "paletta"
   },
 
   // Basque (Euskara)
@@ -270,6 +275,7 @@ export const translations = {
     exported: "Esportatuta !",
     detailedHslOnly: "Sarrera xehatua HSL formaturako soilik",
     invalidFormat: "Formatu baliogabea. Erabili HSL, RGB edo HEX",
+    palette_file: "paleta"
   },
 
   // Portuguese (Português)
@@ -312,6 +318,7 @@ export const translations = {
     exported: "Exportado !",
     detailedHslOnly: "Entrada detalhada disponível apenas para formato HSL",
     invalidFormat: "Formato inválido. Use HSL, RGB ou HEX",
+    palette_file: "paleta"
   },
   // Dutch (Nederlands) - suite
   nl: {
@@ -353,6 +360,7 @@ export const translations = {
     exported: "Geëxporteerd !",
     detailedHslOnly: "Gedetailleerde invoer alleen beschikbaar voor HSL-formaat",
     invalidFormat: "Ongeldig formaat. Gebruik HSL, RGB of HEX",
+    palette_file: "kleurenpalet"
   },
 
   // Polish (Polski)
@@ -395,6 +403,7 @@ export const translations = {
     exported: "Wyeksportowano !",
     detailedHslOnly: "Szczegółowe wprowadzanie dostępne tylko dla formatu HSL",
     invalidFormat: "Nieprawidłowy format. Użyj HSL, RGB lub HEX",
+    palette_file: "paleta"
   },
 
   // Catalan (Català)
@@ -437,6 +446,7 @@ export const translations = {
     exported: "Exportat !",
     detailedHslOnly: "Entrada detallada disponible només per al format HSL",
     invalidFormat: "Format invàlid. Utilitzeu HSL, RGB o HEX",
+    palette_file: "paleta"
   },
 
   // Galician (Galego)
@@ -479,5 +489,6 @@ export const translations = {
     exported: "Exportado !",
     detailedHslOnly: "Entrada detallada dispoñible só para formato HSL",
     invalidFormat: "Formato non válido. Use HSL, RGB ou HEX",
+    palette_file: "paleta"
   },
 };
